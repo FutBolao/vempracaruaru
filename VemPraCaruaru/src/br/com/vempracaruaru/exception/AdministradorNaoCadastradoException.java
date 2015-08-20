@@ -1,4 +1,4 @@
-package br.com.vempracaruaru.Exception;
+package br.com.vempracaruaru.exception;
 
 public class AdministradorNaoCadastradoException extends Exception{
 	

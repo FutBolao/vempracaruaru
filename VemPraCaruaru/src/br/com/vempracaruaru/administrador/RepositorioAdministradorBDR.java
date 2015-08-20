@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.com.vempracaruaru.Exception.AdministradorJaCadastradoException;
-import br.com.vempracaruaru.Exception.AdministradorNaoCadastradoException;
-import br.com.vempracaruaru.Exception.NaoFoiPossivelAlterarAdministradorException;
-import br.com.vempracaruaru.Exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
+import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
+import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarAdministradorException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 
 public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	

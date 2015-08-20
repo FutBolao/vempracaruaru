@@ -3,9 +3,9 @@ package br.com.vempracaruaru.administrador;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.com.vempracaruaru.Exception.AdministradorJaCadastradoException;
-import br.com.vempracaruaru.Exception.AdministradorNaoCadastradoException;
-import br.com.vempracaruaru.Exception.NaoFoiPossivelCadastrarAdministradorException;
+import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
+import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 
 public interface IRepositorioAdministrador {
 	
