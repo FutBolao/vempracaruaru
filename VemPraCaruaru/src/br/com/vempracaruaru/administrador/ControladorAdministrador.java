@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
+import br.com.vempracaruaru.util.Validacao;
 
 
 public class ControladorAdministrador {
@@ -18,7 +19,10 @@ private IRepositorioAdministrador repositorio;
 	
 	public void cadastrar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorJaCadastradoException, Exception{	
 		if (administrador != null) {
-			repositorio.cadastrar(administrador);
+			if (Validacao.validaCPF(administrador.getCpf())) {
+				administrador.setCpf(administrador.getCpf().replace('.',' ').replace('-',' ').replaceAll(" ", ""));
+				repositorio.cadastrar(administrador);
+			}
 		}
 	}
 	
@@ -35,7 +39,21 @@ private IRepositorioAdministrador repositorio;
 	}
 	
 	public Administrador listarPorCpf(String cpf) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		if (Validacao.validaCPF(cpf)){
+			cpf = cpf.replace('.',' ').replace('-',' ').replaceAll(" ", "");
+		}
 		return repositorio.listarPorCpf(cpf);
+	}
+	
+	public void alterar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorNaoCadastradoException, Exception{
+		if (Validacao.validaCPF(administrador.getCpf())) {
+			administrador.setCpf(administrador.getCpf().replace('.',' ').replace('-',' ').replaceAll(" ", ""));
+			repositorio.alterar(administrador);
+		}
+	}
+	
+	public void deletar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		repositorio.deletar(id);
 	}
 
 }
