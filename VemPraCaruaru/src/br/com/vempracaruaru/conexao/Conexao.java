@@ -16,16 +16,16 @@ public class Conexao {
     	
     	//condições para selecionar o tipo de banco.
     	if (sistema == DataBase.MYSQL) {
-    		conexao = "jdbc:mysql://weblinktecnologia.com.br:3306/weblinkt_futbolao";
-    		usuario = "weblinkt_fut";
-    		senha = "futbolao";
+    		conexao = "jdbc:mysql://vempracaruaru.com.br:3306/vempraca_bd";
+    		usuario = "vempraca_user";
+    		senha = "fivetech";
     	}else if (sistema == DataBase.SQLSERVER) {
     		conexao = "jdbc:sqlserver://localhost:1433;databaseName=aula08";
     		usuario = "root";
     		senha = "root";
     	}else if (sistema == DataBase.ORACLE) {
-    		conexao = "jdbc:oracle:thin:@TOTVS11:1521:XE";
-    		usuario = "system";
+    		conexao = "jdbc:oracle:thin:@localhost:8080:XE";
+    		usuario = "root";
     		senha = "root";
     	}else if (sistema == DataBase.POSTGRESQL) {
     		conexao = "jdbc:postgresql://totvs11:5432/aula08";

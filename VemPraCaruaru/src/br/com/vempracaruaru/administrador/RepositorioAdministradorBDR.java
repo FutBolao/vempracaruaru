@@ -36,7 +36,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	@Override
 	public void cadastrar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException,
 			AdministradorJaCadastradoException, Exception {
-
+		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
@@ -61,6 +61,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 					id = rs.getInt(1);
 				}
 				administrador.setId(id);
+				System.out.println("Cadastro concluido com sucesso");
 			} else {
 				throw new NaoFoiPossivelCadastrarAdministradorException();
 			}
@@ -155,7 +156,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 		if (existeId(administrador) == false){
 			PreparedStatement ps = null;
 			String sql = "";
-			// instrução de update do clube
+			// instrução de update do artista
 			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
 			ps = this.connection.prepareStatement(sql);
 			ps.setString(1, String.valueOf(administrador.getAtivo()));
