@@ -61,12 +61,14 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 					id = rs.getInt(1);
 				}
 				administrador.setId(id);
+				System.out.println(administrador.toString());
 				System.out.println("Cadastro concluido com sucesso");
 			} else {
 				throw new NaoFoiPossivelCadastrarAdministradorException();
 			}
 			
 		} else {
+			System.out.println("erro");
 			throw new AdministradorJaCadastradoException();
 		}
 		ps.close();
@@ -77,7 +79,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	@Override
 	public ArrayList<Administrador> listarTodos(String complemento)
 			throws SQLException, AdministradorNaoCadastradoException, Exception {
-
+		System.out.println("Chegando ao repositorio");
 		ArrayList<Administrador> administradores = new ArrayList<Administrador>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -93,6 +95,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 				Administrador administrador = new Administrador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("usuario"), rs.getString("senha"), rs.getString("nome").charAt(0));
 				administradores.add(administrador);
 			}
+			System.out.println("- consulta completada com sucesso -");
 		}else{
 			throw new AdministradorNaoCadastradoException();
 		}

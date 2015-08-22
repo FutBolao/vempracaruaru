@@ -38,8 +38,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 	@Override
 	public void cadastrar(Artista artista)
 			throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception {
-
-
+		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
@@ -66,7 +65,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 			} else {
 				throw new NaoFoiPossivelCadastrarArtistaException();
 			}
-			
+			System.out.println("Cadastro concluido com sucesso");
 		
 		ps.close();
 		rs.close();
@@ -78,7 +77,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 	@Override
 	public ArrayList<Artista> listarTodos(String complemento)
 			throws SQLException, ArtistaNaoCadastradoException, Exception {
-
+		System.out.println("Chegando ao repositorio -");
 		ArrayList<Artista> artistas = new ArrayList<Artista>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -91,12 +90,13 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Artista artista = new Artista(rs.getInt("id"), rs.getInt("id_administrador"), rs.getString("nome"), rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0));
+				Artista artista = new Artista(rs.getInt("id"), rs.getInt("id_administrador"),rs.getString("nome"), rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0));
 				artistas.add(artista);
 			}
 		}else{
 			throw new ArtistaNaoCadastradoException();
 		}
+		System.out.println("- Consulta completada com sucesso -");
 		ps.close();
 		rs.close();
 		return artistas;

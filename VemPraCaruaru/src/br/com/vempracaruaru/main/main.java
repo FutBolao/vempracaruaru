@@ -1,8 +1,10 @@
 package br.com.vempracaruaru.main;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import br.com.vempracaruaru.administrador.Administrador;
+import br.com.vempracaruaru.artista.Artista;
 import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.fachada.Fachada;
@@ -13,14 +15,13 @@ public class main {
 		// TODO Auto-generated method stub
 
 		try {
-			System.out.println("Inicio do teste da classe do Administrador");
+			Fachada.getInstance().administradorCadastrar(new Administrador(1, "João Henrique", "10494510460",
+					"9310-5217", "joao60", "123", 'A'));
 			
-			Administrador admTeste = new Administrador(4, "João Henrique", "104.845.104-60",
-					"8193105217", "joao60", "123", 'A');
-			
-			Fachada.getInstance().administradorCadastrar(admTeste);
-			
-			System.out.println("- Teste concluido com sucesso -");
+//			ArrayList<Administrador> lista = Fachada.getInstance().administradorListarTodos("");
+//			for (Administrador adm : lista) {
+//				System.out.println(adm);
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,7 +35,8 @@ public class main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		
 	}
 
 }

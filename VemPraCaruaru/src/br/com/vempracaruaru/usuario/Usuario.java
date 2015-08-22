@@ -1,32 +1,23 @@
 package br.com.vempracaruaru.usuario;
 
-public class Usuario {
+import com.vempracaruaru.pessoa.Pessoa;
+
+public class Usuario extends Pessoa{
 	
-	private int id;
 	private String emial;
-	private String nome;
 	private String localizacao;
 	private String senha;
 	private String userFacebook;
 	private String link_facebook;
 	
-	public Usuario(int id, String emial, String nome, String localizacao, String senha, String userFacebook,
+	public Usuario(int id, String nome, String emial, String localizacao, String senha, String userFacebook,
 			String link_facebook) {
-			this.id = id;
+		super(id, nome);
 		this.emial = emial;
-		this.nome = nome;
 		this.localizacao = localizacao;
 		this.senha = senha;
 		this.userFacebook = userFacebook;
 		this.link_facebook = link_facebook;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getEmial() {
@@ -37,13 +28,6 @@ public class Usuario {
 		this.emial = emial;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	public String getLocalizacao() {
 		return localizacao;
@@ -75,12 +59,6 @@ public class Usuario {
 
 	public void setLink_facebook(String link_facebook) {
 		this.link_facebook = link_facebook;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", emial=" + emial + ", nome=" + nome + ", localizacao=" + localizacao + ", senha="
-				+ senha + ", userFacebook=" + userFacebook + ", link_facebook=" + link_facebook + "]";
 	}
 	
 }

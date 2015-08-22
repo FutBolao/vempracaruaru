@@ -28,6 +28,7 @@ private IRepositorioAdministrador repositorio;
 	}
 	
 	public ArrayList<Administrador> listarTodos(String complemento) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return repositorio.listarTodos(complemento);
 	}
 	

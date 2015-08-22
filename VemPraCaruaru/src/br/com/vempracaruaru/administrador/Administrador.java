@@ -1,41 +1,22 @@
 package br.com.vempracaruaru.administrador;
 
-public class Administrador {
+import com.vempracaruaru.pessoa.Pessoa;
+
+public class Administrador extends Pessoa{
 	
-	private int id;
-	private String nome;
 	private String cpf;
 	private String telefone;
 	private String usuario;
 	private String senha;
 	private char ativo;
 	
-	public Administrador(int id, String nome, String cpf, String telefone,
-			String usuario, String senha, char ativo) {
-		super();
-		this.id = id;
-		this.nome = nome;
+	public Administrador(int id, String nome, String cpf, String telefone, String usuario, String senha, char ativo) {
+		super(id, nome);
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.usuario = usuario;
 		this.senha = senha;
 		this.ativo = ativo;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getCpf() {
@@ -80,9 +61,8 @@ public class Administrador {
 
 	@Override
 	public String toString() {
-		return "Administrador [id=" + id + ", nome=" + nome + ", cpf=" + cpf
-				+ ", telefone=" + telefone + ", usuario=" + usuario
-				+ ", senha=" + senha + ", ativo=" + ativo + "]";
+		return "Administrador [cpf=" + cpf + ", telefone=" + telefone + ", usuario=" + usuario + ", senha=" + senha
+				+ ", ativo=" + ativo + "]";
 	}
 	
 }

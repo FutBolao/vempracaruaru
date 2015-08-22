@@ -13,15 +13,23 @@ import br.com.vempracaruaru.exception.ArtistaJaCadastradoException;
 import br.com.vempracaruaru.exception.ArtistaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
+import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
+import br.com.vempracaruaru.exception.UsuarioNaoCadastradoException;
+import br.com.vempracaruaru.usuario.ControladorUsuario;
+import br.com.vempracaruaru.usuario.Usuario;
 
 public class Fachada {
 	
 	private static Fachada instance = null;
 	private ControladorAdministrador controladorAdministrador;
 	private ControladorArtista controladorArtista;
+	private ControladorUsuario controladorUsuario;
 	
 	public Fachada() throws Exception {
 		this.controladorAdministrador = new ControladorAdministrador();
+		this.controladorArtista = new ControladorArtista();
+		this.controladorUsuario = new ControladorUsuario();
 	}
 	
 	public static Fachada getInstance() throws Exception {
@@ -38,6 +46,7 @@ public class Fachada {
 	}
 	
 	public ArrayList<Administrador> administradorListarTodos(String complemento) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorAdministrador.listarTodos(complemento);
 	}
 	
@@ -46,6 +55,7 @@ public class Fachada {
 	}
 	
 	public ArrayList<Administrador> administradorListarPorNome(String nome) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorAdministrador.listarPorNome(nome);
 	}
 	
@@ -62,25 +72,47 @@ public class Fachada {
 	}
 	
 	//MÉTODOS DO ARTISTA	
-	public void cadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception{
+	public void artistaCadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorArtista.cadastrar(artista);		
 	}
 	
-	public ArrayList<Artista> listarTodos(String complemento) throws SQLException, ArtistaNaoCadastradoException, Exception{
+	public ArrayList<Artista> artistaListarTodos(String complemento) throws SQLException, ArtistaNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorArtista.listarTodos(complemento);
 	}
-	public Artista listarPorId(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
+	public Artista artistaListarPorId(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
 		return controladorArtista.listarPorId(id);
 	}
-	public ArrayList<Artista> listarPorNome(String nome) throws SQLException, ArtistaNaoCadastradoException, Exception{
+	public ArrayList<Artista> artistaListarPorNome(String nome) throws SQLException, ArtistaNaoCadastradoException, Exception{
 		return controladorArtista.listarPorNome(nome);
 	}
 	
-	public void alterar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaNaoCadastradoException, Exception{
+	public void artistaAlterar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaNaoCadastradoException, Exception{
 		controladorArtista.alterar(artista);
 	}
-	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
+	public void artistaDeletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
 		controladorArtista.deletar(id);
 	}
+	
+	//MÉTODOS DO USARIO
 
+	public void usuarioCadastrar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioJaCadastradoException, Exception{
+		controladorUsuario.cadastrar(usuario);
+	}
+	public ArrayList<Usuario> usuarioListarTodos(String complemento) throws SQLException, UsuarioNaoCadastradoException, Exception{
+		return controladorUsuario.listarTodos(complemento);
+	}
+	public Usuario listarPorId(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
+		return controladorUsuario.listarPorId(id);
+	}
+	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception{
+		return controladorUsuario.listarPorNome(nome);
+	}
+	public void alterar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception{
+		controladorUsuario.alterar(usuario);
+	}
+	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
+		controladorUsuario.deletar(id);
+	}
 }
