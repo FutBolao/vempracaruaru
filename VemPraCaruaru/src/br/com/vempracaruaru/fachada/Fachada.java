@@ -22,12 +22,12 @@ import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioNaoCadastradoException;
+import br.com.vempracaruaru.obra.ControladorObra;
+import br.com.vempracaruaru.obra.Obra;
 import br.com.vempracaruaru.pontoturistico.ControladorPontoTuristico;
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 import br.com.vempracaruaru.usuario.ControladorUsuario;
 import br.com.vempracaruaru.usuario.Usuario;
-import br.com.vemprecaruaru.obra.ControladorObra;
-import br.com.vemprecaruaru.obra.Obra;
 
 public class Fachada {
 	

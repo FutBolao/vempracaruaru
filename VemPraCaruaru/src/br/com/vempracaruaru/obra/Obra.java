@@ -1,4 +1,4 @@
-package br.com.vemprecaruaru.obra;
+package br.com.vempracaruaru.obra;
 
 import br.com.vempracaruaru.administrador.Administrador;
 import br.com.vempracaruaru.artista.Artista;

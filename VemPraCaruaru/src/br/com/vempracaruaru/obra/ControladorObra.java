@@ -1,4 +1,4 @@
-package br.com.vemprecaruaru.obra;
+package br.com.vempracaruaru.obra;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
