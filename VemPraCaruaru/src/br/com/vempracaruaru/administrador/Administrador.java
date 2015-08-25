@@ -1,14 +1,14 @@
 package br.com.vempracaruaru.administrador;
 
-import com.vempracaruaru.pessoa.Pessoa;
+import br.com.vempracaruaru.pessoa.Pessoa;
 
 public class Administrador extends Pessoa{
 	
-	private String cpf;
-	private String telefone;
-	private String usuario;
-	private String senha;
-	private char ativo;
+	private String		cpf;
+	private String		telefone;
+	private String		usuario;
+	private String		senha;
+	private char		ativo;
 	
 	public Administrador(int id, String nome, String cpf, String telefone, String usuario, String senha, char ativo) {
 		super(id, nome);

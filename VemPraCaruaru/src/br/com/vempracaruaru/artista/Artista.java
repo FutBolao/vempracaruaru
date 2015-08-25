@@ -1,29 +1,30 @@
 package br.com.vempracaruaru.artista;
 
-import com.vempracaruaru.pessoa.Pessoa;
+import br.com.vempracaruaru.administrador.Administrador;
+import br.com.vempracaruaru.pessoa.Pessoa;
 
 public class Artista extends Pessoa{
 
-	private int idAdministrador;
-	private String historico;
-	private String tipo;
-	private char ativo;
+	private Administrador	administrador;
+	private String			historico;
+	private String			tipo;
+	private char			ativo;
 	
-	public Artista(int id, int idAdministrador, String nome, String historico, String tipo,char ativo) {
+	public Artista(int id, Administrador administrador, String nome, String historico, String tipo,char ativo) {
 		super(id, nome);
-		this.idAdministrador = idAdministrador;
+		this.administrador = administrador;
 		this.historico = historico;
 		this.tipo = tipo;
 		this.ativo = ativo;
 	}
 
 
-	public int getIdAdministrador() {
-		return idAdministrador;
+	public Administrador getAdministrador() {
+		return administrador;
 	}
 
-	public void setIdAdministrador(int idAdministrador) {
-		this.idAdministrador = idAdministrador;
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
 	}
 
 	public String getHistorico() {
@@ -52,7 +53,7 @@ public class Artista extends Pessoa{
 
 	@Override
 	public String toString() {
-		return "Artista [idAdministrador=" + idAdministrador + ", historico=" + historico + ", tipo=" + tipo
+		return "Artista [idAdministrador=" + administrador + ", historico=" + historico + ", tipo=" + tipo
 				+ ", ativo=" + ativo + "]";
 	}		
 }

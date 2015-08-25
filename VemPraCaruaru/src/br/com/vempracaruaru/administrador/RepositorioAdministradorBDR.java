@@ -200,12 +200,12 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE cpf=?";
-		boolean resposta = false;		
+		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
 		ps.setString(1, administrador.getCpf());
 		rs = ps.executeQuery();
 		if(rs != null){
-			resposta = true;
+			resposta = false;
 		}
 		ps.close();
 		rs.close();
