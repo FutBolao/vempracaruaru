@@ -51,8 +51,8 @@ public class RepositorioObraBDR implements IRepositorioObra{
 			} else {
 				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			}
-			ps.setInt(1, obra.getArtista().getId());
-			ps.setInt(2, obra.getAdministrador().getId());
+			ps.setInt(1, obra.getIdArtista());
+			ps.setInt(2, obra.getIdAdministrador());
 			ps.setString(3,obra.getNome() );
 			ps.setString(4, obra.getHistorico());
 			ps.setString(5, String.valueOf(obra.getAtivo()));
@@ -88,18 +88,9 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Obra obra = new Obra(rs.getInt("id"),
-						 	new Artista(rs.getInt("id"),new Administrador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"),
-						 			rs.getString("usuario"), rs.getString("senha"), rs.getString("nome").charAt(0)),rs.getString("nome"), rs.getString("historico"), 
-						 			rs.getString("tipo"), rs.getString("ativo").charAt(0)),
-						 	new Administrador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), "",
-						 			rs.getString("usuario"), rs.getString("senha"), rs.getString("nome").charAt(0)),
-						 	new PontoTuristico(rs.getInt("id"), new Administrador(rs.getInt("id"), rs.getString("nome"),
-									rs.getString("cpf"), rs.getString("telfone"), rs.getString("usuario"), rs.getString("senha"), rs.getString("ativo").charAt(0)),
-									rs.getString("nome"),new Endereco(rs.getInt("numero"), rs.getString("bairro"), rs.getString("endereco"), rs.getString("complemento")), 
-									rs.getString("telefone"), rs.getString("horario_abertura"), rs.getString("horario_encerramento"),
-									rs.getString("tempo_visitacao"), rs.getString("historico_descricap"), rs.getString("ativo").charAt(0)),
-						 			rs.getString("nome"),rs.getString("historico"),rs.getString("ativo").charAt(0));
+				Obra obra = new Obra(rs.getInt("id"), rs.getInt("idArtista"), rs.getString("nomeArtista"), rs.getInt("idAdministrador"), 
+						rs.getString("nomeAdministrador"), rs.getInt("idPontoTuristico"), rs.getString("nomePontoTuristico"), rs.getString("nome"),
+						rs.getString("historico"), rs.getString("ativo").charAt(0));
 				obras.add(obra);
 			}
 		}else{
@@ -146,7 +137,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 
 	@Override
 	public void deletar(int id) throws SQLException, ObraNaoCadastradoException, Exception {	
-		Obra obra = new Obra(id, null, null, null, "", "", 'N');
+		Obra obra = new Obra(id, 0, "", 0,"", 0,"", "", "", 'N');
 		
 		PreparedStatement ps = null;
 		String sql = "";
@@ -167,12 +158,12 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
-		boolean resposta = false;		
+		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
 		ps.setInt(1, obra.getId());
 		rs = ps.executeQuery();
 		if(rs != null){
-			resposta = true;
+			resposta = false;
 		}
 		ps.close();
 		rs.close();

@@ -63,6 +63,5 @@ public class Administrador extends Pessoa{
 	public String toString() {
 		return "Administrador [cpf=" + cpf + ", telefone=" + telefone + ", usuario=" + usuario + ", senha=" + senha
 				+ ", ativo=" + ativo + "]";
-	}
-	
+	}	
 }

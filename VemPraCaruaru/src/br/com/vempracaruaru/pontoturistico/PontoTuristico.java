@@ -1,12 +1,12 @@
 package br.com.vempracaruaru.pontoturistico;
 
-import br.com.vempracaruaru.administrador.Administrador;
 import br.com.vempracaruaru.endereco.Endereco;
 
 public class PontoTuristico {
 	
 	private int				id;
-	private Administrador	administrador;
+	private int				idAdministrador;
+	private String			nomeAdministrador;
 	private String			nome;
 	private Endereco		endereco;
 	private String			telefone;
@@ -16,11 +16,12 @@ public class PontoTuristico {
 	private String			historicoDescricao;
 	private char			ativo;
 	
-	public PontoTuristico(int id, Administrador administrador, String nome, Endereco endereco, String telefone,
-			String horarioAbertura, String horarioEncerramento, String tempoVisitacao, String historicoDescricao,
-			char ativo) {
-			this.id = id;
-		this.administrador = administrador;
+	public PontoTuristico(int id, int idAdministrador, String nomeAdministrador, String nome, Endereco endereco,
+			String telefone, String horarioAbertura, String horarioEncerramento, String tempoVisitacao,
+			String historicoDescricao, char ativo) {
+		this.id = id;
+		this.idAdministrador = idAdministrador;
+		this.nomeAdministrador = nomeAdministrador;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -39,12 +40,20 @@ public class PontoTuristico {
 		this.id = id;
 	}
 
-	public Administrador getAdministrador() {
-		return administrador;
+	public int getIdAdministrador() {
+		return idAdministrador;
 	}
 
-	public void setIdAdministrador(Administrador administrador) {
-		this.administrador = administrador;
+	public void setIdAdministrador(int idAdministrador) {
+		this.idAdministrador = idAdministrador;
+	}
+
+	public String getNomeAdministrador() {
+		return nomeAdministrador;
+	}
+
+	public void setNomeAdministrador(String nomeAdministrador) {
+		this.nomeAdministrador = nomeAdministrador;
 	}
 
 	public String getNome() {
@@ -113,12 +122,13 @@ public class PontoTuristico {
 
 	@Override
 	public String toString() {
-		return "PontoTuristico [id=" + id + ", idA"
-				+ "dministrador=" + administrador + ", nome=" + nome + ", endereco="
-				+ endereco + ", telefone=" + telefone + ", horarioAbertura=" + horarioAbertura
-				+ ", horarioEncerramento=" + horarioEncerramento + ", tempoVisitacao=" + tempoVisitacao
-				+ ", historicoDescricao=" + historicoDescricao + ", ativo=" + ativo + "]";
+		return "PontoTuristico [id=" + id + ", idAdministrador=" + idAdministrador + ", nomeAdministrador="
+				+ nomeAdministrador + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone
+				+ ", horarioAbertura=" + horarioAbertura + ", horarioEncerramento=" + horarioEncerramento
+				+ ", tempoVisitacao=" + tempoVisitacao + ", historicoDescricao=" + historicoDescricao + ", ativo="
+				+ ativo + "]";
 	}
 	
-		
+	 
+			
 }

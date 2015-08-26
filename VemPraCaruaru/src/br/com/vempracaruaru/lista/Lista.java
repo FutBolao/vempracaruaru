@@ -3,19 +3,21 @@ package br.com.vempracaruaru.lista;
 import java.util.ArrayList;
 
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
-import br.com.vempracaruaru.usuario.Usuario;
 
 public class Lista {
 
-	private int id;
-	private ArrayList<PontoTuristico> listaPontoTuristico;
-	private Usuario usuario;
-	private String dataHoraCriacao;
+	private int 						id;
+	private int 						idUsuario;
+	private String						nomeUsuario;
+	private ArrayList<PontoTuristico> 	listaPontoTuristico;
+	private String 						dataHoraCriacao;
 	
-	public Lista(int id, ArrayList<PontoTuristico> listaPontoTuristico, Usuario usuario, String dataHoraCriacao) {
+	public Lista(int id, int idUsuario, String nomeUsuario, ArrayList<PontoTuristico> listaPontoTuristico,
+			String dataHoraCriacao) {
 		this.id = id;
+		this.idUsuario = idUsuario;
+		this.nomeUsuario = nomeUsuario;
 		this.listaPontoTuristico = listaPontoTuristico;
-		this.usuario = usuario;
 		this.dataHoraCriacao = dataHoraCriacao;
 	}
 
@@ -27,20 +29,28 @@ public class Lista {
 		this.id = id;
 	}
 
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
 	public ArrayList<PontoTuristico> getListaPontoTuristico() {
 		return listaPontoTuristico;
 	}
 
 	public void setListaPontoTuristico(ArrayList<PontoTuristico> listaPontoTuristico) {
 		this.listaPontoTuristico = listaPontoTuristico;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getDataHoraCriacao() {
@@ -53,8 +63,9 @@ public class Lista {
 
 	@Override
 	public String toString() {
-		return "Lista [id=" + id + ", listaPontoTuristico=" + listaPontoTuristico + ", usuario=" + usuario
-				+ ", dataHoraCriacao=" + dataHoraCriacao + "]";
+		return "Lista [id=" + id + ", idUsuario=" + idUsuario + ", nomeUsuario=" + nomeUsuario
+				+ ", listaPontoTuristico=" + listaPontoTuristico + ", dataHoraCriacao=" + dataHoraCriacao + "]";
 	}
 	
+			
 }

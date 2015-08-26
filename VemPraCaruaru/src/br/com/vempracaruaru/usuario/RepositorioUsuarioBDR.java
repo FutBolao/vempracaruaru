@@ -162,12 +162,12 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
-		boolean resposta = false;		
+		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
 		ps.setInt(1, usuario.getId());
 		rs = ps.executeQuery();
 		if(rs != null){
-			resposta = true;
+			resposta = false;
 		}
 		ps.close();
 		rs.close();

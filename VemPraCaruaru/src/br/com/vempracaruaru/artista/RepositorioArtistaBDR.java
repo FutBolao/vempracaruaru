@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.com.vempracaruaru.administrador.Administrador;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.ArtistaJaCadastradoException;
@@ -49,7 +48,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 			} else {
 				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			}
-			ps.setInt(1, artista.getAdministrador().getId());
+			ps.setInt(1, artista.getIdAdministrador());
 			ps.setString(2, artista.getNome());
 			ps.setString(3, artista.getHistorico());
 			ps.setString(4, artista.getTipo());
@@ -90,8 +89,8 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Artista artista = new Artista(rs.getInt("id"),new Administrador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("usuario"), rs.getString("senha"), rs.getString("nome").charAt(0))
-						,rs.getString("nome"), rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0));
+				Artista artista = new Artista(rs.getInt("id"),rs.getInt("idAdministrador"),rs.getString("nomeAdministrador"),
+						rs.getString("nome"), rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0));
 				artistas.add(artista);
 			}
 		}else{
@@ -141,7 +140,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 
 	@Override
 	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {		
-			Artista artista = new Artista(id, null, "", "", "", 'N');
+			Artista artista = new Artista(id, 0,"", "", "", "", 'N');
 		
 			PreparedStatement ps = null;
 			String sql = "";
@@ -163,12 +162,12 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
-		boolean resposta = false;		
+		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
 		ps.setInt(1, artista.getId());
 		rs = ps.executeQuery();
 		if(rs != null){
-			resposta = true;
+			resposta = false;
 		}
 		ps.close();
 		rs.close();

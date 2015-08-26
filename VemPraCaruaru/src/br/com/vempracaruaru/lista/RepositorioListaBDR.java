@@ -50,7 +50,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 			} else {
 				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			}
-			ps.setInt(1, lista.getUsuario().getId());
+			ps.setInt(1, lista.getIdUsuario());
 			ps.setString(2, lista.getDataHoraCriacao());
 			ps.execute();
 			rs = ps.getGeneratedKeys();
@@ -107,12 +107,12 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
-		boolean resposta = false;		
+		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
 		ps.setInt(1, lista.getId());
 		rs = ps.executeQuery();
 		if(rs != null){
-			resposta = true;
+			resposta = false;
 		}
 		ps.close();
 		rs.close();
