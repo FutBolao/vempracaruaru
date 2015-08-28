@@ -3,30 +3,41 @@ package br.com.vempracaruaru.lista;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.vempracaruaru.administrador.IRepositorioAdministrador;
+import br.com.vempracaruaru.administrador.RepositorioAdministradorBDR;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
+import br.com.vempracaruaru.util.Validacao;
 
 public class ControladorLista {
 
+private IRepositorioLista repositorio;
 	
+	public ControladorLista() throws Exception{
+		this.repositorio = new RepositorioListaBDR();
+	}
 	
 	public void cadastrar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
-		
+		System.out.println("passando pela controladora - concluido com sucesso -");
+		if (lista != null) {
+			repositorio.cadastrar(lista);
+		}
 	}
 	public ArrayList<Lista> listarTodos(String complemento) throws SQLException, ListaNaoCadastradoException, Exception{
-		return null;
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return repositorio.listarTodos(complemento);
 	}
 	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception{
-		return null;
+		return repositorio.listarPorId(id);
 	}
 	public ArrayList<Lista> listarPorNome(String nome) throws SQLException, ListaNaoCadastradoException, Exception{
-		return null;
+		return repositorio.listarPorNome(nome);
 	}
 	public void alterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
-		
+		repositorio.alterar(lista);	
 	}
 	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception{
-		
+		repositorio.deletar(id);
 	}
 }
