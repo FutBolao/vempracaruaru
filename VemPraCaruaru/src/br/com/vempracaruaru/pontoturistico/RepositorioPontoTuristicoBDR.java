@@ -100,7 +100,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 			while (rs.next()) {
 				
 				
-						PontoTuristico pontoTuristico = new PontoTuristico(rs.getInt("id"), rs.getInt("idAdministrador"),rs.getString("nomeAdministrador"),
+						PontoTuristico pontoTuristico = new PontoTuristico(rs.getInt("id"), rs.getInt("id_Administrador"),rs.getString("nomeAdministrador"),
 						rs.getString("nome"), new Endereco(rs.getInt("numero"), rs.getString("bairro"), rs.getString("endereco"),
 						rs.getString("complemento")),rs.getString("cpf"),  rs.getString("horario_abertura"), rs.getString("horario_encerramento"), 
 						rs.getString("tempo_visitacao"),rs.getString("historico_descricao"), rs.getString("ativo").charAt(0));
@@ -133,12 +133,12 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 				PreparedStatement ps = null;
 				String sql = "";
 				// instrução de update do artista
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, endereco=?, numero,=? bairro=?, complemento=?, telefone=?, horario_abertura,=? horario_encerramento,=? "
+				sql = "UPDATE " + NOME_TABELA + " SET nome=?, endereco=?, numero=?, bairro=?, complemento=?, telefone=?, horario_abertura=?, horario_encerramento=?, "
 						+ "tempo_visitacao=?, historico_descricao=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, pontoTuristico.getNome());
 				ps.setString(2, pontoTuristico.getEndereco().getRua());
-				ps.setString(3, pontoTuristico.getEndereco().getRua());
+				ps.setInt(3, pontoTuristico.getEndereco().getNumero());
 				ps.setString(4, pontoTuristico.getEndereco().getBairro());
 				ps.setString(5, pontoTuristico.getEndereco().getComplemento());
 				ps.setString(6, pontoTuristico.getTelefone());

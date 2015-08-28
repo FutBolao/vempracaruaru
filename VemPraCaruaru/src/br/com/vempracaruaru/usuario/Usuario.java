@@ -60,5 +60,11 @@ public class Usuario extends Pessoa{
 	public void setLink_facebook(String link_facebook) {
 		this.linkfacebook = link_facebook;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Usuario [emial=" + emial + ", localizacao=" + localizacao + ", senha=" + senha + ", userFacebook="
+				+ userFacebook + ", linkfacebook=" + linkfacebook + "]";
+	}
+		
 }

@@ -89,7 +89,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Artista artista = new Artista(rs.getInt("id"),rs.getInt("idAdministrador"),rs.getString("nomeAdministrador"),
+				Artista artista = new Artista(rs.getInt("id"),rs.getInt("id_Administrador"),rs.getString("nomeAdministrador"),
 						rs.getString("nome"), rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0));
 				artistas.add(artista);
 			}
@@ -122,7 +122,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 				PreparedStatement ps = null;
 				String sql = "";
 				// instrução de update do artista
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?,tipo,=? ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, artista.getNome());
 				ps.setString(2, artista.getHistorico());

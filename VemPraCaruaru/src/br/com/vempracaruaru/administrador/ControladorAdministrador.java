@@ -33,14 +33,18 @@ private IRepositorioAdministrador repositorio;
 	}
 	
 	public Administrador listarPorId(int id) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("passando pela controladora - concluido com sucesso -");
 		return repositorio.listarPorId(id);
 	}
 	
 	public ArrayList<Administrador> listarPorNome(String nome) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("passando pela controladora - concluido com sucesso -");
+
 		return repositorio.listarPorNome(nome);
 	}
 	
 	public Administrador listarPorCpf(String cpf) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("passando pela controladora - concluido com sucesso -");
 		if (Validacao.validaCPF(cpf)){
 			cpf = cpf.replace('.',' ').replace('-',' ').replaceAll(" ", "");
 		}
@@ -48,6 +52,7 @@ private IRepositorioAdministrador repositorio;
 	}
 	
 	public void alterar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("passando pela controladora - concluido com sucesso -");
 		if (Validacao.validaCPF(administrador.getCpf())) {
 			administrador.setCpf(administrador.getCpf().replace('.',' ').replace('-',' ').replaceAll(" ", ""));
 			repositorio.alterar(administrador);
@@ -55,6 +60,7 @@ private IRepositorioAdministrador repositorio;
 	}
 	
 	public void deletar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("passando pela controladora - concluido com sucesso -");
 		repositorio.deletar(id);
 	}
 

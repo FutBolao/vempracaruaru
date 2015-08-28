@@ -92,7 +92,8 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Administrador administrador = new Administrador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("usuario"), rs.getString("senha"), rs.getString("nome").charAt(0));
+				Administrador administrador = new Administrador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"),
+						rs.getString("usuario"), rs.getString("senha"), rs.getString("ativo").charAt(0));
 				administradores.add(administrador);
 			}
 			System.out.println("- consulta completada com sucesso -");
@@ -125,23 +126,25 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 
 	@Override
 	public void alterar(Administrador administrador) throws SQLException, NaoFoiPossivelAlterarAdministradorException, AdministradorNaoCadastradoException, Exception {
-		
+		System.out.println("Chegando ao repositorio");
 		if (existeId(administrador) == false){
 			if(existeCpf(administrador) == false){
 				PreparedStatement ps = null;
 				String sql = "";
 				// instrução de update do clube
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, cpf=?, telefone=?, senha=?, ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET nome=?, cpf=?, telefone=?, usuario=? , senha=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, administrador.getNome());
 				ps.setString(2, administrador.getCpf());
 				ps.setString(3, administrador.getTelefone());
-				ps.setString(4, administrador.getSenha());
-				ps.setString(5, String.valueOf(administrador.getAtivo()));
-				ps.setInt(6, administrador.getId());
+				ps.setString(4, administrador.getUsuario());
+				ps.setString(5, administrador.getSenha());
+				ps.setString(6, String.valueOf(administrador.getAtivo()));
+				ps.setInt(7, administrador.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarAdministradorException();
 				ps.close();
+				System.out.println("- consulta completada com sucesso -");
 			}else{
 				throw new NaoFoiPossivelAlterarAdministradorException();
 			}
@@ -154,7 +157,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	@Override
 	public void deletar(int id) throws SQLException,
 			AdministradorNaoCadastradoException, Exception {
-		
+		System.out.println("Chegando ao repositorio");
 		Administrador administrador = new Administrador(id, "", "", "", "", "", 'N');
 		if (existeId(administrador) == false){
 			PreparedStatement ps = null;
@@ -167,6 +170,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 			Integer resultado = ps.executeUpdate();
 			if (resultado == 0) throw new NaoFoiPossivelAlterarAdministradorException();
 			ps.close();
+			System.out.println("- consulta completada com sucesso -");
 		}else{
 			throw new AdministradorNaoCadastradoException();
 		}
@@ -176,19 +180,20 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	@Override
 	public boolean existeId(Administrador administrador) throws SQLException,
 			AdministradorJaCadastradoException, Exception {
-		
+		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
-		boolean resposta = false;		
+		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
 		ps.setInt(1, administrador.getId());
 		rs = ps.executeQuery();
 		if(rs != null){
-			resposta = true;
+			resposta = false;
 		}
 		ps.close();
 		rs.close();
+		System.out.println("- consulta completada com sucesso -");
 		return resposta;
 		
 	}
@@ -196,7 +201,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	@Override
 	public boolean existeCpf(Administrador administrador) throws SQLException,
 			AdministradorJaCadastradoException, Exception {
-		
+		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE cpf=?";
@@ -209,6 +214,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 		}
 		ps.close();
 		rs.close();
+		System.out.println("- consulta completada com sucesso -");
 		return resposta;
 		
 	}

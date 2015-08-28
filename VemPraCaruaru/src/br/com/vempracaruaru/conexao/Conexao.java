@@ -16,7 +16,7 @@ public class Conexao {
     	
     	//condições para selecionar o tipo de banco.
     	if (sistema == DataBase.MYSQL) {
-    		conexao = "jdbc:mysql://vempracaruaru.com.br:3306/vempraca_bd";
+    		conexao = "jdbc:mysql://vempracaruaru:3306/vempraca_bd";
     		usuario = "vempraca_user";
     		senha = "fivetech";
     	}else if (sistema == DataBase.SQLSERVER) {

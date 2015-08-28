@@ -16,6 +16,7 @@ public class ControladorArtista {
 	}
 	
 	public void cadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception{
+		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		if(artista !=null){
 			repositorio.cadastrar(artista);
 		}

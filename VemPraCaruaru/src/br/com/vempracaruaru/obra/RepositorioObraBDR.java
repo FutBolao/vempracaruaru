@@ -7,16 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.com.vempracaruaru.administrador.Administrador;
-import br.com.vempracaruaru.artista.Artista;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
-import br.com.vempracaruaru.endereco.Endereco;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarObraException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
 import br.com.vempracaruaru.exception.ObraJaCadastradoException;
 import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
-import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
 public class RepositorioObraBDR implements IRepositorioObra{
 	

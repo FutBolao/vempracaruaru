@@ -87,7 +87,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nome"),rs.getString("email"), rs.getString("localozacao"), rs.getString("senha"), rs.getString("user_facebook"),rs.getString("link_facebook"));
+				Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nome"),rs.getString("email"), rs.getString("localizacao"), rs.getString("senha"), rs.getString("user_facebook"),rs.getString("link_facebook"));
 				usuarios.add(usuario);
 			}
 		}else{
@@ -117,7 +117,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 				PreparedStatement ps = null;
 				String sql = "";
 				// instrução de update do usuario
-				sql = "UPDATE " + NOME_TABELA + " SET email=?, nome=?, localizacao=?, senha=?, user_facebook=?,, link_facebook=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET email=?, nome=?, localizacao=?, senha=?, user_facebook=?, link_facebook=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, usuario.getEmial());
 				ps.setString(2, usuario.getNome());
