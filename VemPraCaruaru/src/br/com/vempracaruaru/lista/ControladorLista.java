@@ -3,12 +3,9 @@ package br.com.vempracaruaru.lista;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.com.vempracaruaru.administrador.IRepositorioAdministrador;
-import br.com.vempracaruaru.administrador.RepositorioAdministradorBDR;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
-import br.com.vempracaruaru.util.Validacao;
 
 public class ControladorLista {
 

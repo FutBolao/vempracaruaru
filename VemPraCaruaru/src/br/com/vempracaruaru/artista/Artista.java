@@ -1,5 +1,7 @@
 package br.com.vempracaruaru.artista;
 
+import com.mysql.jdbc.Blob;
+
 import br.com.vempracaruaru.pessoa.Pessoa;
 
 public class Artista extends Pessoa{
@@ -9,16 +11,18 @@ public class Artista extends Pessoa{
 	private String			historico;
 	private String			tipo;
 	private char			ativo;
+	private Blob			foto;
 	
-	public Artista(int id, int idAdministrador,String nomeAdministrador, String nome, String historico, String tipo,char ativo) {
+	public Artista(int id, String nome, int idAdministrador, String nomeAdministrador, String historico, String tipo,
+			char ativo, Blob foto) {
 		super(id, nome);
 		this.idAdministrador = idAdministrador;
 		this.nomeAdministrador = nomeAdministrador;
 		this.historico = historico;
 		this.tipo = tipo;
 		this.ativo = ativo;
+		this.foto = foto;
 	}
-
 
 	public int getIdAdministrador() {
 		return idAdministrador;
@@ -60,11 +64,18 @@ public class Artista extends Pessoa{
 		this.ativo = ativo;
 	}
 
+	public Blob getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Blob foto) {
+		this.foto = foto;
+	}
 
 	@Override
 	public String toString() {
 		return "Artista [idAdministrador=" + idAdministrador + ", nomeAdministrador=" + nomeAdministrador
-				+ ", historico=" + historico + ", tipo=" + tipo + ", ativo=" + ativo + "]";
+				+ ", historico=" + historico + ", tipo=" + tipo + ", ativo=" + ativo + ", foto=" + foto + "]";
 	}
-		
+				
 }

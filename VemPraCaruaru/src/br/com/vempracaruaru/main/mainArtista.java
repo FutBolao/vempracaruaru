@@ -14,8 +14,8 @@ public class mainArtista {
 		// TODO Auto-generated method stub
 		try {
 			System.out.println("inicio teste");
-			Fachada.getInstance().artistaCadastrar(new Artista(1, 1, "João Henrique", 
-					"Zé", "sem", "escultor", 'A'));
+			Fachada.getInstance().artistaCadastrar(new Artista(1, "João Henrique", 
+					1,"Zé", "sem", "escultor", 'A',null));
 //			ArrayList<Artista> lista = Fachada.getInstance().artistaListarTodos("nome = nome");
 		
 //			for(Artista artista : lista) {

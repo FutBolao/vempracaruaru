@@ -69,8 +69,6 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		ps.close();
 		rs.close();
 		
-	
-		
 	}
 
 	@Override
@@ -89,8 +87,9 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Artista artista = new Artista(rs.getInt("id"),rs.getInt("id_Administrador"),rs.getString("nomeAdministrador"),
-						rs.getString("nome"), rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0));
+				Artista artista = new Artista(rs.getInt("id"), rs.getString("nome"), rs.getInt("id_Administrador"), rs.getString("nomeAdministrador"),
+						 rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0), null);
+				
 				artistas.add(artista);
 			}
 		}else{
@@ -140,7 +139,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 
 	@Override
 	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {		
-			Artista artista = new Artista(id, 0,"", "", "", "", 'N');
+			Artista artista = new Artista(id,"", 0,"", "", "", 'N',null);
 		
 			PreparedStatement ps = null;
 			String sql = "";

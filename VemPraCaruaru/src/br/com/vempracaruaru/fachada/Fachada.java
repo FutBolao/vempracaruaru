@@ -11,8 +11,14 @@ import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.ArtistaJaCadastradoException;
 import br.com.vempracaruaru.exception.ArtistaNaoCadastradoException;
+import br.com.vempracaruaru.exception.FotoJaCadastradoException;
+import br.com.vempracaruaru.exception.FotoNaoCadastradoException;
+import br.com.vempracaruaru.exception.ListaJaCadastradoException;
+import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarFotoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarPontoTuristicoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
@@ -22,6 +28,10 @@ import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioNaoCadastradoException;
+import br.com.vempracaruaru.fotos.ControladorFoto;
+import br.com.vempracaruaru.fotos.Foto;
+import br.com.vempracaruaru.lista.ControladorLista;
+import br.com.vempracaruaru.lista.Lista;
 import br.com.vempracaruaru.obra.ControladorObra;
 import br.com.vempracaruaru.obra.Obra;
 import br.com.vempracaruaru.pontoturistico.ControladorPontoTuristico;
@@ -32,11 +42,14 @@ import br.com.vempracaruaru.usuario.Usuario;
 public class Fachada {
 	
 	private static Fachada instance = null;
+	
 	private ControladorAdministrador controladorAdministrador;
 	private ControladorArtista controladorArtista;
 	private ControladorUsuario controladorUsuario;
 	private ControladorPontoTuristico controladoraPontoTuristico;
 	private ControladorObra controladorObra;
+	private ControladorLista controladorLista;
+	private ControladorFoto controladorFoto;
 	
 	public Fachada() throws Exception {
 		this.controladorAdministrador = new ControladorAdministrador();
@@ -54,6 +67,7 @@ public class Fachada {
 	}
 	
 	// MÉTODOS DO ADMINISTRADOR
+	
 	public void administradorCadastrar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorJaCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorAdministrador.cadastrar(administrador);
@@ -189,6 +203,63 @@ public class Fachada {
 	public void obraDeletar(int id) throws SQLException, ObraNaoCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorObra.deletar(id);
+	}
+	
+	//METODOS DAS LISTA
+	
+	public void cadastrar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorLista.cadastrar(lista);
+	}
+	public ArrayList<Lista> listarTodos(String complemento) throws SQLException, ListaNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorLista.listarTodos(complemento);
+	}
+	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorLista.listarPorId(id);
+	}
+	public ArrayList<Lista> listarPorNome(String nome) throws SQLException, ListaNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorLista.listarPorNome(nome);
+	}
+	public void alterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorLista.alterar(lista);
+	}
+	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorLista.deletar(id);
+	}
+	
+	
+	
+	
+	//METODOS DAS FOTO
+	
+	public void fotoCadastrar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorFoto.cadastrar(foto);
+	}
+	public ArrayList<Foto> fotoListarTodos(String complemento) throws SQLException, FotoNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorFoto.listarTodos(complemento);
+	}
+	public Foto fotoListarPorId(int id) throws SQLException, FotoNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorFoto.listarPorId(id);
+	}
+	public ArrayList<Foto> fotoListarPorNome(String nome) throws SQLException, FotoNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorFoto.listarPorNome(nome);
+	}
+	public void fotoAlterar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorFoto.alterar(foto);
+	}
+	public void fotoDeletar(int id) throws SQLException, FotoNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorFoto.deletar(id);
 	}
 
 }

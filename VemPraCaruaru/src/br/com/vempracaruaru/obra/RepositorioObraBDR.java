@@ -86,7 +86,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 			while (rs.next()) {
 				Obra obra = new Obra(rs.getInt("id"), rs.getInt("idArtista"), rs.getString("nomeArtista"), rs.getInt("idAdministrador"), 
 						rs.getString("nomeAdministrador"), rs.getInt("idPontoTuristico"), rs.getString("nomePontoTuristico"), rs.getString("nome"),
-						rs.getString("historico"), rs.getString("ativo").charAt(0));
+						rs.getString("historico"), rs.getString("ativo").charAt(0),null);
 				obras.add(obra);
 			}
 		}else{
@@ -133,7 +133,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 
 	@Override
 	public void deletar(int id) throws SQLException, ObraNaoCadastradoException, Exception {	
-		Obra obra = new Obra(id, 0, "", 0,"", 0,"", "", "", 'N');
+		Obra obra = new Obra(id, 0, "", 0,"", 0,"", "", "", 'N',null);
 		
 		PreparedStatement ps = null;
 		String sql = "";

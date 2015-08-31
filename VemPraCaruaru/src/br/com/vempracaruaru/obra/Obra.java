@@ -1,5 +1,7 @@
 package br.com.vempracaruaru.obra;
 
+import com.mysql.jdbc.Blob;
+
 public class Obra {
 
 	private int				id;
@@ -12,8 +14,10 @@ public class Obra {
 	private String 			nome;
 	private String 			historico;
 	private char 			ativo;
+	private Blob			foto;
+	
 	public Obra(int id, int idArtista, String nomeArtista, int idAdministrador, String nomeAdministrador,
-			int idPontoTuristico, String nomePontoTuristico, String nome, String historico, char ativo) {
+			int idPontoTuristico, String nomePontoTuristico, String nome, String historico, char ativo, Blob foto) {
 		super();
 		this.id = id;
 		this.idArtista = idArtista;
@@ -25,6 +29,7 @@ public class Obra {
 		this.nome = nome;
 		this.historico = historico;
 		this.ativo = ativo;
+		this.foto = foto;
 	}
 	public int getId() {
 		return id;
@@ -86,13 +91,19 @@ public class Obra {
 	public void setAtivo(char ativo) {
 		this.ativo = ativo;
 	}
+	public Blob getFoto() {
+		return foto;
+	}
+	public void setFoto(Blob foto) {
+		this.foto = foto;
+	}
 	@Override
 	public String toString() {
 		return "Obra [id=" + id + ", idArtista=" + idArtista + ", nomeArtista=" + nomeArtista + ", idAdministrador="
 				+ idAdministrador + ", nomeAdministrador=" + nomeAdministrador + ", idPontoTuristico="
 				+ idPontoTuristico + ", nomePontoTuristico=" + nomePontoTuristico + ", nome=" + nome + ", historico="
-				+ historico + ", ativo=" + ativo + "]";
+				+ historico + ", ativo=" + ativo + ", foto=" + foto + "]";
 	}
-	
+	 
 	
 }

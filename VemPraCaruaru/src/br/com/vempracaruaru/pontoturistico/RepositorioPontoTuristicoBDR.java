@@ -103,7 +103,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 						PontoTuristico pontoTuristico = new PontoTuristico(rs.getInt("id"), rs.getInt("id_Administrador"),rs.getString("nomeAdministrador"),
 						rs.getString("nome"), new Endereco(rs.getInt("numero"), rs.getString("bairro"), rs.getString("endereco"),
 						rs.getString("complemento")),rs.getString("cpf"),  rs.getString("horario_abertura"), rs.getString("horario_encerramento"), 
-						rs.getString("tempo_visitacao"),rs.getString("historico_descricao"), rs.getString("ativo").charAt(0));
+						rs.getString("tempo_visitacao"),rs.getString("historico_descricao"), rs.getString("ativo").charAt(0),null,rs.getInt("pontos"));
 				
 				pontosTuristicos.add(pontoTuristico);
 			}
@@ -159,7 +159,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 	}
 	@Override
 	public void deletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {		
-		PontoTuristico artista = new PontoTuristico(id, 0, "","", null, "", "", "",	"", "", 'N');	
+		PontoTuristico artista = new PontoTuristico(id, 0, "","", null, "", "", "",	"", "", 'N',null,0);	
 		PreparedStatement ps = null;
 		String sql = "";
 		// instrução de update do artista

@@ -5,7 +5,7 @@ public class ObraNaoCadastradoException extends Exception{
 	private static final long serialVersionUID = -2849294837831479260L;
 
 	public ObraNaoCadastradoException(){
-		super("Usuario não cadastrado!");
+		super("Obra não cadastrado!");
 	}
 	
 	public ObraNaoCadastradoException(String msg){
