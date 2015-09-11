@@ -11,8 +11,10 @@ import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
+import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
 
 public class RepositorioListaBDR implements IRepositorioLista{
 
@@ -35,7 +37,6 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	}
 	
 	
-	//metodo incompleto
 	@Override
 	public void cadastrar(Lista lista)
 			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception {
@@ -44,14 +45,13 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_usuario, ) VALUES (?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (id_usuario) VALUES (?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
 				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			}
-			ps.setInt(1, lista.getUsuario().getId());
-			ps.setString(2, lista.getDataHoraCriacao());
+			ps.setInt(1, lista.getIdUsuario());
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -67,16 +67,35 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		
 		ps.close();
 		rs.close();
-		
-	
-		
 	}
 
 	@Override
 	public ArrayList<Lista> listarTodos(String complemento)
 			throws SQLException, ListaNaoCadastradoException, Exception {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Chegando ao repositorio -");
+		ArrayList<Lista> listas = new ArrayList<Lista>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "";
+		sql = "SELECT * FROM " + NOME_TABELA + " ";
+		sql += "WHERE ";
+		sql += complemento;
+		sql += " ORDER BY nome";
+		ps = this.connection.prepareStatement(sql);
+		rs = ps.executeQuery();
+		if (rs != null) {
+			while (rs.next()) {
+				Lista lista = new Lista(rs.getInt("ID"), null, rs.getInt("ID_USUARIO"), rs.getString("DATA_HORA_CRIACAO"));
+				listas.add(lista);
+			}
+		}else{
+			throw new ObraNaoCadastradoException();
+		}
+		System.out.println("- Consulta completada com sucesso -");
+		ps.close();
+		rs.close();
+		return listas;
+	
 	}
 
 	@Override
@@ -84,22 +103,28 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		return listarTodos("id=" + id).get(0);
 		}
 
-	@Override
-	public ArrayList<Lista> listarPorNome(String nome) throws SQLException, ListaNaoCadastradoException, Exception {
-		return listarTodos("nome LIKE '%" + nome + "%'");
-		}
 
 	@Override
 	public void alterar(Lista lista)
 			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception {
-		// TODO Auto-generated method stub
-		
+				
 	}
 
 	@Override
 	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception {
-		// TODO Auto-generated method stub
+		PreparedStatement stmt = null;
+		String sql = "";
+		try {
 		
+			sql = "delete form " + NOME_TABELA +" where id= ?";
+			stmt = this.connection.prepareStatement(sql);
+			stmt.setInt(1, id);
+			
+			stmt.execute();
+			System.out.println("foi removido");
+		} finally {
+
+		}		
 	}
 
 	@Override
@@ -118,6 +143,4 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		rs.close();
 		return resposta;		
 	}
-
-	
 }

@@ -14,17 +14,17 @@ public class mainArtista {
 		// TODO Auto-generated method stub
 		try {
 			System.out.println("inicio teste");
-			Fachada.getInstance().artistaCadastrar(new Artista(1, "João Henrique", 
-					1,"Zé", "sem", "escultor", 'A',null));
-//			ArrayList<Artista> lista = Fachada.getInstance().artistaListarTodos("nome = nome");
+//			Fachada.getInstance().artistaCadastrar(new Artista(1, "João Henrique", 
+//					1,"Zé", "sem", "escultor", 'A',null));
+			ArrayList<Artista> lista = Fachada.getInstance().artistaListarTodos("nome = nome");
 		
-//			for(Artista artista : lista) {
-//				System.out.println(artista.toString());
-//			}
+			for(Artista artista : lista) {
+				System.out.println(artista.toString());
+			}
 			
 //			Fachada.getInstance().artistaAlterar(new Artista(1, 1, "João Henrique",	"Zé", "Doido", "escultor", 'A') );
 			
-			Fachada.getInstance().artistaDeletar(1);
+//			Fachada.getInstance().artistaDeletar(1);
 			System.out.println("fim de teste");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

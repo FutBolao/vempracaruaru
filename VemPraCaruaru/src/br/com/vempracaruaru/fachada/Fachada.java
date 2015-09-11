@@ -207,7 +207,7 @@ public class Fachada {
 	
 	//METODOS DAS LISTA
 	
-	public void cadastrar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
+	public void listaCadastrar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.cadastrar(lista);
 	}
@@ -219,15 +219,11 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorLista.listarPorId(id);
 	}
-	public ArrayList<Lista> listarPorNome(String nome) throws SQLException, ListaNaoCadastradoException, Exception{
-		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladorLista.listarPorNome(nome);
-	}
-	public void alterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
+	public void ListaAlterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.alterar(lista);
 	}
-	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception{
+	public void listaDeletar(int id) throws SQLException, ListaNaoCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.deletar(id);
 	}

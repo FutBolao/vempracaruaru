@@ -79,7 +79,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
-		sql = "SELECT * FROM " + NOME_TABELA + " ";
+		sql = "SELECT * FROM ";
 		sql += "WHERE ";
 		sql += complemento;
 		sql += " ORDER BY nome";
@@ -87,7 +87,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Artista artista = new Artista(rs.getInt("id"), rs.getString("nome"), rs.getInt("id_Administrador"), rs.getString("nomeAdministrador"),
+				Artista artista = new Artista(rs.getInt("id"), rs.getString("nome"), rs.getInt("id_Administrador"), rs.getString("nome_Administrador"),
 						 rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0), null);
 				
 				artistas.add(artista);

@@ -3,19 +3,18 @@ package br.com.vempracaruaru.lista;
 import java.util.ArrayList;
 
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
-import br.com.vempracaruaru.usuario.Usuario;
 
 public class Lista {
 
-	private int id;
-	private ArrayList<PontoTuristico> listaPontoTuristico;
-	private Usuario usuario;
-	private String dataHoraCriacao;
+	private int 						id;
+	private ArrayList<PontoTuristico>	listaPontoTuristico;
+	private int 						idUsuario;
+	private String 						dataHoraCriacao;
 	
-	public Lista(int id, ArrayList<PontoTuristico> listaPontoTuristico, Usuario usuario, String dataHoraCriacao) {
+	public Lista(int id, ArrayList<PontoTuristico> listaPontoTuristico, int idUsuario, String dataHoraCriacao) {
 		this.id = id;
 		this.listaPontoTuristico = listaPontoTuristico;
-		this.usuario = usuario;
+		this.idUsuario = idUsuario;
 		this.dataHoraCriacao = dataHoraCriacao;
 	}
 
@@ -35,12 +34,12 @@ public class Lista {
 		this.listaPontoTuristico = listaPontoTuristico;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getDataHoraCriacao() {
@@ -53,8 +52,7 @@ public class Lista {
 
 	@Override
 	public String toString() {
-		return "Lista [id=" + id + ", listaPontoTuristico=" + listaPontoTuristico + ", usuario=" + usuario
+		return "Lista [id=" + id + ", listaPontoTuristico=" + listaPontoTuristico + ", idUsuario=" + idUsuario
 				+ ", dataHoraCriacao=" + dataHoraCriacao + "]";
-	}
-	
+	}		
 }

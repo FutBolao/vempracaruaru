@@ -28,9 +28,7 @@ private IRepositorioLista repositorio;
 	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception{
 		return repositorio.listarPorId(id);
 	}
-	public ArrayList<Lista> listarPorNome(String nome) throws SQLException, ListaNaoCadastradoException, Exception{
-		return repositorio.listarPorNome(nome);
-	}
+
 	public void alterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
 		repositorio.alterar(lista);	
 	}

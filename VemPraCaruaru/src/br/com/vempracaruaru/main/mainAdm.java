@@ -14,22 +14,21 @@ public class mainAdm {
 		// TODO Auto-generated method stub
 
 		try {
-//			System.out.println("inicio do teste");
-//			Fachada.getInstance().administradorCadastrar(new Administrador(1, "João Henrique", "425.802.737-51",
-//					"9310-5217", "joao60", "123", 'A'));
+			System.out.println("inicio do teste");
+			Fachada.getInstance().administradorCadastrar(new Administrador(1, "João Henrique", "425.802.737-51",
+					"9310-5217", "joao60", "123", 'S'));
 			
-			ArrayList<Administrador> lista = Fachada.getInstance().administradorListarTodos("nome = nome");
+//		ArrayList<Administrador> lista = Fachada.getInstance().administradorListarTodos("nome = nome");
 //			Administrador admTeste = Fachada.getInstance().administradorListarPorId(1);
 //			Administrador admTeste = Fachada.getInstance().administradorListarPorCpf("425.802.737-51");
 //			System.out.println(admTeste.toString());
 //			ArrayList<Administrador> lista  = Fachada.getInstance().administradorListarPorNome("João Henrique");
-//			Fachada.getInstance().administradorAlterar(new Administrador(1, "João Henrique", "42580273751",
-//					"9310-5217", "joao61", "456", 'A'));
+//			Fachada.getInstance().administradorAlterar(new Administrador(9, "João Henrique", "42580273751","9310-5217", "joao61", "456", 'A'));
 //			Fachada.getInstance().administradorDeletar(1);
 //			
-		for (Administrador adm : lista) {
-			System.out.println(adm.toString());
-		}			
+//		for (Administrador adm : lista) {
+//			System.out.println(adm.toString());
+//		}			
 		
 			System.out.println("fim do teste");
 		} catch (SQLException e) {
