@@ -19,6 +19,7 @@ public class ControladorFoto {
 	public void cadastrar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		if(foto != null){
+			repositorio.cadastrar(foto);
 		}
 	}
 	public ArrayList<Foto> listarTodos(String complemento) throws SQLException, FotoNaoCadastradoException, Exception{
@@ -29,9 +30,9 @@ public class ControladorFoto {
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		return repositorio.listarPorId(id);
 	}
-	public ArrayList<Foto> listarPorNome(String nome) throws SQLException, FotoNaoCadastradoException, Exception{
+	public ArrayList<Foto> listarPorReferencia(String referencia) throws SQLException, FotoNaoCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
-		return repositorio.listarPorNome(nome);
+		return repositorio.listarPorReferencia(referencia);
 	}
 	public void alterar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoNaoCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");

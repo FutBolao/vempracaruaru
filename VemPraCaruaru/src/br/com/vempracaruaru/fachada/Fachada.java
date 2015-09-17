@@ -57,6 +57,8 @@ public class Fachada {
 		this.controladorUsuario = new ControladorUsuario();
 		this.controladoraPontoTuristico = new ControladorPontoTuristico();
 		this.controladorObra = new ControladorObra();
+		this.controladorLista = new ControladorLista();
+		this.controladorFoto = new ControladorFoto();
 	}
 	
 	public static Fachada getInstance() throws Exception {
@@ -211,7 +213,7 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.cadastrar(lista);
 	}
-	public ArrayList<Lista> listarTodos(String complemento) throws SQLException, ListaNaoCadastradoException, Exception{
+	public ArrayList<Lista> listarTodasListas(String complemento) throws SQLException, ListaNaoCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorLista.listarTodos(complemento);
 	}
@@ -228,9 +230,7 @@ public class Fachada {
 		controladorLista.deletar(id);
 	}
 	
-	
-	
-	
+		
 	//METODOS DAS FOTO
 	
 	public void fotoCadastrar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception{
@@ -245,9 +245,9 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorFoto.listarPorId(id);
 	}
-	public ArrayList<Foto> fotoListarPorNome(String nome) throws SQLException, FotoNaoCadastradoException, Exception{
+	public ArrayList<Foto> fotoListarPorReferencia(String nome) throws SQLException, FotoNaoCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladorFoto.listarPorNome(nome);
+		return controladorFoto.listarPorReferencia(nome);
 	}
 	public void fotoAlterar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoNaoCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");

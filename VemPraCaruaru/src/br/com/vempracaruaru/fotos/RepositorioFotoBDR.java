@@ -46,7 +46,7 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, id_referencia, referencia, imagem) VALUES (?,?,?,);";
+			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, id_referencia, referencia, imagem, descricao, ativo) VALUES (?,?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -55,7 +55,9 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 			ps.setInt(1, foto.getIdAdministrador());
 			ps.setInt(2, foto.getIdReferencia());
 			ps.setString(3, foto.getReferencia());
-			ps.setBlob(4, foto.getImagem());
+			ps.setString(4, foto.getImagem());
+			ps.setString(5, foto.getDescricao());
+			ps.setString(6, String.valueOf(foto.getAtivo()));
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -84,12 +86,13 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
 		sql += "WHERE ";
 		sql += complemento;
-		sql += " ORDER BY nome";
+		sql += " ORDER BY referencia";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Foto foto = new Foto(rs.getInt("id"), rs.getInt("id_Administrador"), rs.getInt("id_Referencia"), rs.getString("referencia"), null);	
+				Foto foto = new Foto(rs.getInt("id"), rs.getInt("id_Administrador"), rs.getInt("id_Referencia"), rs.getString("referencia"),
+						rs.getString("imagem"),rs.getString("descricao"),rs.getString("ativo").charAt(0));	
 				fotos.add(foto);
 			}
 		}else{
@@ -108,8 +111,8 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 		}
 
 	@Override
-	public ArrayList<Foto> listarPorNome(String nome) throws SQLException, FotoNaoCadastradoException, Exception {
-		return listarTodos("nome LIKE '%" + nome + "%'");
+	public ArrayList<Foto> listarPorReferencia(String referencia) throws SQLException, FotoNaoCadastradoException, Exception {
+		return listarTodos("referencia LIKE '%" + referencia + "%'");
 		}
 
 	@Override
@@ -123,7 +126,7 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 				sql = "UPDATE " + NOME_TABELA + " SET referencia=?, image,=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, foto.getReferencia());
-				ps.setBlob(2, foto.getImagem());
+				ps.setString(2, foto.getImagem());
 				ps.setInt(5, foto.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();

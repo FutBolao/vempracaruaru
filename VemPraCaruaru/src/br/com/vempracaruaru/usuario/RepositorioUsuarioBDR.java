@@ -37,7 +37,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 	@Override
 	public void cadastrar(Usuario usuario)
 			throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioJaCadastradoException, Exception {
-
+		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
@@ -62,6 +62,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 					id = rs.getInt(1);
 				}
 				usuario.setId(id);
+				System.out.println("cadastro concluido com sucesso");
 			} else {
 				throw new NaoFoiPossivelCadastrarUsuarioException();
 			}

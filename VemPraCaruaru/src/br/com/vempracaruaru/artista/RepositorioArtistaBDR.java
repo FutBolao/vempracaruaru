@@ -42,7 +42,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, historico, tipo, ativo) VALUES (?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, historico, tipo, ativo,imagem_principal) VALUES (?,?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -53,6 +53,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 			ps.setString(3, artista.getHistorico());
 			ps.setString(4, artista.getTipo());
 			ps.setString(5, String.valueOf(artista.getAtivo()));
+			ps.setString(6, artista.getFoto());
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -79,16 +80,17 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
-		sql = "SELECT * FROM ";
+		sql = "SELECT * FROM vw_artista ";
 		sql += "WHERE ";
 		sql += complemento;
-		sql += " ORDER BY nome";
+		sql += " ORDER BY nome_artista";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Artista artista = new Artista(rs.getInt("id"), rs.getString("nome"), rs.getInt("id_Administrador"), rs.getString("nome_Administrador"),
-						 rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0), null);
+				Artista artista = new Artista(rs.getInt("id_artista"), rs.getString("nome_artista"), 
+						rs.getInt("id_Administrador"), rs.getString("nome_Administrador"),
+						 rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0), rs.getString("imagem_principal"));
 				
 				artistas.add(artista);
 			}
@@ -104,12 +106,12 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 
 	@Override
 	public Artista listarPorId(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {
-		return listarTodos("id=" + id).get(0);
+		return listarTodos("id_artista=" + id).get(0);
 		}
 
 	@Override
 	public ArrayList<Artista> listarPorNome(String nome) throws SQLException, ArtistaNaoCadastradoException, Exception {
-		return listarTodos("nome LIKE '%" + nome + "%'");
+		return listarTodos("nome_artista LIKE '%" + nome + "%'");
 		}
 
 

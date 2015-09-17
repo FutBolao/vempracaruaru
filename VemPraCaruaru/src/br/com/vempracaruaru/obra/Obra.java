@@ -1,6 +1,5 @@
 package br.com.vempracaruaru.obra;
 
-import com.mysql.jdbc.Blob;
 
 public class Obra {
 
@@ -12,12 +11,11 @@ public class Obra {
 	private int				idPontoTuristico;
 	private String			nomePontoTuristico;
 	private String 			nome;
-	private String 			historico;
 	private char 			ativo;
-	private Blob			foto;
+	private String			foto;
 	
 	public Obra(int id, int idArtista, String nomeArtista, int idAdministrador, String nomeAdministrador,
-			int idPontoTuristico, String nomePontoTuristico, String nome, String historico, char ativo, Blob foto) {
+			int idPontoTuristico, String nomePontoTuristico, String nome, char ativo, String foto) {
 		super();
 		this.id = id;
 		this.idArtista = idArtista;
@@ -27,7 +25,6 @@ public class Obra {
 		this.idPontoTuristico = idPontoTuristico;
 		this.nomePontoTuristico = nomePontoTuristico;
 		this.nome = nome;
-		this.historico = historico;
 		this.ativo = ativo;
 		this.foto = foto;
 	}
@@ -79,31 +76,24 @@ public class Obra {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getHistorico() {
-		return historico;
-	}
-	public void setHistorico(String historico) {
-		this.historico = historico;
-	}
+
 	public char getAtivo() {
 		return ativo;
 	}
 	public void setAtivo(char ativo) {
 		this.ativo = ativo;
 	}
-	public Blob getFoto() {
+	public String getFoto() {
 		return foto;
 	}
-	public void setFoto(Blob foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 	@Override
 	public String toString() {
 		return "Obra [id=" + id + ", idArtista=" + idArtista + ", nomeArtista=" + nomeArtista + ", idAdministrador="
 				+ idAdministrador + ", nomeAdministrador=" + nomeAdministrador + ", idPontoTuristico="
-				+ idPontoTuristico + ", nomePontoTuristico=" + nomePontoTuristico + ", nome=" + nome + ", historico="
-				+ historico + ", ativo=" + ativo + ", foto=" + foto + "]";
+				+ idPontoTuristico + ", nomePontoTuristico=" + nomePontoTuristico + ", nome=" + nome + ", ativo="
+				+ ativo + ", foto=" + foto + "]";
 	}
-	 
-	
 }

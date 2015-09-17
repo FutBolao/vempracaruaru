@@ -1,7 +1,5 @@
 package br.com.vempracaruaru.pontoturistico;
 
-import com.mysql.jdbc.Blob;
-
 import br.com.vempracaruaru.endereco.Endereco;
 
 public class PontoTuristico {
@@ -17,13 +15,12 @@ public class PontoTuristico {
 	private String			tempoVisitacao;
 	private String			historicoDescricao;
 	private char			ativo;
-	private Blob			foto;
-	private int				pontos;
+	private String			foto;
 	
 	
 	public PontoTuristico(int id, int idAdministrador, String nomeAdministrador, String nome, Endereco endereco,
 			String telefone, String horarioAbertura, String horarioEncerramento, String tempoVisitacao,
-			String historicoDescricao, char ativo, Blob foto,int pontos) {
+			String historicoDescricao, char ativo, String foto) {
 		super();
 		this.id = id;
 		this.idAdministrador = idAdministrador;
@@ -37,7 +34,6 @@ public class PontoTuristico {
 		this.historicoDescricao = historicoDescricao;
 		this.ativo = ativo;
 		this.foto = foto;
-		this.pontos = pontos;
 	}
 
 
@@ -151,26 +147,14 @@ public class PontoTuristico {
 	}
 
 
-	public Blob getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
 
-	public void setFoto(Blob foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-
-	
-
-	public int getPontos() {
-		return pontos;
-	}
-
-
-	public void setPontos(int pontos) {
-		this.pontos = pontos;
-	}
-
 
 	@Override
 	public String toString() {
@@ -178,7 +162,7 @@ public class PontoTuristico {
 				+ nomeAdministrador + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone
 				+ ", horarioAbertura=" + horarioAbertura + ", horarioEncerramento=" + horarioEncerramento
 				+ ", tempoVisitacao=" + tempoVisitacao + ", historicoDescricao=" + historicoDescricao + ", ativo="
-				+ ativo + ", foto=" + foto + ", pontos=" + pontos + "]";
+				+ ativo + ", foto=" + foto + "]";
 	}
 
 

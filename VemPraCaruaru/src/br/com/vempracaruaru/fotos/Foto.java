@@ -1,21 +1,22 @@
 package br.com.vempracaruaru.fotos;
 
-import com.mysql.jdbc.Blob;
-
 public class Foto {
 
 	private int			id;
 	private int			idAdministrador;
 	private	int			idReferencia;
 	private String 		referencia;
-	private Blob		imagem;
-	public Foto(int id, int idAdministrador, int idReferencia, String referencia, Blob imagem) {
-		super();
+	private String		imagem;
+	private String		descricao;
+	private char		ativo;
+	public Foto(int id, int idAdministrador, int idReferencia, String referencia, String imagem, String descricao, char ativo) {
 		this.id = id;
 		this.idAdministrador = idAdministrador;
 		this.idReferencia = idReferencia;
 		this.referencia = referencia;
 		this.imagem = imagem;
+		this.descricao = descricao;
+		this.ativo = ativo;
 	}
 	public int getId() {
 		return id;
@@ -41,16 +42,30 @@ public class Foto {
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
 	}
-	public Blob getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
-	public void setImagem(Blob imagem) {
+	public void setImagem(String imagem) {
 		this.imagem = imagem;
+	}
+	
+	public char getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(char ativo) {
+		this.ativo = ativo;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	@Override
 	public String toString() {
 		return "Foto [id=" + id + ", idAdministrador=" + idAdministrador + ", idReferencia=" + idReferencia
-				+ ", referencia=" + referencia + ", imagem=" + imagem + "]";
-	}	
-	
+				+ ", referencia=" + referencia + ", imagem=" + imagem + ", descricao=" + descricao + ", ativo=" + ativo
+				+ "]";
+	}
 }

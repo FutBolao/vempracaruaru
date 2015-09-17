@@ -9,12 +9,15 @@ import java.util.ArrayList;
 
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
+import br.com.vempracaruaru.endereco.Endereco;
+import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
-import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
 import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
+import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
+import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
 public class RepositorioListaBDR implements IRepositorioLista{
 
@@ -60,6 +63,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 					id = rs.getInt(1);
 				}
 				lista.setId(id);
+				cardastrarLista(lista);
 			} else {
 				throw new NaoFoiPossivelCadastrarArtistaException();
 			}
@@ -80,12 +84,11 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
 		sql += "WHERE ";
 		sql += complemento;
-		sql += " ORDER BY nome";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Lista lista = new Lista(rs.getInt("ID"), null, rs.getInt("ID_USUARIO"), rs.getString("DATA_HORA_CRIACAO"));
+				Lista lista = new Lista(rs.getInt("ID"), listarPonto(rs.getInt("ID")), rs.getInt("ID_USUARIO"), rs.getString("DATA_HORA_CRIACAO"));
 				listas.add(lista);
 			}
 		}else{
@@ -102,7 +105,6 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception {
 		return listarTodos("id=" + id).get(0);
 		}
-
 
 	@Override
 	public void alterar(Lista lista)
@@ -142,5 +144,75 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		ps.close();
 		rs.close();
 		return resposta;		
+	}
+	
+	private void cardastrarLista(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
+		System.out.println("Chegando ao repositorio");
+		PreparedStatement ps = null;
+		String sql = "";
+	
+			sql = "INSERT INTO lista_ponto (id_lista, id_ponto_turistico) VALUES (?,?);";
+			if (this.dataBase == DataBase.ORACLE) {
+				ps = this.connection.prepareStatement(sql, new String[] { "id" });
+			} else {
+				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			}
+			
+			for (PontoTuristico ponto : lista.getListaPontoTuristico()) {
+				ps.setInt(1, lista.getId());
+				ps.setInt(2,ponto.getId());
+				ps.execute();
+				
+			}		
+		ps.close();
+	
+	}
+	
+	private ArrayList<PontoTuristico> listarPonto(int id)throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
+		ArrayList<PontoTuristico> pontosTuristicos = new ArrayList<PontoTuristico>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "";
+		sql = "SELECT * FROM  lista_ponto ";
+		sql += "WHERE ";
+		sql += "id_lista = " + id;
+		ps = this.connection.prepareStatement(sql);
+		rs = ps.executeQuery();
+		if (rs != null) {
+			while (rs.next()) {
+								
+				PontoTuristico pontoTuristico = repcuperarPonto(rs.getInt("id_ponto_turistico"));
+				pontosTuristicos.add(pontoTuristico);
+			}
+		}else{
+			throw new AdministradorNaoCadastradoException();
+		}
+		ps.close();
+		rs.close();
+		return pontosTuristicos;
+		
+	}
+	
+	private PontoTuristico repcuperarPonto(int id) throws SQLException{
+		PontoTuristico ponto = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM  vw_ponto_turistico where id_ponto_turistico = " +id;
+		
+		ps = this.connection.prepareStatement(sql);
+		rs = ps.executeQuery();
+		
+		if(rs != null){
+			while(rs.next()){
+				ponto = new PontoTuristico(rs.getInt("id_ponto_turistico"), rs.getInt("id_administrador"),
+				rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), new Endereco(rs.getInt("numero"),
+				rs.getString("bairro"), rs.getString("endereco"),rs.getString("complemento")),rs.getString("telefone"),
+				rs.getString("horario_abertura"), rs.getString("horario_encerramento"),rs.getString("tempo_visitacao"),
+				rs.getString("historico_descricao"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"));
+				}
+			}
+		ps.close();
+		rs.close();
+		return ponto;
 	}
 }

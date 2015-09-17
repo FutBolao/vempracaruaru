@@ -1,6 +1,6 @@
 package br.com.vempracaruaru.artista;
 
-import com.mysql.jdbc.Blob;
+
 
 import br.com.vempracaruaru.pessoa.Pessoa;
 
@@ -11,10 +11,10 @@ public class Artista extends Pessoa{
 	private String			historico;
 	private String			tipo;
 	private char			ativo;
-	private Blob			foto;
+	private String			foto;
 	
 	public Artista(int id, String nome, int idAdministrador, String nomeAdministrador, String historico, String tipo,
-			char ativo, Blob foto) {
+			char ativo, String foto) {
 		super(id, nome);
 		this.idAdministrador = idAdministrador;
 		this.nomeAdministrador = nomeAdministrador;
@@ -64,11 +64,11 @@ public class Artista extends Pessoa{
 		this.ativo = ativo;
 	}
 
-	public Blob getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 

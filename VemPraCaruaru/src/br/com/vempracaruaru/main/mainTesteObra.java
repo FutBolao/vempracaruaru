@@ -8,23 +8,31 @@ import br.com.vempracaruaru.exception.ObraJaCadastradoException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.obra.Obra;
 
-public class mainObra {
+public class mainTesteObra {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		/*Os teste com cadatrar e listar foram feitos com sucesso e ja estão prontos para uso
+		 * 
+		 * falta testar os metodos restantes
+		 */
 		
 		try {
-//			Fachada.getInstance().obraCadastrar(new Obra(1, 1, "Zé", 1,	"João Henrique", 1, "museu", "sem", "sem", 'A'));
-
-//		ArrayList<Obra> lista =  Fachada.getInstance().obraListarTodos("nome = nome");
-//		
-//		for (Obra obra : lista) {
-//			System.out.println(obra.toString());
-//		}
+//			Fachada.getInstance().obraCadastrar(new Obra(1, 1, "josé2", 1, "josé2",
+//					1, "se2,", "can2", 'A', "imagemObra2"));
 			
-//		Fachada.getInstance().obraAlterar(new Obra(1, 1, "Zé", 1,"João Henrique", 1, "museu", "vaso", "sem", 'A'));
-		
-		Fachada.getInstance().obraDeletar(1);	
+//		Obra obra =	Fachada.getInstance().obraListarPorId(1);
+//		ArrayList<Obra> lista1 = Fachada.getInstance().obraListarPorNome("can");
+		ArrayList<Obra> lista2 = Fachada.getInstance().obraListarTodos("nome = nome");
+//		
+//		System.out.println(obra.toString());
+//		
+//		for (Obra obra1 : lista1) {
+//			System.out.println(obra1.toString());
+//		}
+		System.out.println("Lista 2");
+		for (Obra obra1 : lista2) {
+			System.out.println(obra1.toString());
+		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
