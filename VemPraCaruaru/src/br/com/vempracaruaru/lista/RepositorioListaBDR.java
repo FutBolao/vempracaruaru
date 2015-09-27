@@ -13,6 +13,7 @@ import br.com.vempracaruaru.endereco.Endereco;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarListaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
 import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
@@ -20,7 +21,11 @@ import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
 public class RepositorioListaBDR implements IRepositorioLista{
-
+	/*
+	 * pricisamos criar o metodo que vai recuperar e controlar os pontos dos usuarios
+	 */
+	
+	
 	private static RepositorioListaBDR instance;
 	public static final String NOME_TABELA = "lista";
 	private Connection connection;
@@ -88,7 +93,8 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Lista lista = new Lista(rs.getInt("ID"), listarPonto(rs.getInt("ID")), rs.getInt("ID_USUARIO"), rs.getString("DATA_HORA_CRIACAO"));
+				Lista lista = new Lista(rs.getInt("ID"), listarPonto(rs.getInt("ID")),
+					rs.getInt("ID_USUARIO"), rs.getString("DATA_HORA_CRIACAO"),(rs.getString("ativo").charAt(0)));
 				listas.add(lista);
 			}
 		}else{
@@ -109,24 +115,28 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	@Override
 	public void alterar(Lista lista)
 			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception {
-				
+		
+		
+		
 	}
 
 	@Override
 	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception {
-		PreparedStatement stmt = null;
+		Lista lista = new Lista(id, null, 0, "", 'N');
+		if(existeId(lista) == false){
+		PreparedStatement ps = null;
 		String sql = "";
-		try {
-		
-			sql = "delete form " + NOME_TABELA +" where id= ?";
-			stmt = this.connection.prepareStatement(sql);
-			stmt.setInt(1, id);
-			
-			stmt.execute();
-			System.out.println("foi removido");
-		} finally {
-
-		}		
+		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, String.valueOf(lista.getAtivo()));
+		ps.setInt(2, lista.getId());
+		Integer resultado = ps.executeUpdate();
+		if (resultado == 0) throw new NaoFoiPossivelAlterarListaException();
+		ps.close();
+		System.out.println("- consulta completada com sucesso -");
+	}else{
+		throw new ListaNaoCadastradoException();
+		}
 	}
 
 	@Override
@@ -208,7 +218,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 				rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), new Endereco(rs.getInt("numero"),
 				rs.getString("bairro"), rs.getString("endereco"),rs.getString("complemento")),rs.getString("telefone"),
 				rs.getString("horario_abertura"), rs.getString("horario_encerramento"),rs.getString("tempo_visitacao"),
-				rs.getString("historico_descricao"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"));
+				rs.getString("historico_descricao"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"),0);
 				}
 			}
 		ps.close();

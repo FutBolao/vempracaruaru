@@ -17,6 +17,9 @@ import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 
 public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
+	/*
+	 * pricisamos criar o metodo que vai recuperar e controlar os pontos dos usuarios
+	 */
 	
 	private static RepositorioPontoTuristicoBDR instance;
 	private static final String NOME_TABELA = "ponto_turistico";
@@ -103,7 +106,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 						rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), new Endereco(rs.getInt("numero"),
 						rs.getString("bairro"), rs.getString("endereco"),rs.getString("complemento")),rs.getString("telefone"),
 						rs.getString("horario_abertura"), rs.getString("horario_encerramento"),rs.getString("tempo_visitacao"),
-						rs.getString("historico_descricao"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"));
+						rs.getString("historico_descricao"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"),0);
 				
 				pontosTuristicos.add(pontoTuristico);
 			}
@@ -132,8 +135,8 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		if (existeId(pontoTuristico) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				// instrução de update do artista
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, endereco=?, numero=?, bairro=?, complemento=?, telefone=?, horario_abertura=?, horario_encerramento=?, "
+				sql = "UPDATE " + NOME_TABELA + " SET nome=?, endereco=?, numero=?, bairro=?,"
+						+ " complemento=?, telefone=?, horario_abertura=?, horario_encerramento=?, "
 						+ "tempo_visitacao=?, historico_descricao=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, pontoTuristico.getNome());
@@ -159,7 +162,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 	}
 	@Override
 	public void deletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {		
-		PontoTuristico artista = new PontoTuristico(id, 0, "","", null, "", "", "",	"", "", 'N',null);	
+		PontoTuristico artista = new PontoTuristico(id, 0, "","", null, "", "", "",	"", "", 'N',"",0);	
 		PreparedStatement ps = null;
 		String sql = "";
 		// instrução de update do artista
@@ -192,6 +195,12 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		
 	}
 	
+	private int recuperarPontos(int id){
+		return id;
+	}
 	
+	private void curtir(int id){
+		
+	}
 
 }

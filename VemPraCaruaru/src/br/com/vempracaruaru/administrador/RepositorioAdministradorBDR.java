@@ -162,7 +162,6 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 		if (existeId(administrador) == false){
 			PreparedStatement ps = null;
 			String sql = "";
-			// instrução de update do artista
 			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
 			ps = this.connection.prepareStatement(sql);
 			ps.setString(1, String.valueOf(administrador.getAtivo()));

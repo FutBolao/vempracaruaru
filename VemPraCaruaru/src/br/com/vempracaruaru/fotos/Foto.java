@@ -9,6 +9,7 @@ public class Foto {
 	private String		imagem;
 	private String		descricao;
 	private char		ativo;
+	
 	public Foto(int id, int idAdministrador, int idReferencia, String referencia, String imagem, String descricao, char ativo) {
 		this.id = id;
 		this.idAdministrador = idAdministrador;

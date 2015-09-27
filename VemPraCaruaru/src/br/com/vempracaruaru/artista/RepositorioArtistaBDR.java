@@ -42,7 +42,9 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, historico, tipo, ativo,imagem_principal) VALUES (?,?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, historico,imagem_principal,"
+					+ " telefone, email, twitter, instagram, facebook, tipo, ativo"
+					+ ") VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -50,10 +52,15 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 			}
 			ps.setInt(1, artista.getIdAdministrador());
 			ps.setString(2, artista.getNome());
-			ps.setString(3, artista.getHistorico());
-			ps.setString(4, artista.getTipo());
-			ps.setString(5, String.valueOf(artista.getAtivo()));
-			ps.setString(6, artista.getFoto());
+			ps.setString(3, artista.getHistorico());	
+			ps.setString(4, artista.getFoto());
+			ps.setString(5, artista.getTelefone());
+			ps.setString(6, artista.getEmail());
+			ps.setString(7, artista.getTwitter());
+			ps.setString(8, artista.getInstagram());
+			ps.setString(9, artista.getFacebook());			
+			ps.setString(10, artista.getTipo());
+			ps.setString(11, String.valueOf(artista.getAtivo()));
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -88,9 +95,14 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Artista artista = new Artista(rs.getInt("id_artista"), rs.getString("nome_artista"), 
+				
+			
+				 
+				Artista artista = new Artista(	rs.getInt("id_artista"), rs.getString("nome_artista"), 
 						rs.getInt("id_Administrador"), rs.getString("nome_Administrador"),
-						 rs.getString("historico"), rs.getString("tipo"), rs.getString("ativo").charAt(0), rs.getString("imagem_principal"));
+						 rs.getString("historico"), rs.getString("tipo"), rs.getString("imagem_principal"),
+						  rs.getString("telefone"), rs.getString("email"), rs.getString("twitter"), rs.getString("instragram"),
+						  rs.getString("facebook"),rs.getString("ativo").charAt(0));
 				
 				artistas.add(artista);
 			}
@@ -122,14 +134,21 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		if (existeId(artista) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				// instrução de update do artista
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, foto=?,"
+						+ " telefone=?, email=?, twitter=?, instagram=?, facebook=?, ativo=?"
+						+ " WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, artista.getNome());
 				ps.setString(2, artista.getHistorico());
 				ps.setString(3, artista.getTipo());
-				ps.setString(4, String.valueOf(artista.getAtivo()));
-				ps.setInt(5, artista.getId());
+				ps.setString(4, artista.getFoto());
+				ps.setString(5, artista.getTelefone());
+				ps.setString(6, artista.getEmail());
+				ps.setString(7, artista.getTwitter());
+				ps.setString(8, artista.getInstagram());
+				ps.setString(9, artista.getFacebook());
+				ps.setString(10, String.valueOf(artista.getAtivo()));
+				ps.setInt(11, artista.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
 				ps.close();
@@ -141,11 +160,10 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 
 	@Override
 	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {		
-			Artista artista = new Artista(id,"", 0,"", "", "", 'N',null);
+			Artista artista = new Artista(id, "", 0, "", "", "", "", "", "", "", "", "", 'S');
 		
 			PreparedStatement ps = null;
 			String sql = "";
-			// instrução de update do artista
 			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
 			ps = this.connection.prepareStatement(sql);
 			ps.setString(1, String.valueOf(artista.getAtivo()));

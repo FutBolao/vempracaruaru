@@ -10,12 +10,15 @@ public class Lista {
 	private ArrayList<PontoTuristico>	listaPontoTuristico;
 	private int 						idUsuario;
 	private String 						dataHoraCriacao;
+	private char						ativo;
 	
-	public Lista(int id, ArrayList<PontoTuristico> listaPontoTuristico, int idUsuario, String dataHoraCriacao) {
+	public Lista(int id, ArrayList<PontoTuristico> listaPontoTuristico, int idUsuario, String dataHoraCriacao,
+			char ativo) {
 		this.id = id;
 		this.listaPontoTuristico = listaPontoTuristico;
 		this.idUsuario = idUsuario;
 		this.dataHoraCriacao = dataHoraCriacao;
+		this.ativo = ativo;
 	}
 
 	public int getId() {
@@ -50,9 +53,18 @@ public class Lista {
 		this.dataHoraCriacao = dataHoraCriacao;
 	}
 
+	public char getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(char ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public String toString() {
 		return "Lista [id=" + id + ", listaPontoTuristico=" + listaPontoTuristico + ", idUsuario=" + idUsuario
-				+ ", dataHoraCriacao=" + dataHoraCriacao + "]";
-	}		
+				+ ", dataHoraCriacao=" + dataHoraCriacao + ", ativo=" + ativo + "]";
+	}
+
 }

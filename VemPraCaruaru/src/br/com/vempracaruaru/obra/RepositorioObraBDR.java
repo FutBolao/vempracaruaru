@@ -115,10 +115,11 @@ public class RepositorioObraBDR implements IRepositorioObra{
 				PreparedStatement ps = null;
 				String sql = "";
 				// instrução de update do obra
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET nome=?, imagem_principal=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, obra.getNome());
-				ps.setString(2, String.valueOf(obra.getAtivo()));
+				ps.setString(2, obra.getFoto());
+				ps.setString(3, String.valueOf(obra.getAtivo()));
 				ps.setInt(3, obra.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarObraException();

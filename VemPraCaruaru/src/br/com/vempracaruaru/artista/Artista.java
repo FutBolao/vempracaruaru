@@ -10,18 +10,31 @@ public class Artista extends Pessoa{
 	private String			nomeAdministrador;
 	private String			historico;
 	private String			tipo;
-	private char			ativo;
 	private String			foto;
+	private String			telefone;
+	private String			email;
+	private String			twitter;
+	private String			instagram;
+	private String			facebook;
+	private char			ativo;
 	
+
+
 	public Artista(int id, String nome, int idAdministrador, String nomeAdministrador, String historico, String tipo,
-			char ativo, String foto) {
+			String foto, String telefone, String email, String twitter, String instagram, String facebook,
+			char ativo) {
 		super(id, nome);
 		this.idAdministrador = idAdministrador;
 		this.nomeAdministrador = nomeAdministrador;
 		this.historico = historico;
 		this.tipo = tipo;
-		this.ativo = ativo;
 		this.foto = foto;
+		this.telefone = telefone;
+		this.email = email;
+		this.twitter = twitter;
+		this.instagram = instagram;
+		this.facebook = facebook;
+		this.ativo = ativo;
 	}
 
 	public int getIdAdministrador() {
@@ -56,14 +69,6 @@ public class Artista extends Pessoa{
 		this.tipo = tipo;
 	}
 
-	public char getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(char ativo) {
-		this.ativo = ativo;
-	}
-
 	public String getFoto() {
 		return foto;
 	}
@@ -72,10 +77,59 @@ public class Artista extends Pessoa{
 		this.foto = foto;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	public String getInstagram() {
+		return instagram;
+	}
+
+	public void setInstagram(String instagram) {
+		this.instagram = instagram;
+	}
+
+	public String getFacebook() {
+		return facebook;
+	}
+
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
+	}
+
+	public char getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(char ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public String toString() {
 		return "Artista [idAdministrador=" + idAdministrador + ", nomeAdministrador=" + nomeAdministrador
-				+ ", historico=" + historico + ", tipo=" + tipo + ", ativo=" + ativo + ", foto=" + foto + "]";
-	}
-				
+				+ ", historico=" + historico + ", tipo=" + tipo + ", foto=" + foto + ", telefone=" + telefone
+				+ ", email=" + email + ", twitter=" + twitter + ", instagram=" + instagram + ", facebook=" + facebook
+				+ ", ativo=" + ativo + "]";
+	}				
 }

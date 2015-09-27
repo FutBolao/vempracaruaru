@@ -13,6 +13,7 @@ import br.com.vempracaruaru.exception.ArtistaNaoCadastradoException;
 import br.com.vempracaruaru.exception.FotoJaCadastradoException;
 import br.com.vempracaruaru.exception.FotoNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarArtistaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarFotoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarFotoException;
 
@@ -122,11 +123,13 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 		if (existeId(foto) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				// instrução de update do artista
-				sql = "UPDATE " + NOME_TABELA + " SET referencia=?, image,=? WHERE id=?;";
+	
+				sql = "UPDATE " + NOME_TABELA + " SET referencia=?, image=?, descricao=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, foto.getReferencia());
 				ps.setString(2, foto.getImagem());
+				ps.setString(3, foto.getDescricao());
+				ps.setString(4, String.valueOf(foto.getAtivo()));
 				ps.setInt(5, foto.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
@@ -139,20 +142,21 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 
 	@Override
 	public void deletar(int id) throws SQLException, FotoNaoCadastradoException, Exception {		
-//		Foto foto = new Foto(id, 0, 0, "", null);
-//		
-//		PreparedStatement ps = null;
-//		String sql = "";
-//		// instrução de update do foto
-//		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
-//		ps = this.connection.prepareStatement(sql);
-//		ps.setString(1, String.valueOf(artista.getAtivo()));
-//		ps.setInt(2, artista.getId());
-//		Integer resultado = ps.executeUpdate();
-//		if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
-//		ps.close();
-
-	
+		Foto foto = new Foto(id, 0, 0, "", "", "", 'N');
+		if(existeId(foto) == false){
+		PreparedStatement ps = null;
+		String sql = "";
+		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, String.valueOf(foto.getAtivo()));
+		ps.setInt(2, foto.getId());
+		Integer resultado = ps.executeUpdate();
+		if (resultado == 0) throw new NaoFoiPossivelAlterarFotoException();
+		ps.close();
+		System.out.println("- consulta completada com sucesso -");
+	}else{
+		throw new FotoNaoCadastradoException();
+	}	
 }
 
 	@Override
