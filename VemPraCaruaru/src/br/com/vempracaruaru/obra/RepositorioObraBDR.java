@@ -114,7 +114,6 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		if (existeId(obra) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				// instrução de update do obra
 				sql = "UPDATE " + NOME_TABELA + " SET nome=?, imagem_principal=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, obra.getNome());
@@ -132,11 +131,10 @@ public class RepositorioObraBDR implements IRepositorioObra{
 
 	@Override
 	public void deletar(int id) throws SQLException, ObraNaoCadastradoException, Exception {	
-		Obra obra = new Obra(id, 0, "", 0,"", 0,"", "", 'N',null);
+		Obra obra = new Obra(id, 0, "", 0,"", 0,"", "", 'N',"");
 		
 		PreparedStatement ps = null;
 		String sql = "";
-		// instrução de update do obra
 		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
 		ps = this.connection.prepareStatement(sql);
 		ps.setString(1, String.valueOf(obra.getAtivo()));

@@ -22,7 +22,6 @@ public class PontoTuristico {
 	public PontoTuristico(int id, int idAdministrador, String nomeAdministrador, String nome, Endereco endereco,
 			String telefone, String horarioAbertura, String horarioEncerramento, String tempoVisitacao,
 			String historicoDescricao, char ativo, String foto, int pontos) {
-		super();
 		this.id = id;
 		this.idAdministrador = idAdministrador;
 		this.nomeAdministrador = nomeAdministrador;

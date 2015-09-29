@@ -17,10 +17,7 @@ import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 
 public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
-	/*
-	 * pricisamos criar o metodo que vai recuperar e controlar os pontos dos usuarios
-	 */
-	
+
 	private static RepositorioPontoTuristicoBDR instance;
 	private static final String NOME_TABELA = "ponto_turistico";
 	private Connection  connection;
@@ -165,7 +162,6 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		PontoTuristico artista = new PontoTuristico(id, 0, "","", null, "", "", "",	"", "", 'N',"",0);	
 		PreparedStatement ps = null;
 		String sql = "";
-		// instrução de update do artista
 		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
 		ps = this.connection.prepareStatement(sql);
 		ps.setString(1, String.valueOf(artista.getAtivo()));

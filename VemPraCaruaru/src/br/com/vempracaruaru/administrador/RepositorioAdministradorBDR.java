@@ -131,7 +131,6 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 			if(existeCpf(administrador) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				// instrução de update do clube
 				sql = "UPDATE " + NOME_TABELA + " SET nome=?, cpf=?, telefone=?, usuario=? , senha=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, administrador.getNome());

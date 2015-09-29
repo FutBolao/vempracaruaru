@@ -42,7 +42,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (email, nome, localizacao, senha, user_facebook, link_facebook) VALUES (?,?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (email, nome, localizacao, senha, user_facebook, link_facebook, ativo) VALUES (?,?,?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -53,7 +53,8 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 			ps.setString(3, usuario.getLocalizacao());
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getUserFacebook());
-			ps.setString(6, usuario.getLink_facebook());
+			ps.setString(6, usuario.getLinkfacebook());
+			ps.setString(7, String.valueOf(usuario.getAtivo()));
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -88,7 +89,8 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nome"),rs.getString("email"), rs.getString("localizacao"), rs.getString("senha"), rs.getString("user_facebook"),rs.getString("link_facebook"));
+				Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nome"),rs.getString("email"), rs.getString("localizacao"), rs.getString("senha"),
+						rs.getString("user_facebook"),rs.getString("link_facebook"),rs.getString("ativo").charAt(0));
 				usuarios.add(usuario);
 			}
 		}else{
@@ -117,16 +119,16 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		if (existeId(usuario) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				// instrução de update do usuario
-				sql = "UPDATE " + NOME_TABELA + " SET email=?, nome=?, localizacao=?, senha=?, user_facebook=?, link_facebook=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET email=?, nome=?, localizacao=?, senha=?, user_facebook=?, link_facebook=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, usuario.getEmial());
 				ps.setString(2, usuario.getNome());
 				ps.setString(3, usuario.getLocalizacao());
 				ps.setString(4, usuario.getSenha());
 				ps.setString(5, usuario.getUserFacebook());
-				ps.setString(6, usuario.getLink_facebook());
-				ps.setInt(7, usuario.getId());
+				ps.setString(6, usuario.getLinkfacebook());
+				ps.setString(7, String.valueOf(usuario.getAtivo()));
+				ps.setInt(8, usuario.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarUsuarioException();
 				ps.close();
@@ -136,26 +138,25 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		
 	}
 
-	//metodo incompleto
 	@Override
 	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
-//		
-//		Usuario usuario = new Usuario(0, "", "", "", "", "", "");
-//		if (existeId(usuario) == false){
-//			PreparedStatement ps = null;
-//			String sql = "";
-//			// instrução de update do usuario
-//			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
-//			ps = this.connection.prepareStatement(sql);
-//			ps.setString(1, String.valueOf(administrador.getAtivo()));
-//			ps.setInt(2, usuario.getId());
-//			Integer resultado = ps.executeUpdate();
-//			if (resultado == 0) throw new NaoFoiPossivelAlterarUsuarioException();
-//			ps.close();
-//		}else{
-//			throw new UsuarioNaoCadastradoException();
-//		}
-//		
+		
+		Usuario usuario = new Usuario(0, "", "", "", "", "", "",'N');
+		if (existeId(usuario) == false){
+			PreparedStatement ps = null;
+			String sql = "";
+			// instrução de update do usuario
+			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, String.valueOf(usuario.getAtivo()));
+			ps.setInt(2, usuario.getId());
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaoFoiPossivelAlterarUsuarioException();
+			ps.close();
+		}else{
+			throw new UsuarioNaoCadastradoException();
+		}
+		
 	}
 
 	@Override
