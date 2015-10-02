@@ -85,7 +85,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
-		sql += "WHERE ";
+		sql += "WHERE id IS NOT NULL ";
 		sql += complemento;
 		sql += " ORDER BY nome";
 		ps = this.connection.prepareStatement(sql);
@@ -109,19 +109,19 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	@Override
 	public Administrador listarPorId(int id)
 			throws SQLException, AdministradorNaoCadastradoException, Exception {
-		return listarTodos("id=" + id).get(0);
+		return listarTodos("AND id=" + id).get(0);
 	}
 	
 	@Override
 	public ArrayList<Administrador> listarPorNome(String nome)
 			throws SQLException, AdministradorNaoCadastradoException, Exception {
-		return listarTodos("nome LIKE '%" + nome + "%'");
+		return listarTodos("AND nome LIKE '%" + nome + "%'");
 	}
 	
 	@Override
 	public Administrador listarPorCpf(String cpf)
 			throws SQLException, AdministradorNaoCadastradoException, Exception {
-		return listarTodos("cpf='" + cpf + "'").get(0);
+		return listarTodos("AND cpf='" + cpf + "'").get(0);
 	}
 
 	@Override
