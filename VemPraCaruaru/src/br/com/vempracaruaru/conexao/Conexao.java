@@ -10,6 +10,8 @@ public class Conexao {
 
 	//método de conexão.
 	public static Connection getConexao(int sistema) throws Exception {
+		String driverName = "com.mysql.jdbc.Driver";                        
+		Class.forName(driverName);
 		String conexao = "";
     	String usuario = "";
     	String senha = "";
