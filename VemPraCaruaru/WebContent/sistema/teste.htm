@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Highslide JS - Custom Example</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.1/swfobject.js"></script>
+<script type="text/javascript" src="../highslide/highslide-with-html.js"></script>
+<script type="text/javascript" src="../highslide/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="../highslide/highslide.css" />
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="../highslide/highslide-ie6.css" />
+<![endif]-->
+
+</head>
+<body>
+<h3>Single image</h3>
+<div style="text-align: justify">
+
+	<a href="../highslide/sample-images/full-image.jpg" class="highslide" onclick="return hs.expand(this)"
+			
+			title="Caption from the anchor's title attribute" style="float:right; margin: 0 0 10px 15px">
+		<img src="../highslide/sample-images/thumbnail.jpg"  alt=""
+			style="width: 107px;height:120px;" />
+	</a>
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+	fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+	qui officia deserunt mollit anim id est laborum.</p>
+</div>
+
+<h3>HTML</h3>
+<div>
+	<a href="#" onclick="return hs.htmlExpand(this, { 
+			width: 400, headingText: 'Title from onclick', 
+			wrapperClassName: 'titlebar' } )">Inline HTML</a>
+	<div class="highslide-maincontent">
+		<h3>Lorem ipsum</h3>
+		Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam
+		dapibus leo quis nisl. In lectus. Vivamus consectetuer pede in nisl.
+		Mauris cursus pretium mauris. Suspendisse condimentum mi ac tellus.
+		Pellentesque habitant morbi tristique senectus et netus et malesuada
+		fames ac turpis egestas. Donec sed enim. Ut vel ipsum. Cras consequat
+		velit et justo. Donec mollis, mi at tincidunt vehicula, nisl mi luctus
+		risus, quis scelerisque arcu nibh ac nisi. Sed risus. Curabitur urna.
+		Aliquam vitae nisl. Quisque imperdiet semper justo. Pellentesque nonummy
+		pretium tellus.
+	</div>
+	-
+	<a href="../highslide/sample-includes/include-short.htm" onclick="return hs.htmlExpand(this, { 
+			objectType: 'ajax', width: 400, 
+			headingText: 'Title from onclick', wrapperClassName: 'titlebar' } )">Ajax</a>
+	-
+	<a href="../highslide/sample-includes/include-short.htm" onclick="return hs.htmlExpand(this, { 
+			objectType: 'iframe', width: 400, 
+			headingText: 'Title from onclick', wrapperClassName: 'titlebar' } )">Iframe</a>
+	-
+	<a href="../highslide/sample-includes/Flash.swf" onclick="return hs.htmlExpand(this, { 
+			objectType: 'swf', width: 300, 
+			objectWidth: 300, objectHeight: 250, 
+			preserveContent: false, wrapperClassName: 'no-footer titlebar', 
+			allowSizeReduction: false, maincontentText: 'You need to upgrade your Flash player', 
+			headingText: 'Title from onclick' } )">
+		Flash</a>
+</div>
+
+</body>
+</html>
