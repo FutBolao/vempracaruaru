@@ -155,9 +155,9 @@ public class Fachada {
 	
 	//MÉTODOS DO PONTO_TURISTICOS
 	
-	public void pontoTuristicoCadastrar(PontoTuristico pontoTurustico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception{
+	public PontoTuristico pontoTuristicoCadastrar(PontoTuristico pontoTurustico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		controladoraPontoTuristico.cadastrar(pontoTurustico);
+		return controladoraPontoTuristico.cadastrar(pontoTurustico);
 	}
 	public ArrayList<PontoTuristico> pontoTuristicoListarTodos(String complemento) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");

@@ -37,7 +37,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 	
 	
 	@Override
-	public void cadastrar(PontoTuristico pontoTuristico) throws SQLException,
+	public PontoTuristico cadastrar(PontoTuristico pontoTuristico) throws SQLException,
 			NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception {
 		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
@@ -80,8 +80,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		ps.close();
 		rs.close();
 		
-	
-		
+		return pontoTuristico;
 	}
 	@Override
 	public ArrayList<PontoTuristico> listarTodos(String complemento)
@@ -191,10 +190,12 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private int recuperarPontos(int id){
 		return id;
 	}
 	
+	@SuppressWarnings("unused")
 	private void curtir(int id){
 		
 	}

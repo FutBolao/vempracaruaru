@@ -15,9 +15,11 @@ public class ControladorPontoTuristico{
 		this.repositorio = new RepositorioPontoTuristicoBDR();
 	}
 
-	public void cadastrar(PontoTuristico pontoTuristico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception{
+	public PontoTuristico cadastrar(PontoTuristico pontoTuristico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception{
 		if(pontoTuristico != null){
-			repositorio.cadastrar(pontoTuristico);
+			return repositorio.cadastrar(pontoTuristico);
+		} else {
+			return null;
 		}
 	}
 	public ArrayList<PontoTuristico> listarTodos(String complemento) throws SQLException, PontoTuristicoJaCadastradoException, Exception{

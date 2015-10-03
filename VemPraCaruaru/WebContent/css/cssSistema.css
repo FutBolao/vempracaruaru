@@ -315,6 +315,7 @@ transition: all 0.5s ease;
 .form input[type="url"],
 .form input[type="tel"],
 .form input[type="password"],
+.form input[type="file"],
 .form select,
 .form textarea {
 	padding-left:4px;

@@ -5,7 +5,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistema de gerenciamento do aplicativo "Vem Pra Caruaru"</title>
-<link href="../css/cssSistema.css" rel="stylesheet" type="text/css">
+<link href="../css/cssSistema.css" type="text/css" media="screen" rel="stylesheet">
+<link href="../css/button.css" type="text/css" media="screen" rel="stylesheet" />
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.validate.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.mask.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/funcoes.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
@@ -64,12 +69,35 @@
             <div class="clear"></div>
       	</div>
         <div id="conteudo">
+        <div id="get">
         <h3>Destaques > Cadastrar</h3>
-        <div id="form">
-          <p>asdas        </p>
+        <div id="form" class="form" style="width:610px">
+          <iframe style="display:none;" name="recebeForm"></iframe>
+		  <form id="formAdministrador" name="formAdministrador" method="post" target="recebeForm" action="../AdministradorCadastrar">
+              <div class="coluna">
+                <label for="campoNome">Nome</label>
+                <input type="file" id="campoNome" name="campoNome" style="width:438px; margin-right:10px" class="required" minlength="4" value="" />
+                <span>Informe o nome completo do administrador</span>
+              </div>
+              <div class="coluna">
+                <label for="campoTitulo">Titulo</label>
+                <input type="text" id="campoTitulo" name="campoTitulo" style="width:438px; margin-right:10px" class="required" minlength="4" value="" />
+                <span>Informe um título da imagem de destaque</span>
+              </div>
+              <div class="coluna">
+                <label for="campoLink">Link</label>
+                <input type="text" id="campoLink" name="campoLink" style="width:438px; margin-right:10px" minlength="4" value="" />
+                <span>Informe um link para a imagem</span>
+              </div>
+            <div class="coluna">
+                <button class="button blue submit" type="submit" style="margin-top:14px; margin-right:10px;">Cadastrar</button>
+                <button  class="button gray reset" type="reset" style="margin-top:14px;">Redefinir</button>
+              </div>
+              <div class="clear"></div>
+          </form>
         </div>
       </div>
+      </div>
     </div>
-    <div>
 </body>
 </html>
