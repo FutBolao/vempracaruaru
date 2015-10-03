@@ -34,7 +34,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	}
 	
 	@Override
-	public void cadastrar(Obra obra)
+	public Obra cadastrar(Obra obra)
 			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception {
 		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
@@ -67,7 +67,9 @@ public class RepositorioObraBDR implements IRepositorioObra{
 			System.out.println("Cadastro concluido com sucesso");
 		
 		ps.close();
-		rs.close();		
+		rs.close();	
+		
+		return obra;
 	}
 
 	@Override

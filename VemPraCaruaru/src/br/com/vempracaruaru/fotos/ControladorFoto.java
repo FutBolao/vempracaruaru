@@ -16,10 +16,13 @@ public class ControladorFoto {
 		this.repositorio = new RepositorioFotoBDR();
 	}
 	
-	public void cadastrar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception{
+	public Foto cadastrar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		if(foto != null){
-			repositorio.cadastrar(foto);
+		return	repositorio.cadastrar(foto);
+		}
+		else{
+			return null;
 		}
 	}
 	public ArrayList<Foto> listarTodos(String complemento) throws SQLException, FotoNaoCadastradoException, Exception{

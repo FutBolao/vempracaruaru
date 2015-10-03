@@ -15,9 +15,11 @@ public class ControladorObra {
 		this.repositorio = new RepositorioObraBDR();
 	}
 
-	public void cadastrar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception{
+	public Obra cadastrar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception{
 		if(obra !=null){
-			repositorio.cadastrar(obra);
+		return	repositorio.cadastrar(obra);
+		}else{
+			return null;
 		}
 	}
 	public ArrayList<Obra> listarTodos(String complemento) throws SQLException, ObraNaoCadastradoException, Exception{

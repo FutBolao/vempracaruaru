@@ -10,7 +10,7 @@ import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 
 public interface IRepositorioArtista {
 	
-	public void cadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception;
+	public Artista cadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception;
 	public ArrayList<Artista> listarTodos(String complemento) throws SQLException, ArtistaNaoCadastradoException, Exception;
 	public Artista listarPorId(int id) throws SQLException, ArtistaNaoCadastradoException, Exception;
 	public ArrayList<Artista> listarPorNome(String nome) throws SQLException, ArtistaNaoCadastradoException, Exception;

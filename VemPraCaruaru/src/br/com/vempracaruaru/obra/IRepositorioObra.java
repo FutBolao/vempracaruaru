@@ -10,7 +10,7 @@ import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
 
 public interface IRepositorioObra {
 
-	public void cadastrar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception;
+	public Obra cadastrar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception;
 	public ArrayList<Obra> listarTodos(String complemento) throws SQLException, ObraNaoCadastradoException, Exception;
 	public Obra listarPorId(int id) throws SQLException, ObraNaoCadastradoException, Exception;
 	public ArrayList<Obra> listarPorNome(String nome) throws SQLException, ObraNaoCadastradoException, Exception;

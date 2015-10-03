@@ -15,10 +15,12 @@ public class ControladorArtista {
 		this.repositorio = new RepositorioArtistaBDR();
 	}
 	
-	public void cadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception{
+	public Artista cadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		if(artista !=null){
-			repositorio.cadastrar(artista);
+			return repositorio.cadastrar(artista);
+		}else{
+			return null;
 		}
 	}
 	

@@ -40,7 +40,7 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 	}
 	
 	@Override
-	public void cadastrar(Foto foto)
+	public Foto cadastrar(Foto foto)
 			throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception {
 		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
@@ -74,6 +74,8 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 		
 		ps.close();
 		rs.close();
+		
+		return foto;
 		
 	}
 

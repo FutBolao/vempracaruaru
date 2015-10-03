@@ -35,7 +35,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 	}
 	
 	@Override
-	public void cadastrar(Artista artista)
+	public Artista cadastrar(Artista artista)
 			throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception {
 		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
@@ -76,6 +76,8 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		
 		ps.close();
 		rs.close();
+		
+		return artista;
 		
 	}
 
