@@ -90,20 +90,17 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT * FROM vw_artista ";
-		sql += "WHERE ";
+		sql += "WHERE id IS NOT NULL ";
 		sql += complemento;
 		sql += " ORDER BY nome_artista";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				
-			
-				 
-				Artista artista = new Artista(	rs.getInt("id_artista"), rs.getString("nome_artista"), 
-						rs.getInt("id_Administrador"), rs.getString("nome_Administrador"),
+				Artista artista = new Artista(	rs.getInt("id"), rs.getString("nome_artista"), 
+						rs.getInt("id_administrador"), rs.getString("nome_administrador"),
 						 rs.getString("historico"), rs.getString("tipo"), rs.getString("imagem_principal"),
-						  rs.getString("telefone"), rs.getString("email"), rs.getString("twitter"), rs.getString("instragram"),
+						  rs.getString("telefone"), rs.getString("email"), rs.getString("twitter"), rs.getString("instagram"),
 						  rs.getString("facebook"),rs.getString("ativo").charAt(0));
 				
 				artistas.add(artista);
@@ -120,12 +117,12 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 
 	@Override
 	public Artista listarPorId(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {
-		return listarTodos("id_artista=" + id).get(0);
+		return listarTodos("AND id=" + id).get(0);
 		}
 
 	@Override
 	public ArrayList<Artista> listarPorNome(String nome) throws SQLException, ArtistaNaoCadastradoException, Exception {
-		return listarTodos("nome_artista LIKE '%" + nome + "%'");
+		return listarTodos("AND nome_artista LIKE '%" + nome + "%'");
 		}
 
 
@@ -134,29 +131,29 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 			throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaNaoCadastradoException, Exception {
 		
 		if (existeId(artista) == false){
-				PreparedStatement ps = null;
-				String sql = "";
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, foto=?,"
-						+ " telefone=?, email=?, twitter=?, instagram=?, facebook=?, ativo=?"
-						+ " WHERE id=?;";
-				ps = this.connection.prepareStatement(sql);
-				ps.setString(1, artista.getNome());
-				ps.setString(2, artista.getHistorico());
-				ps.setString(3, artista.getTipo());
-				ps.setString(4, artista.getFoto());
-				ps.setString(5, artista.getTelefone());
-				ps.setString(6, artista.getEmail());
-				ps.setString(7, artista.getTwitter());
-				ps.setString(8, artista.getInstagram());
-				ps.setString(9, artista.getFacebook());
-				ps.setString(10, String.valueOf(artista.getAtivo()));
-				ps.setInt(11, artista.getId());
-				Integer resultado = ps.executeUpdate();
-				if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
-				ps.close();
-			}else{
-				throw new NaoFoiPossivelAlterarArtistaException();
-			}
+			PreparedStatement ps = null;
+			String sql = "";
+			sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, foto=?,"
+					+ " telefone=?, email=?, twitter=?, instagram=?, facebook=?, ativo=?"
+					+ " WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, artista.getNome());
+			ps.setString(2, artista.getHistorico());
+			ps.setString(3, artista.getTipo());
+			ps.setString(4, artista.getFoto());
+			ps.setString(5, artista.getTelefone());
+			ps.setString(6, artista.getEmail());
+			ps.setString(7, artista.getTwitter());
+			ps.setString(8, artista.getInstagram());
+			ps.setString(9, artista.getFacebook());
+			ps.setString(10, String.valueOf(artista.getAtivo()));
+			ps.setInt(11, artista.getId());
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
+			ps.close();
+		}else{
+			throw new NaoFoiPossivelAlterarArtistaException();
+		}
 				
 	}
 

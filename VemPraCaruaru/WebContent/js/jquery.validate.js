@@ -50,8 +50,10 @@ $(function() {
 			element.mask("(99) 9999-9999?9");
 		}
 	}).trigger('focusout');
-    /* mascara telefone */
-    $('.cep').mask('99999-999'); 	
+    /* mascara cep */
+    $('.cep').mask('99999-999');
+	/* mascara tempo */
+    $('.tempo').mask('99:99'); 	
     /* validate style - comentar alinha abaixo para omitir o style */
 	
     //$('head').append('<link href="css/validate.css" type="text/css" media="screen" rel="stylesheet" />');

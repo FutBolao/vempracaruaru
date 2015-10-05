@@ -73,11 +73,11 @@
         <h3>Destaques > Cadastrar</h3>
         <div id="form" class="form" style="width:610px">
           <iframe style="display:none;" name="recebeForm"></iframe>
-		  <form id="formAdministrador" name="formAdministrador" method="post" target="recebeForm" action="../AdministradorCadastrar">
+		  <form id="formDestaque" name="formDestaque" method="post" target="recebeForm" action="../DestaqueCadastrar">
               <div class="coluna">
-                <label for="campoNome">Nome</label>
-                <input type="file" id="campoNome" name="campoNome" style="width:438px; margin-right:10px" class="required" minlength="4" value="" />
-                <span>Informe o nome completo do administrador</span>
+                <label for="campoImagem">Imagem</label>
+                <input type="file" id="campoImagem" name="campoImagem" style="width:438px; margin-right:10px" class="required" minlength="1" />
+                <span>Selecione a imagem de destaque</span>
               </div>
               <div class="coluna">
                 <label for="campoTitulo">Titulo</label>

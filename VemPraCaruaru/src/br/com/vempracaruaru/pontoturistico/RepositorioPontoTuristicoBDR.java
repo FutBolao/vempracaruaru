@@ -90,7 +90,9 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
-		sql = "SELECT * FROM vw_ponto_turistico";
+		sql = "SELECT * FROM vw_ponto_turistico ";
+		sql += "WHERE id IS NOT NULL ";
+		sql += complemento;
 		sql += " ORDER BY nome_ponto_turistico";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
@@ -98,7 +100,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 			while (rs.next()) {
 				
 				
-						PontoTuristico pontoTuristico = new PontoTuristico(rs.getInt("id_ponto_turistico"), rs.getInt("id_administrador"),
+						PontoTuristico pontoTuristico = new PontoTuristico(rs.getInt("id"), rs.getInt("id_administrador"),
 						rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), new Endereco(rs.getInt("numero"),
 						rs.getString("bairro"), rs.getString("endereco"),rs.getString("complemento")),rs.getString("telefone"),
 						rs.getString("horario_abertura"), rs.getString("horario_encerramento"),rs.getString("tempo_visitacao"),

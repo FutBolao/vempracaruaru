@@ -80,12 +80,14 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT * FROM vw_obra";
+		sql += "WHERE id IS NOT NULL ";
+		sql += complemento;
 		sql += " ORDER BY nome_obra";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Obra obra = new Obra(rs.getInt("id_obra"), rs.getInt("id_artista"), rs.getString("nome"), rs.getInt("id_administrador"), 
+				Obra obra = new Obra(rs.getInt("id"), rs.getInt("id_artista"), rs.getString("nome"), rs.getInt("id_administrador"), 
 						rs.getString("nome_Administrador"), rs.getInt("id_Ponto_Turistico"), rs.getString("nome_ponto_turistico"),
 						rs.getString("nome_obra"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"));
 				obras.add(obra);
@@ -102,12 +104,12 @@ public class RepositorioObraBDR implements IRepositorioObra{
 
 	@Override
 	public Obra listarPorId(int id) throws SQLException, ObraNaoCadastradoException, Exception {
-		return listarTodos("id_obra=" + id).get(0);
+		return listarTodos("AND id_obra=" + id).get(0);
 		}
 
 	@Override
 	public ArrayList<Obra> listarPorNome(String nome) throws SQLException, ObraNaoCadastradoException, Exception {
-		return listarTodos("nome_obra LIKE '%" + nome + "%'");
+		return listarTodos("AND nome_obra LIKE '%" + nome + "%'");
 		}
 
 	@Override
@@ -163,7 +165,6 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		ps.close();
 		rs.close();
 		return resposta;
-		
 	}
 
 	private void adicionarPonto(Obra obra)

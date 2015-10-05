@@ -5,7 +5,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistema de gerenciamento do aplicativo "Vem Pra Caruaru"</title>
-<link href="../css/cssSistema.css" rel="stylesheet" type="text/css">
+<link href="../css/cssSistema.css" type="text/css" media="screen" rel="stylesheet">
+<link href="../css/button.css" type="text/css" media="screen" rel="stylesheet" />
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.validate.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.mask.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/funcoes.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript" charset="utf-8"></script>
+<script src="../js/mapa.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-ui.custom.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
@@ -64,12 +72,65 @@
             <div class="clear"></div>
       	</div>
         <div id="conteudo">
+        <div id="get">
         <h3>Pontos Turísticos > Cadastrar</h3>
-        <div id="form">
-          <p>asdas        </p>
+        <div id="form" class="form" style="width:1200px">
+          <iframe style="display:none;" name="recebeForm"></iframe>
+		  <form id="formPonto" name="formPonto" method="post" target="recebeForm" action="../PontoCadastrar">
+              <div class="coluna">
+                <label for="campoNome">Nome</label>
+                <input type="text" id="campoNome" name="campoNome" style="width:1188px;" class="required" minlength="4" value="" />
+                <span>Informe o nome do ponto turístico</span>
+              </div>
+              <div class="coluna">
+                <label for="campoEndereco">Endereço</label>
+                <input type="text" id="campoEndereco" name="campoEndereco" style="width:1188px;" class="required" minlength="4" value="" />
+                <span>Informe o endereço do ponto turístico</span>
+                <input type="hidden" id="campoLatitude" name="campoLatitude" />
+                <input type="hidden" id="campoLongitude" name="campoLongitude" />
+              </div>
+              <div class="coluna">
+                <div id="mapa"></div>
+              </div>
+              <div class="coluna">
+                <label for="campoTelefone">Telefone</label>
+                <input type="text" id="campoTelefone" name="campoTelefone" style="width:138px; margin-right:10px" class="fone" value="" />
+                <span>Informe o telefone</span>
+              </div>
+              <div class="coluna">
+                <label for="campoEmail">Email</label>
+                <input type="text" id="campoEmail" name="campoEmail" style="width:350px; margin-right:10px" class="email" minlength="4" value="" />
+                <span>Informe o email</span>
+              </div>
+              <div class="coluna">
+                <label for="campoTempo">Tempo de visitação</label>
+                <input type="text" id="campoTempo" name="campoTempo" style="width:138px; margin-right:10px" class="required tempo" minlength="4" value="" />
+                <span>Informe tempo</span>
+              </div>
+              <div class="coluna">
+                <label for="campoHorarioDeFuncionamento">Horário de funcionamento</label>
+                <input type="text" id="campoHorarioDeFuncionamento" name="campoHorarioDeFuncionamento" style="width:504px;" class="required" minlength="4" value="" />
+                <span>Informe horário de funcionamento</span>
+              </div>
+              <div class="coluna">
+                <label for="campoDescricao">Descrição do ponto turístico</label>
+                <textarea id="campoDescricao" name="campoDescricao" style="width:1188px; height:200px;" class="required" minlength="1" value="" /></textarea>
+                <span>Informe uma descrição do ponto turístico</span>
+              </div>
+              <div class="coluna">
+                <label for="campoImagem">Imagem</label>
+                <input type="file" id="campoImagem" name="campoImagem[]" multiple style="width:1188px;" class="required" minlength="1" />
+                <span>Selecione as imagens do ponto</span>
+              </div>
+              <div class="coluna">
+                <button class="button blue submit" type="submit" style="margin-top:14px; margin-right:10px;">Cadastrar</button>
+                <button  class="button gray reset" type="reset" style="margin-top:14px;">Redefinir</button>
+              </div>
+              <div class="clear"></div>
+          </form>
         </div>
       </div>
+      </div>
     </div>
-    <div>
 </body>
 </html>
