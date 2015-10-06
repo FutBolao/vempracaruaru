@@ -126,7 +126,7 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 				PreparedStatement ps = null;
 				String sql = "";
 	
-				sql = "UPDATE " + NOME_TABELA + " SET referencia=?, image=?, descricao=?, ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET referencia=?, imagem=?, descricao=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, foto.getReferencia());
 				ps.setString(2, foto.getImagem());

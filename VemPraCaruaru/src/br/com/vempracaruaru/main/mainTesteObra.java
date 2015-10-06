@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
-import br.com.vempracaruaru.exception.ObraJaCadastradoException;
+import br.com.vempracaruaru.exception.ObraJaCadastradaException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.obra.Obra;
 
@@ -39,7 +39,7 @@ public class mainTesteObra {
 		} catch (NaoFoiPossivelCadastrarObraException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ObraJaCadastradoException e) {
+		} catch (ObraJaCadastradaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {

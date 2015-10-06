@@ -9,14 +9,13 @@ import java.util.ArrayList;
 
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
-import br.com.vempracaruaru.endereco.Endereco;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarListaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
-import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
+import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
@@ -98,7 +97,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 				listas.add(lista);
 			}
 		}else{
-			throw new ObraNaoCadastradoException();
+			throw new ObraNaoCadastradaException();
 		}
 		System.out.println("- Consulta completada com sucesso -");
 		ps.close();
@@ -214,11 +213,10 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		
 		if(rs != null){
 			while(rs.next()){
-				ponto = new PontoTuristico(rs.getInt("id_ponto_turistico"), rs.getInt("id_administrador"),
-				rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), new Endereco(rs.getInt("numero"),
-				rs.getString("bairro"), rs.getString("endereco"),rs.getString("complemento")),rs.getString("telefone"),
-				rs.getString("horario_abertura"), rs.getString("horario_encerramento"),rs.getString("tempo_visitacao"),
-				rs.getString("historico_descricao"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"),0);
+				ponto = new PontoTuristico(rs.getInt("id"), rs.getInt("id_administrador"),
+						rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), rs.getString("endereco"),
+						rs.getString("telefone"), rs.getString("email"), rs.getString("tempo_visitacao"), rs.getString("horario_funcionamento"),
+						rs.getString("historico_descricao"), rs.getString("imagem_principal"), rs.getString("ativo").charAt(0));
 				}
 			}
 		ps.close();

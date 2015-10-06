@@ -1,14 +1,14 @@
 package br.com.vempracaruaru.exception;
 
-public class ObraJaCadastradoException extends Exception{
+public class ObraJaCadastradaException extends Exception{
 	
 	private static final long serialVersionUID = -5953376500993574711L;
 
-	public ObraJaCadastradoException(){
+	public ObraJaCadastradaException(){
 		super("Obra já cadastrado!");
 	}
 	
-	public ObraJaCadastradoException(String msg){
+	public ObraJaCadastradaException(String msg){
 		super(msg);
 	}
 

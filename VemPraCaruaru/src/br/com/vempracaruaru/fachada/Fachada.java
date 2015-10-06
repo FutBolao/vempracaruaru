@@ -27,8 +27,8 @@ import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarPontoTuristicoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
-import br.com.vempracaruaru.exception.ObraJaCadastradoException;
-import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
+import br.com.vempracaruaru.exception.ObraJaCadastradaException;
+import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
 import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
@@ -189,27 +189,27 @@ public class Fachada {
 	
 	//METODOS DAS OBRAS
 	
-	public Obra obraCadastrar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception{
+	public Obra obraCadastrar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradaException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorObra.cadastrar(obra);		
 	}
-	public ArrayList<Obra> obraListarTodos(String complemento) throws SQLException, ObraNaoCadastradoException, Exception{
+	public ArrayList<Obra> obraListarTodos(String complemento) throws SQLException, ObraNaoCadastradaException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorObra.listarTodos(complemento);
 	}
-	public Obra obraListarPorId(int id) throws SQLException, ObraNaoCadastradoException, Exception{
+	public Obra obraListarPorId(int id) throws SQLException, ObraNaoCadastradaException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorObra.listarPorId(id);
 	}
-	public ArrayList<Obra> obraListarPorNome(String nome) throws SQLException, ObraNaoCadastradoException, Exception{
+	public ArrayList<Obra> obraListarPorNome(String nome) throws SQLException, ObraNaoCadastradaException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorObra.listarPorNome(nome);
 	}
-	public void obraAlterar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradoException, Exception{
+	public void obraAlterar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradaException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorObra.alterar(obra);
 	}
-	public void obraDeletar(int id) throws SQLException, ObraNaoCadastradoException, Exception{
+	public void obraDeletar(int id) throws SQLException, ObraNaoCadastradaException, Exception{
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorObra.deletar(id);
 	}

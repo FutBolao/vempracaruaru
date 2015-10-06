@@ -5,7 +5,7 @@ var marker;
 function initialize() {
 	var latlng = new google.maps.LatLng(-8.284556174274263, -35.971536532387745);
 	var options = {
-		zoom: 5,
+		zoom: 18,
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
@@ -89,16 +89,6 @@ $(document).ready(function () {
 			map.setCenter(location);
 			map.setZoom(16);
 		}
-	});
-	
-	$("form").submit(function(event) {
-		event.preventDefault();
-		
-		var endereco = $("#campoEndereco").val();
-		var latitude = $("#campoLatitude").val();
-		var longitude = $("#campoLongitude").val();
-		
-		//alert("Endereço: " + endereco + "\nLatitude: " + latitude + "\nLongitude: " + longitude);
 	});
 
 });

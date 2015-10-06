@@ -11,8 +11,8 @@ import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarObraException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
-import br.com.vempracaruaru.exception.ObraJaCadastradoException;
-import br.com.vempracaruaru.exception.ObraNaoCadastradoException;
+import br.com.vempracaruaru.exception.ObraJaCadastradaException;
+import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
 
 public class RepositorioObraBDR implements IRepositorioObra{
 	
@@ -35,7 +35,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	
 	@Override
 	public Obra cadastrar(Obra obra)
-			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception {
+			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradaException, Exception {
 		System.out.println("Chegando ao repositorio");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -73,7 +73,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	}
 
 	@Override
-	public ArrayList<Obra> listarTodos(String complemento) throws SQLException, ObraNaoCadastradoException, Exception {
+	public ArrayList<Obra> listarTodos(String complemento) throws SQLException, ObraNaoCadastradaException, Exception {
 		System.out.println("Chegando ao repositorio -");
 		ArrayList<Obra> obras = new ArrayList<Obra>();
 		PreparedStatement ps = null;
@@ -93,7 +93,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 				obras.add(obra);
 			}
 		}else{
-			throw new ObraNaoCadastradoException();
+			throw new ObraNaoCadastradaException();
 		}
 		System.out.println("- Consulta completada com sucesso -");
 		ps.close();
@@ -103,18 +103,18 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	}
 
 	@Override
-	public Obra listarPorId(int id) throws SQLException, ObraNaoCadastradoException, Exception {
+	public Obra listarPorId(int id) throws SQLException, ObraNaoCadastradaException, Exception {
 		return listarTodos("AND id_obra=" + id).get(0);
 		}
 
 	@Override
-	public ArrayList<Obra> listarPorNome(String nome) throws SQLException, ObraNaoCadastradoException, Exception {
+	public ArrayList<Obra> listarPorNome(String nome) throws SQLException, ObraNaoCadastradaException, Exception {
 		return listarTodos("AND nome_obra LIKE '%" + nome + "%'");
 		}
 
 	@Override
 	public void alterar(Obra obra)
-			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradoException, Exception {		
+			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradaException, Exception {		
 		if (existeId(obra) == false){
 				PreparedStatement ps = null;
 				String sql = "";
@@ -134,7 +134,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	}
 
 	@Override
-	public void deletar(int id) throws SQLException, ObraNaoCadastradoException, Exception {	
+	public void deletar(int id) throws SQLException, ObraNaoCadastradaException, Exception {	
 		Obra obra = new Obra(id, 0, "", 0,"", 0,"", "", 'N',"");
 		
 		PreparedStatement ps = null;
@@ -151,7 +151,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 }
 
 	@Override
-	public boolean existeId(Obra obra) throws SQLException, ObraJaCadastradoException, Exception {		
+	public boolean existeId(Obra obra) throws SQLException, ObraJaCadastradaException, Exception {		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
@@ -168,7 +168,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	}
 
 	private void adicionarPonto(Obra obra)
-		throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradoException, Exception {
+		throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradaException, Exception {
 	System.out.println("Chegando ao repositorio");
 	PreparedStatement ps = null;
 	String sql = "";

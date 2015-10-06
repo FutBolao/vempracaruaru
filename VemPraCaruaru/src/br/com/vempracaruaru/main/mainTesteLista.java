@@ -20,14 +20,14 @@ public class mainTesteLista {
 		
 		try {
 			ArrayList<PontoTuristico> lista = new ArrayList<>();
-			lista.add(new PontoTuristico(1, 10, "teste", "teste", null,
-					"teste", "teste", "teste", "teste", "teste", 'A', "teste",0));
-			
-			lista.add(new PontoTuristico(2, 10, "teste", "teste", null,
-					"teste", "teste", "teste", "teste", "teste", 'A', "teste",0));
-			
-			lista.add(new PontoTuristico(3, 10, "teste", "teste", null,
-					"teste", "teste", "teste", "teste", "teste", 'A', "teste",0));
+//			lista.add(new PontoTuristico(1, 10, "teste", "teste", null,
+//					"teste", "teste", "teste", "teste", "teste", 'A', "teste",0));
+//			
+//			lista.add(new PontoTuristico(2, 10, "teste", "teste", null,
+//					"teste", "teste", "teste", "teste", "teste", 'A', "teste",0));
+//			
+//			lista.add(new PontoTuristico(3, 10, "teste", "teste", null,
+//					"teste", "teste", "teste", "teste", "teste", 'A', "teste",0));
 			
 			Fachada.getInstance().listaCadastrar(new Lista(10, lista, 3, "17/09/12 - 11:00",'S'));
 			

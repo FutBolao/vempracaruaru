@@ -133,7 +133,7 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		if (existeId(artista) == false){
 			PreparedStatement ps = null;
 			String sql = "";
-			sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, foto=?,"
+			sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, imagem_principal=?,"
 					+ " telefone=?, email=?, twitter=?, instagram=?, facebook=?, ativo=?"
 					+ " WHERE id=?;";
 			ps = this.connection.prepareStatement(sql);

@@ -27,7 +27,6 @@ public class AdministradorCadastrar extends HttpServlet {
      */
     public AdministradorCadastrar() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -44,7 +43,7 @@ public class AdministradorCadastrar extends HttpServlet {
 		try {
 			Fachada.getInstance().administradorCadastrar(new Administrador(0, nome, cpf, telefone, usuario, senha, 'S'));
 			out.println( "<script>parent.alert(\"Cadastro efetuado com sucesso!!!\");</script>" );
-			out.println( "<script>parent.limparFormulario();</script>" );;
+			out.println( "<script>parent.limparFormulario();</script>" );
 		} catch (SQLException e) {
 			e.printStackTrace();
 			out.println( "<script>parent.alert(\"" + e.getMessage() + "\");</script>" );

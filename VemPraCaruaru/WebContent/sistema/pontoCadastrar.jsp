@@ -1,19 +1,19 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="ISO-8859-1" />  
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistema de gerenciamento do aplicativo "Vem Pra Caruaru"</title>
 <link href="../css/cssSistema.css" type="text/css" media="screen" rel="stylesheet">
 <link href="../css/button.css" type="text/css" media="screen" rel="stylesheet" />
-<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery.validate.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery.mask.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/funcoes.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript" charset="utf-8"></script>
-<script src="../js/mapa.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery-ui.custom.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.min.js" type="text/javascript" charset="ISO-8859-1"></script>
+<script src="../js/jquery.validate.js" type="text/javascript" charset="ISO-8859-1"></script>
+<script src="../js/jquery.mask.js" type="text/javascript" charset="ISO-8859-1"></script>
+<script src="../js/funcoes.js" type="text/javascript" charset="ISO-8859-1"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript" charset="ISO-8859-1"></script>
+<script src="../js/mapa.js" type="text/javascript" charset="ISO-8859-1"></script>
+<script src="../js/jquery-ui.custom.min.js" type="text/javascript" charset="ISO-8859-1"></script>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
                     </div>
                   <div class="coluna" id="informacaoDoUsuario">
                     	<div>
-                        	Olá <strong>Kaio César</strong>, seja bem vindo!</div>
+                        	Ol&aacute; <strong>Kaio C&eacute;sar</strong>, seja bem vindo!</div>
                         <div id="sairDoSistema">
                    	  <a href="Sair">Sair do sistema </a></div>
                     </div>
@@ -38,19 +38,19 @@
 				<div id="menu">
 					<nav id='nav'>
 						<ul class='menunav' id='navinti'>
-							<li><a href='index.jsp'>Início</a></li>
+							<li><a href='index.jsp'>In&iacute;cio</a></li>
 							<li class='singsub'><a href='#'>Administradores</a>
 								<ul class='sub-menu hidden'>
 									<li><a href='administradorCadastrar.jsp'>Cadastrar</a>
 									<li><a href='administradorListar.jsp'>Listar</a>
 								</ul></li>
-							<li><a href='usuario.jsp'>Usuários</a></li>
+							<li><a href='usuario.jsp'>Usu&aacute;rios</a></li>
 							<li class='singsub'><a href='#'>Destaques</a>
 								<ul class='sub-menu hidden'>
 									<li><a href='destaqueCadastrar.jsp'>Cadastrar</a></li>
 									<li><a href='destaqueListar.jsp'>Listar</a></li>
 								</ul></li>
-                            <li class='singsub'><a href='#'>Pontos Turísticos</a>
+                            <li class='singsub'><a href='#'>Pontos Tur&iacute;sticos</a>
 								<ul class='sub-menu hidden'>
 									<li><a href='pontoCadastrar.jsp'>Cadastrar</a></li>
 									<li><a href='pontoListar.jsp'>Listar</a></li>
@@ -73,19 +73,19 @@
       	</div>
         <div id="conteudo">
         <div id="get">
-        <h3>Pontos Turísticos > Cadastrar</h3>
+        <h3>Pontos Tur&iacute;sticos > Cadastrar</h3>
         <div id="form" class="form" style="width:1200px">
           <iframe style="display:none;" name="recebeForm"></iframe>
-		  <form id="formPonto" name="formPonto" method="post" target="recebeForm" action="../PontoCadastrar">
+		  <form id="formPonto" name="formPonto" method="post" target="recebeForm" action="../PontoCadastrar" enctype="multipart/form-data">
               <div class="coluna">
                 <label for="campoNome">Nome</label>
                 <input type="text" id="campoNome" name="campoNome" style="width:1188px;" class="required" minlength="4" value="" />
-                <span>Informe o nome do ponto turístico</span>
+                <span>Informe o nome do ponto tur&iacute;stico</span>
               </div>
               <div class="coluna">
-                <label for="campoEndereco">Endereço</label>
+                <label for="campoEndereco">Endere&ccedil;o</label>
                 <input type="text" id="campoEndereco" name="campoEndereco" style="width:1188px;" class="required" minlength="4" value="" />
-                <span>Informe o endereço do ponto turístico</span>
+                <span>Informe o endere&ccedil;o do ponto tur&iacute;stico</span>
                 <input type="hidden" id="campoLatitude" name="campoLatitude" />
                 <input type="hidden" id="campoLongitude" name="campoLongitude" />
               </div>
@@ -103,19 +103,19 @@
                 <span>Informe o email</span>
               </div>
               <div class="coluna">
-                <label for="campoTempo">Tempo de visitação</label>
+                <label for="campoTempo">Tempo de visita&ccedil;&atilde;o</label>
                 <input type="text" id="campoTempo" name="campoTempo" style="width:138px; margin-right:10px" class="required tempo" minlength="4" value="" />
                 <span>Informe tempo</span>
               </div>
               <div class="coluna">
-                <label for="campoHorarioDeFuncionamento">Horário de funcionamento</label>
+                <label for="campoHorarioDeFuncionamento">Hor&aacute;rio de funcionamento</label>
                 <input type="text" id="campoHorarioDeFuncionamento" name="campoHorarioDeFuncionamento" style="width:504px;" class="required" minlength="4" value="" />
-                <span>Informe horário de funcionamento</span>
+                <span>Informe hor&aacute;rio de funcionamento</span>
               </div>
               <div class="coluna">
-                <label for="campoDescricao">Descrição do ponto turístico</label>
+                <label for="campoDescricao">Descri&ccedil;&atilde;o do ponto tur&iacute;stico</label>
                 <textarea id="campoDescricao" name="campoDescricao" style="width:1188px; height:200px;" class="required" minlength="1" value="" /></textarea>
-                <span>Informe uma descrição do ponto turístico</span>
+                <span>Informe uma descri&ccedil;&atilde;o do ponto tur&iacute;stico</span>
               </div>
               <div class="coluna">
                 <label for="campoImagem">Imagem</label>
