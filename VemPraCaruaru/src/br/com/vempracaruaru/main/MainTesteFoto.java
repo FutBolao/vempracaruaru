@@ -8,7 +8,7 @@ import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarFotoException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.fotos.Foto;
 
-public class mainTesteFoto {
+public class MainTesteFoto {
 
 	public static void main(String[] args) {
 		/*Os teste com cadatrar e listar foram feitos com sucesso e ja estão prontos para uso

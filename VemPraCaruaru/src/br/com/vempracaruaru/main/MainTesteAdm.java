@@ -8,7 +8,7 @@ import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.fachada.Fachada;
 
-public class mainTesteAdm {
+public class MainTesteAdm {
 
 	public static void main(String[] args) {
 		/*Os teste com cadatrar e listar foram feitos com sucesso e ja estão prontos para uso

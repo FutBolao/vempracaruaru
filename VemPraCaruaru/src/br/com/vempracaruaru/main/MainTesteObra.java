@@ -8,7 +8,7 @@ import br.com.vempracaruaru.exception.ObraJaCadastradaException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.obra.Obra;
 
-public class mainTesteObra {
+public class MainTesteObra {
 
 	public static void main(String[] args) {
 		/*Os teste com cadatrar e listar foram feitos com sucesso e ja estão prontos para uso

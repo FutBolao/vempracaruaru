@@ -12,10 +12,9 @@ import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.DestaqueJaCadastradoException;
 import br.com.vempracaruaru.exception.DestaqueNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarDestaqueException;
-import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarDestqueException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
-import br.com.vempracaruaru.exception.NaofoiPossivelDeletarDestaque;
+import br.com.vempracaruaru.exception.NaofoiPossivelDeletarDestaqueException;
 
 public class RepositorioDestaqueBDR implements IRepositorioDestaque {
 
@@ -129,7 +128,7 @@ public class RepositorioDestaqueBDR implements IRepositorioDestaque {
 				if (resultado == 0) throw new NaoFoiPossivelAlterarDestaqueException();
 				ps.close();
 			}else{
-				throw new NaoFoiPossivelAlterarDestqueException();
+				throw new NaoFoiPossivelAlterarDestaqueException();
 			}
 				
 	}
@@ -148,7 +147,7 @@ public class RepositorioDestaqueBDR implements IRepositorioDestaque {
 			stmt.execute();
 			System.out.println("foi removido");
 			}else{
-				throw new NaofoiPossivelDeletarDestaque();
+				throw new NaofoiPossivelDeletarDestaqueException();
 			}
 		} finally {
 

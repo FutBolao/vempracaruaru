@@ -7,7 +7,7 @@ import br.com.vempracaruaru.destaque.Destaque;
 import br.com.vempracaruaru.exception.DestaqueNaoCadastradoException;
 import br.com.vempracaruaru.fachada.Fachada;
 
-public class mainTesteDestaque {
+public class MainTesteDestaque {
 	
 	public static void main(String[] args) {
 		

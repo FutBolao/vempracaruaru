@@ -9,7 +9,7 @@ import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.lista.Lista;
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
-public class mainTesteLista {
+public class MainTesteLista {
 
 	public static void main(String[] args) {
 		/*Os teste com cadatrar e listar foram feitos com sucesso e ja estão prontos para uso

@@ -18,8 +18,7 @@ private IRepositorioAdministrador repositorio;
 	}
 	
 	public void cadastrar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorJaCadastradoException, Exception{	
-		System.out.println("passando pela controladora - concluido com sucesso -");
-		if (administrador != null) {
+			if (administrador != null) {
 			if (Validacao.validaCPF(administrador.getCpf())) {
 				administrador.setCpf(administrador.getCpf().replace('.',' ').replace('-',' ').replaceAll(" ", ""));
 				repositorio.cadastrar(administrador);

@@ -7,12 +7,16 @@ import br.com.vempracaruaru.administrador.Administrador;
 import br.com.vempracaruaru.administrador.ControladorAdministrador;
 import br.com.vempracaruaru.artista.Artista;
 import br.com.vempracaruaru.artista.ControladorArtista;
+import br.com.vempracaruaru.contato.Contato;
+import br.com.vempracaruaru.contato.ControladorContato;
 import br.com.vempracaruaru.destaque.ControladorDestaque;
 import br.com.vempracaruaru.destaque.Destaque;
 import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.ArtistaJaCadastradoException;
 import br.com.vempracaruaru.exception.ArtistaNaoCadastradoException;
+import br.com.vempracaruaru.exception.ContatoJaCadastradoException;
+import br.com.vempracaruaru.exception.ContatoNaoCadastradoException;
 import br.com.vempracaruaru.exception.DestaqueJaCadastradoException;
 import br.com.vempracaruaru.exception.DestaqueNaoCadastradoException;
 import br.com.vempracaruaru.exception.FotoJaCadastradoException;
@@ -21,6 +25,7 @@ import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarContatoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarFotoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
@@ -56,6 +61,7 @@ public class Fachada {
 	private ControladorLista controladorLista;
 	private ControladorFoto controladorFoto;
 	private ControladorDestaque controladorDestaque;
+	private ControladorContato controladorContato;
 	
 	public Fachada() throws Exception {
 		this.controladorAdministrador = new ControladorAdministrador();
@@ -66,6 +72,7 @@ public class Fachada {
 		this.controladorLista = new ControladorLista();
 		this.controladorFoto = new ControladorFoto();
 		this.controladorDestaque =  new ControladorDestaque();
+		this.controladorContato = new ControladorContato();
 	}
 	
 	public static Fachada getInstance() throws Exception {
@@ -304,5 +311,26 @@ public class Fachada {
 	public void destaqueDeletar(int id) throws SQLException, DestaqueNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorDestaque.deletar(id);
+	}
+	
+	//Metodos Contato
+	
+	public void contatoCadastrar(Contato contato)
+			throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoJaCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorContato.cadastrar(contato);
+	
+	}
+
+
+	public ArrayList<Contato> contatoListarTodos(String complemento)
+			throws SQLException, ContatoNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorContato.listarTodos(complemento);
+	}
+
+	public void contatoDeletar(int id) throws SQLException, ContatoNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorContato.deletar(id);		
 	}
 }
