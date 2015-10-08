@@ -2,18 +2,22 @@ package br.com.vempracaruaru.contato;
 
 public class Contato {
 
-	private int idContato;
-	private String nome;
-	private String email;
-	private String telefone;
-	private String assunto;
-
-	public Contato(int idContato, String nome, String email, String telefone, String assunto) {
+	private int		idContato;
+	private String	nome;
+	private String	email;
+	private String	telefone;
+	private String	assunto;
+	private String	dataHora;
+	private char	visualizado;
+	
+	public Contato(int idContato, String nome, String email, String telefone, String assunto,String dataHora, char visualizado) {
 		this.idContato = idContato;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.assunto = assunto;
+		this.dataHora = dataHora;
+		this.visualizado = visualizado;
 	}
 
 	public int getIdContato() {
@@ -56,10 +60,28 @@ public class Contato {
 		this.assunto = assunto;
 	}
 
+	public String getDataHora() {
+		return dataHora;
+	}
+
+	public void setDataHora(String dataHora) {
+		this.dataHora = dataHora;
+	}
+
+	public char getVisualizado() {
+		return visualizado;
+	}
+
+	public void setVisualizado(char visualizado) {
+		this.visualizado = visualizado;
+	}
+
 	@Override
 	public String toString() {
 		return "Contato [idContato=" + idContato + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone
-				+ ", assunto=" + assunto + "]";
+				+ ", assunto=" + assunto + ", dataHora=" + dataHora + ", visualizado=" + visualizado + "]";
 	}
+
+
 
 }

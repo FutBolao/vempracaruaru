@@ -50,9 +50,9 @@ import br.com.vempracaruaru.usuario.ControladorUsuario;
 import br.com.vempracaruaru.usuario.Usuario;
 
 public class Fachada {
-	
+
 	private static Fachada instance = null;
-	
+
 	private ControladorAdministrador controladorAdministrador;
 	private ControladorArtista controladorArtista;
 	private ControladorUsuario controladorUsuario;
@@ -62,7 +62,7 @@ public class Fachada {
 	private ControladorFoto controladorFoto;
 	private ControladorDestaque controladorDestaque;
 	private ControladorContato controladorContato;
-	
+
 	public Fachada() throws Exception {
 		this.controladorAdministrador = new ControladorAdministrador();
 		this.controladorArtista = new ControladorArtista();
@@ -71,214 +71,275 @@ public class Fachada {
 		this.controladorObra = new ControladorObra();
 		this.controladorLista = new ControladorLista();
 		this.controladorFoto = new ControladorFoto();
-		this.controladorDestaque =  new ControladorDestaque();
+		this.controladorDestaque = new ControladorDestaque();
 		this.controladorContato = new ControladorContato();
 	}
-	
+
 	public static Fachada getInstance() throws Exception {
 		if (Fachada.instance == null) {
 			Fachada.instance = new Fachada();
 		}
 		return Fachada.instance;
 	}
-	
+
 	// MÉTODOS DO ADMINISTRADOR
-	
-	public void administradorCadastrar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorJaCadastradoException, Exception{
+
+	public void administradorCadastrar(Administrador administrador) throws SQLException,
+			NaoFoiPossivelCadastrarAdministradorException, AdministradorJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorAdministrador.cadastrar(administrador);
 	}
-	public ArrayList<Administrador> administradorListarTodos(String complemento) throws SQLException, AdministradorNaoCadastradoException, Exception{
+
+	public ArrayList<Administrador> administradorListarTodos(String complemento)
+			throws SQLException, AdministradorNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorAdministrador.listarTodos(complemento);
 	}
-	public Administrador administradorListarPorId(int id) throws SQLException, AdministradorNaoCadastradoException, Exception{
+
+	public Administrador administradorListarPorId(int id)
+			throws SQLException, AdministradorNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorAdministrador.listarPorId(id);
 	}
-	public ArrayList<Administrador> administradorListarPorNome(String nome) throws SQLException, AdministradorNaoCadastradoException, Exception{
+
+	public ArrayList<Administrador> administradorListarPorNome(String nome)
+			throws SQLException, AdministradorNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorAdministrador.listarPorNome(nome);
-	}	
-	public Administrador administradorListarPorCpf(String cpf) throws SQLException, AdministradorNaoCadastradoException, Exception{
+	}
+
+	public Administrador administradorListarPorCpf(String cpf)
+			throws SQLException, AdministradorNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorAdministrador.listarPorCpf(cpf);
 	}
-	public void administradorAlterar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorNaoCadastradoException, Exception{
+
+	public void administradorAlterar(Administrador administrador) throws SQLException,
+			NaoFoiPossivelCadastrarAdministradorException, AdministradorNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorAdministrador.alterar(administrador);
 	}
-	public void administradorDeletar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception{
+
+	public void administradorDeletar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorAdministrador.deletar(id);
 	}
-	
-	//MÉTODOS DO ARTISTA	
-	public Artista artistaCadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception{
+
+	// MÉTODOS DO ARTISTA
+	public Artista artistaCadastrar(Artista artista)
+			throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladorArtista.cadastrar(artista);		
+		return controladorArtista.cadastrar(artista);
 	}
-	
-	public ArrayList<Artista> artistaListarTodos(String complemento) throws SQLException, ArtistaNaoCadastradoException, Exception{
+
+	public ArrayList<Artista> artistaListarTodos(String complemento)
+			throws SQLException, ArtistaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorArtista.listarTodos(complemento);
 	}
-	public Artista artistaListarPorId(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
+
+	public Artista artistaListarPorId(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorArtista.listarPorId(id);
 	}
-	public ArrayList<Artista> artistaListarPorNome(String nome) throws SQLException, ArtistaNaoCadastradoException, Exception{
+
+	public ArrayList<Artista> artistaListarPorNome(String nome)
+			throws SQLException, ArtistaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorArtista.listarPorNome(nome);
-	}	
-	public void artistaAlterar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaNaoCadastradoException, Exception{
+	}
+
+	public void artistaAlterar(Artista artista)
+			throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorArtista.alterar(artista);
 	}
-	public void artistaDeletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
+
+	public void artistaDeletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorArtista.deletar(id);
 	}
-	
-	//MÉTODOS DO USARIO
 
-	public void usuarioCadastrar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioJaCadastradoException, Exception{
+	// MÉTODOS DO USARIO
+
+	public void usuarioCadastrar(Usuario usuario)
+			throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorUsuario.cadastrar(usuario);
 	}
-	public ArrayList<Usuario> usuarioListarTodos(String complemento) throws SQLException, UsuarioNaoCadastradoException, Exception{
+
+	public ArrayList<Usuario> usuarioListarTodos(String complemento)
+			throws SQLException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorUsuario.listarTodos(complemento);
 	}
-	public Usuario usuarioListarPorId(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
+
+	public Usuario usuarioListarPorId(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorUsuario.listarPorId(id);
 	}
-	public ArrayList<Usuario> usuarioListarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception{
+
+	public ArrayList<Usuario> usuarioListarPorNome(String nome)
+			throws SQLException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorUsuario.listarPorNome(nome);
 	}
-	public void usuarioAlterar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception{
+
+	public void usuarioAlterar(Usuario usuario)
+			throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorUsuario.alterar(usuario);
 	}
-	public void usuarioDeletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
+
+	public void usuarioDeletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorUsuario.deletar(id);
 	}
-	
-	//MÉTODOS DO PONTO_TURISTICOS
-	
-	public PontoTuristico pontoTuristicoCadastrar(PontoTuristico pontoTurustico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception{
+
+	// MÉTODOS DO PONTO_TURISTICOS
+
+	public PontoTuristico pontoTuristicoCadastrar(PontoTuristico pontoTurustico) throws SQLException,
+			NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladoraPontoTuristico.cadastrar(pontoTurustico);
 	}
-	public ArrayList<PontoTuristico> pontoTuristicoListarTodos(String complemento) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
+
+	public ArrayList<PontoTuristico> pontoTuristicoListarTodos(String complemento)
+			throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladoraPontoTuristico.listarTodos(complemento);
 	}
-	public PontoTuristico pontoTuristicoListarPorId(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
+
+	public PontoTuristico pontoTuristicoListarPorId(int id)
+			throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladoraPontoTuristico.listarPorId(id);
 	}
-	public ArrayList<PontoTuristico> pontoTuristicoListarPorNome(String nome) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
+
+	public ArrayList<PontoTuristico> pontoTuristicoListarPorNome(String nome)
+			throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladoraPontoTuristico.listarPorNome(nome);
 	}
-	public void pontoTuristicoAlterar(PontoTuristico pontoTurustico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoNaoCadastradoException, Exception{
+
+	public void pontoTuristicoAlterar(PontoTuristico pontoTurustico) throws SQLException,
+			NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladoraPontoTuristico.alterar(pontoTurustico);
 	}
-	public void pontoTuristicodeletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
+
+	public void pontoTuristicodeletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladoraPontoTuristico.deletar(id);
 	}
-	
-	//METODOS DAS OBRAS
-	
-	public Obra obraCadastrar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradaException, Exception{
+
+	// METODOS DAS OBRAS
+
+	public Obra obraCadastrar(Obra obra)
+			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladorObra.cadastrar(obra);		
+		return controladorObra.cadastrar(obra);
 	}
-	public ArrayList<Obra> obraListarTodos(String complemento) throws SQLException, ObraNaoCadastradaException, Exception{
+
+	public ArrayList<Obra> obraListarTodos(String complemento)
+			throws SQLException, ObraNaoCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorObra.listarTodos(complemento);
 	}
-	public Obra obraListarPorId(int id) throws SQLException, ObraNaoCadastradaException, Exception{
+
+	public Obra obraListarPorId(int id) throws SQLException, ObraNaoCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorObra.listarPorId(id);
 	}
-	public ArrayList<Obra> obraListarPorNome(String nome) throws SQLException, ObraNaoCadastradaException, Exception{
+
+	public ArrayList<Obra> obraListarPorNome(String nome) throws SQLException, ObraNaoCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorObra.listarPorNome(nome);
 	}
-	public void obraAlterar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradaException, Exception{
+
+	public void obraAlterar(Obra obra)
+			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorObra.alterar(obra);
 	}
-	public void obraDeletar(int id) throws SQLException, ObraNaoCadastradaException, Exception{
+
+	public void obraDeletar(int id) throws SQLException, ObraNaoCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorObra.deletar(id);
 	}
-	
-	//METODOS DAS LISTA
-	
-	public void listaCadastrar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
+
+	// METODOS DAS LISTA
+
+	public void listaCadastrar(Lista lista)
+			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.cadastrar(lista);
 	}
-	public ArrayList<Lista> listarTodasListas(String complemento) throws SQLException, ListaNaoCadastradoException, Exception{
+
+	public ArrayList<Lista> listarTodasListas(String complemento)
+			throws SQLException, ListaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorLista.listarTodos(complemento);
 	}
-	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception{
+
+	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorLista.listarPorId(id);
 	}
-	public void ListaAlterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
+
+	public void ListaAlterar(Lista lista)
+			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.alterar(lista);
 	}
-	public void listaDeletar(int id) throws SQLException, ListaNaoCadastradoException, Exception{
+
+	public void listaDeletar(int id) throws SQLException, ListaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.deletar(id);
 	}
-	
-		
-	//METODOS DAS FOTO
-	
-	public Foto fotoCadastrar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception{
+
+	// METODOS DAS FOTO
+
+	public Foto fotoCadastrar(Foto foto)
+			throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorFoto.cadastrar(foto);
 	}
-	public ArrayList<Foto> fotoListarTodos(String complemento) throws SQLException, FotoNaoCadastradoException, Exception{
+
+	public ArrayList<Foto> fotoListarTodos(String complemento)
+			throws SQLException, FotoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorFoto.listarTodos(complemento);
 	}
-	public Foto fotoListarPorId(int id) throws SQLException, FotoNaoCadastradoException, Exception{
+
+	public Foto fotoListarPorId(int id) throws SQLException, FotoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorFoto.listarPorId(id);
 	}
-	public ArrayList<Foto> fotoListarPorReferencia(String nome) throws SQLException, FotoNaoCadastradoException, Exception{
+
+	public ArrayList<Foto> fotoListarPorReferencia(String nome)
+			throws SQLException, FotoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorFoto.listarPorReferencia(nome);
 	}
-	public void fotoAlterar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoNaoCadastradoException, Exception{
+
+	public void fotoAlterar(Foto foto)
+			throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorFoto.alterar(foto);
 	}
-	public void fotoDeletar(int id) throws SQLException, FotoNaoCadastradoException, Exception{
+
+	public void fotoDeletar(int id) throws SQLException, FotoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorFoto.deletar(id);
 	}
 
-	
-	//Metodos Destaque	
-	public Destaque destaqueCadastrar(Destaque destaque) throws SQLException, NaoFoiPossivelCadastrarDestaqueException, DestaqueJaCadastradoException, Exception {
+	// Metodos Destaque
+	public Destaque destaqueCadastrar(Destaque destaque)
+			throws SQLException, NaoFoiPossivelCadastrarDestaqueException, DestaqueJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorDestaque.cadastrar(destaque);
 	}
-
 
 	public ArrayList<Destaque> destaqueListarTodos(String complemento)
 			throws SQLException, DestaqueNaoCadastradoException, Exception {
@@ -286,19 +347,16 @@ public class Fachada {
 		return controladorDestaque.listarTodos(complemento);
 	}
 
-
 	public Destaque destaqueListarPorId(int id) throws SQLException, DestaqueNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorDestaque.listarPorId(id);
 	}
-
 
 	public ArrayList<Destaque> destaqueListarPorTitulo(String titulo)
 			throws SQLException, DestaqueNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorDestaque.listarPorTitulo(titulo);
 	}
-
 
 	public void destaqueAlterar(Destaque destaque)
 			throws SQLException, NaoFoiPossivelCadastrarDestaqueException, DestaqueNaoCadastradoException, Exception {
@@ -307,21 +365,19 @@ public class Fachada {
 
 	}
 
-
 	public void destaqueDeletar(int id) throws SQLException, DestaqueNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorDestaque.deletar(id);
 	}
-	
-	//Metodos Contato
-	
+
+	// Metodos Contato
+
 	public void contatoCadastrar(Contato contato)
 			throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorContato.cadastrar(contato);
-	
-	}
 
+	}
 
 	public ArrayList<Contato> contatoListarTodos(String complemento)
 			throws SQLException, ContatoNaoCadastradoException, Exception {
@@ -329,8 +385,14 @@ public class Fachada {
 		return controladorContato.listarTodos(complemento);
 	}
 
+	public void contatoAlterar(Contato contato)
+			throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorContato.alterar(contato);
+	}
+
 	public void contatoDeletar(int id) throws SQLException, ContatoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		controladorContato.deletar(id);		
+		controladorContato.deletar(id);
 	}
 }

@@ -30,7 +30,11 @@ public class ControladorContato {
 		return repositorio.listarTodos(complemento);
 	}
 
-
+	public void alterar(Contato contato) throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoNaoCadastradoException, Exception{
+		System.out.println("passando pela controladora - concluido com sucesso -");
+		repositorio.alterar(contato);
+	
+	}
 	public void deletar(int id) throws SQLException, ContatoNaoCadastradoException, Exception {
 		System.out.println("passando pela controladora - concluido com sucesso -");
 		repositorio.deletar(id);

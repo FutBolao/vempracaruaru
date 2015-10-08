@@ -14,6 +14,7 @@ import br.com.vempracaruaru.exception.ContatoNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarContatoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelDeletarContatoException;
+import br.com.vempracaruaru.exception.NaofoiPossivelAlterarContatoException;
 
 public class RepositorioContatoBDR implements IRepositorioContado{
 
@@ -40,7 +41,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (nome, email, telefone, assunto) VALUES (?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (nome, email, telefone, assunto,visualizado) VALUES (?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -50,6 +51,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 			ps.setString(2, contato.getEmail());
 			ps.setString(3, contato.getTelefone());	
 			ps.setString(4, contato.getAssunto());
+			ps.setString(5, String.valueOf(contato.getVisualizado()));
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -83,7 +85,8 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Contato contato = new Contato(rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("telefone"), rs.getString("assunto"));
+				Contato contato = new Contato(rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("telefone"),
+											  rs.getString("assunto"),rs.getString("data_hora"),rs.getString("visualizado").charAt(0));
 				contatos.add(contato);
 			}
 			System.out.println("- consulta completada com sucesso -");
@@ -95,6 +98,30 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		return contatos;
 		
 	}
+	
+	@Override
+	public void alterar(Contato contato) throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoNaoCadastradoException, Exception{
+		if (existeId(contato) == false){
+			PreparedStatement ps = null;
+			String sql = "";
+			sql = "UPDATE " + NOME_TABELA + " SET nome=?, email=?, telefone=?, assunto=?,"
+					+ " visualizado=? WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, contato.getNome());
+			ps.setString(2, contato.getEmail());
+			ps.setString(3, contato.getTelefone());
+			ps.setString(4, contato.getAssunto());
+			ps.setString(5, String.valueOf(contato.getVisualizado()));
+			ps.setInt(6, contato.getIdContato());
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaofoiPossivelAlterarContatoException();
+			ps.close();
+		}else{
+			throw new NaofoiPossivelAlterarContatoException();
+		}
+				
+	}
+
 
 	@Override
 	public void deletar(int id) throws SQLException, ContatoNaoCadastradoException, Exception {		
@@ -103,7 +130,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		String sql = "";
 		
 		try {
-			if(existeId(new Contato(id, "", "", "", ""))== false){
+			if(existeId(new Contato(id, "", "", "", "","",'s'))== false){
 			sql = "delete from "+ NOME_TABELA +" where id= ?";
 			stmt = this.connection.prepareStatement(sql);
 			stmt.setInt(1, id);			
