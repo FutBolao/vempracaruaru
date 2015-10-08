@@ -13,9 +13,12 @@ public class Obra {
 	private String 			nome;
 	private char 			ativo;
 	private String			foto;
+	private String			descricao;
 	
-	public Obra(int id, int idArtista, String nomeArtista, int idAdministrador, String nomeAdministrador,
-			int idPontoTuristico, String nomePontoTuristico, String nome, char ativo, String foto) {
+	public Obra(int id, int idArtista, String nomeArtista, int idAdministrador,
+			String nomeAdministrador, int idPontoTuristico,
+			String nomePontoTuristico, String nome, char ativo, String foto,
+			String descricao) {
 		super();
 		this.id = id;
 		this.idArtista = idArtista;
@@ -27,7 +30,9 @@ public class Obra {
 		this.nome = nome;
 		this.ativo = ativo;
 		this.foto = foto;
+		this.descricao = descricao;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -76,7 +81,6 @@ public class Obra {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public char getAtivo() {
 		return ativo;
 	}
@@ -89,11 +93,22 @@ public class Obra {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	@Override
 	public String toString() {
-		return "Obra [id=" + id + ", idArtista=" + idArtista + ", nomeArtista=" + nomeArtista + ", idAdministrador="
-				+ idAdministrador + ", nomeAdministrador=" + nomeAdministrador + ", idPontoTuristico="
-				+ idPontoTuristico + ", nomePontoTuristico=" + nomePontoTuristico + ", nome=" + nome + ", ativo="
-				+ ativo + ", foto=" + foto + "]";
+		return "Obra [id=" + id + ", idArtista=" + idArtista + ", nomeArtista="
+				+ nomeArtista + ", idAdministrador=" + idAdministrador
+				+ ", nomeAdministrador=" + nomeAdministrador
+				+ ", idPontoTuristico=" + idPontoTuristico
+				+ ", nomePontoTuristico=" + nomePontoTuristico + ", nome="
+				+ nome + ", ativo=" + ativo + ", foto=" + foto + ", descricao="
+				+ descricao + "]";
 	}
+	
 }

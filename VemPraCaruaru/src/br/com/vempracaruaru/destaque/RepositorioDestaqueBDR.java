@@ -80,7 +80,7 @@ public class RepositorioDestaqueBDR implements IRepositorioDestaque {
 		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
-		sql += "WHERE ";
+		sql += "WHERE id IS NOT NULL ";
 		sql += complemento;
 		sql += " ORDER BY titulo";
 		ps = this.connection.prepareStatement(sql);

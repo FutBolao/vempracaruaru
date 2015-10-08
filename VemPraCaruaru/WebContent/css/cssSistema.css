@@ -35,6 +35,33 @@ html,body{
 	margin: 0 auto;
 	padding-top:40px;
 }
+#rodape{
+	width:1200px;
+	height:48px;
+	color:#FFF;
+	background-color:#FECC47;
+	text-align:center;
+	margin: 0 auto;
+	margin-top:40px;
+	padding-top:4px;
+	line-height:22px;
+}
+#rodape a:link {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+#rodape a:visited {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+#rodape a:hover {
+	text-decoration: none;
+	color: #666;
+}
+#rodape a:active {
+	text-decoration: none;
+	color: #FFFFFF;
+}
 #conteudo h3{
 	color:#FF6500;
 	font-size:18px;

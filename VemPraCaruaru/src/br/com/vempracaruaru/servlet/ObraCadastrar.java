@@ -17,13 +17,13 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import br.com.vempracaruaru.artista.Artista;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
 import br.com.vempracaruaru.exception.ObraJaCadastradaException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.fotos.Foto;
+import br.com.vempracaruaru.obra.Obra;
 
 /**
  * Servlet implementation class ObraCadastrar
@@ -50,13 +50,9 @@ public class ObraCadastrar extends HttpServlet {
 		response.setContentType("text/html;");
 	    PrintWriter out = response.getWriter();
 	    String nome = "";
-	    String tipo = "";
-	    String telefone = "";
-	    String email = "";
-	    String twitter = "";
-	    String instagram = "";
-	    String facebook = "";
-	    String historico = "";
+	    int idArtista = 0;
+	    int idPontoTuristico = 0;
+	    String descricao = "";
 	    String foto = "";
 	    char ativo = 'S';
 	    int qtdFotos = 0;
@@ -65,7 +61,7 @@ public class ObraCadastrar extends HttpServlet {
 			Conexao.connection.setAutoCommit(false);
 			// cadastro o artista sem a foto principal para garantir o id.
 			// após upar e armazenar as imagens atualizo os dados com a imagem principal.
-			Artista artista = Fachada.getInstance().artistaCadastrar(new Artista(0, nome, 1, "", historico, tipo, foto, telefone, email, twitter, instagram, facebook, ativo));
+			Obra obra = Fachada.getInstance().obraCadastrar(new Obra(0, idArtista, "", 1, "", idPontoTuristico, "", nome, ativo, foto, descricao));
 			
 			// verifica se o pedido realmente contém arquivo de upload
 			if (!ServletFileUpload.isMultipartContent(request)) {
@@ -84,7 +80,7 @@ public class ObraCadastrar extends HttpServlet {
 			
 			// constrói o caminho do diretório para o arquivo de upload
 			String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY 
-					+ File.separator + artista.getId() + File.separator;
+					+ File.separator + obra.getId() + File.separator;
 			
 			// cria o diretório caso não exista
 			File uploadDir = new File(uploadPath);
@@ -104,12 +100,12 @@ public class ObraCadastrar extends HttpServlet {
 				if (!item.isFormField()) {
 					// faço o cadastro da imagem no bd com dados temporários pra garantir o id e salvar ela no disco com esse id
 					// após upar e armazenar a imagem atualizo os dados
-					Foto fotoTemp = Fachada.getInstance().fotoCadastrar(new Foto(0, 1, artista.getId(), "artista", "", "", 'S'));
+					Foto fotoTemp = Fachada.getInstance().fotoCadastrar(new Foto(0, 1, obra.getId(), "obra", "", "", 'S'));
 					// se for campo de arquivo processa aqui
 					String fileName = new File(item.getName()).getName();
 					String extencao = fileName.substring(fileName.lastIndexOf('.') + 1);
 					String filePath = uploadPath + fotoTemp.getId() + "." + extencao;
-					String imagem = UPLOAD_DIRECTORY + artista.getId() + File.separator + fotoTemp.getId() + "." + extencao;
+					String imagem = UPLOAD_DIRECTORY + obra.getId() + File.separator + fotoTemp.getId() + "." + extencao;
 					fotoTemp.setImagem(imagem);
 					
 					// atualizo os dados do cadastro da foto com seu caminho correto
@@ -118,7 +114,7 @@ public class ObraCadastrar extends HttpServlet {
 					// se essa for a primeira foto a ser cadastrada, define ele como foto principal do ponto
 					qtdFotos++;
 					if (qtdFotos == 1) {
-						artista.setFoto(imagem);
+						obra.setFoto(imagem);
 					}
 					
 					File storeFile = new File(filePath);
@@ -128,32 +124,20 @@ public class ObraCadastrar extends HttpServlet {
 				}
 				else if (item.getFieldName().equals("campoNome")) {
 					nome = item.getString();
-					artista.setNome(nome);
-				} else if (item.getFieldName().equals("campoTipo")) {
-					tipo = item.getString();
-					artista.setTipo(tipo);
-				} else if (item.getFieldName().equals("campoTelefone")) {
-					telefone = item.getString();
-					artista.setTelefone(telefone);
-				} else if (item.getFieldName().equals("campoEmail")) {
-					email = item.getString();
-					artista.setEmail(email);
-				} else if (item.getFieldName().equals("campoTwitter")) {
-					twitter = item.getString();
-					artista.setTwitter(twitter);
-				} else if (item.getFieldName().equals("campoInstagram")) {
-					instagram = item.getString();
-					artista.setInstagram(instagram);
-				} else if (item.getFieldName().equals("campoFacebook")) {
-					facebook = item.getString();
-					artista.setFacebook(facebook);
-				} else if (item.getFieldName().equals("campoHistorico")) {
-					historico = item.getString();
-					artista.setHistorico(historico);
+					obra.setNome(nome);
+				} else if (item.getFieldName().equals("campoArtista")) {
+					idArtista = Integer.parseInt(item.getString());
+					obra.setIdArtista(idArtista);
+				} else if (item.getFieldName().equals("campoPonto")) {
+					idPontoTuristico = Integer.parseInt(item.getString());
+					obra.setIdPontoTuristico(idPontoTuristico);
+				} else if (item.getFieldName().equals("campoDescricao")) {
+					descricao = item.getString();
+					obra.setDescricao(descricao);
 				}
 			}
-			System.out.println(artista.toString());
-			Fachada.getInstance().artistaAlterar(artista);
+			System.out.println(obra.toString());
+			Fachada.getInstance().obraAlterar(obra);
 			Conexao.connection.setAutoCommit(true);
 			out.println( "<script>parent.alert(\"Cadastro efetuado com sucesso!!!\");</script>" );
 			out.println( "<script>parent.limparFormulario();</script>" );

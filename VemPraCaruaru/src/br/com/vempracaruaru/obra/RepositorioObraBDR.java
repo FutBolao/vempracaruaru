@@ -29,7 +29,6 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	}
 	
 	public RepositorioObraBDR() throws Exception{
-		// TODO Auto-generated constructor stub
 		this.connection = Conexao.getConexao(dataBase);
 	}
 	
@@ -41,17 +40,20 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_artista, id_administrador, nome, ativo,imagem_principal) VALUES (?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, id_artista, id_ponto_turistico, nome, ativo, imagem_principal, descricao) VALUES (?,?,?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
 				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			}
-			ps.setInt(1, obra.getIdArtista());
-			ps.setInt(2, obra.getIdAdministrador());
-			ps.setString(3,obra.getNome() );
-			ps.setString(4, String.valueOf(obra.getAtivo()));
-			ps.setString(5, obra.getFoto());
+			ps.setInt(1, obra.getIdAdministrador());
+			ps.setInt(2, obra.getIdArtista());
+			ps.setInt(3, obra.getIdPontoTuristico());
+			ps.setString(4,obra.getNome() );
+			ps.setString(5, String.valueOf(obra.getAtivo()));
+			ps.setString(6, obra.getFoto());
+			ps.setString(7, obra.getDescricao());
+			System.out.println(ps);
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -89,7 +91,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 			while (rs.next()) {
 				Obra obra = new Obra(rs.getInt("id"), rs.getInt("id_artista"), rs.getString("nome"), rs.getInt("id_administrador"), 
 						rs.getString("nome_Administrador"), rs.getInt("id_Ponto_Turistico"), rs.getString("nome_ponto_turistico"),
-						rs.getString("nome_obra"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"));
+						rs.getString("nome_obra"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"), rs.getString("descricao"));
 				obras.add(obra);
 			}
 		}else{
@@ -134,15 +136,13 @@ public class RepositorioObraBDR implements IRepositorioObra{
 	}
 
 	@Override
-	public void deletar(int id) throws SQLException, ObraNaoCadastradaException, Exception {	
-		Obra obra = new Obra(id, 0, "", 0,"", 0,"", "", 'N',"");
-		
+	public void deletar(int id) throws SQLException, ObraNaoCadastradaException, Exception {			
 		PreparedStatement ps = null;
 		String sql = "";
 		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
 		ps = this.connection.prepareStatement(sql);
-		ps.setString(1, String.valueOf(obra.getAtivo()));
-		ps.setInt(2, obra.getId());
+		ps.setString(1, String.valueOf("S"));
+		ps.setInt(2, id);
 		Integer resultado = ps.executeUpdate();
 		if (resultado == 0) throw new NaoFoiPossivelAlterarObraException();
 		ps.close();
