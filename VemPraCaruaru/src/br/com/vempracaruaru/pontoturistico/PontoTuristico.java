@@ -15,11 +15,12 @@ public class PontoTuristico {
 	private String			historicoDescricao;
 	private char			ativo;
 	private String			foto;
+	private int 			quantidadeObras;
 	
 	public PontoTuristico(int id, int idAdministrador,
 			String nomeAdministrador, String nome, String endereco,
 			String telefone, String email, String tempoVisitacao,
-			String horarioFuncionamento, String historicoDescricao, String foto, char ativo) {
+			String horarioFuncionamento, String historicoDescricao, String foto, char ativo, int quantidadeObras) {
 		super();
 		this.id = id;
 		this.idAdministrador = idAdministrador;
@@ -33,6 +34,7 @@ public class PontoTuristico {
 		this.historicoDescricao = historicoDescricao;
 		this.foto = foto;
 		this.ativo = ativo;
+		this.quantidadeObras = quantidadeObras;
 	}
 
 	public int getId() {
@@ -130,6 +132,14 @@ public class PontoTuristico {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+	public int getQuantidadeObras() {
+		return quantidadeObras;
+	}
+
+	public void setQuantidadeObras(int quantidadeObras) {
+		this.quantidadeObras = quantidadeObras;
+	}
 
 	@Override
 	public String toString() {
@@ -139,7 +149,6 @@ public class PontoTuristico {
 				+ telefone +  ", email=" + email + ", tempoVisitacao=" + tempoVisitacao
 				+ ", horarioFuncionamento=" + horarioFuncionamento
 				+ ", historicoDescricao=" + historicoDescricao + ", ativo="
-				+ ativo + ", foto=" + foto + "]";
+				+ ativo + ", foto=" + foto + ", quantidadeObras=" + quantidadeObras + "]";
 	}
-	
 }

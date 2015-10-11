@@ -102,12 +102,12 @@ public class RepositorioDestaqueBDR implements IRepositorioDestaque {
 
 	@Override
 	public Destaque listarPorId(int id) throws SQLException, DestaqueNaoCadastradoException, Exception {
-		return listarTodos("id=" + id).get(0);
+		return listarTodos("AND id=" + id).get(0);
 		}
 
 	@Override
 	public ArrayList<Destaque> listarPorTitulo(String titulo) throws SQLException, DestaqueNaoCadastradoException, Exception{
-		return listarTodos("titulo LIKE '%" + titulo    + "%'");
+		return listarTodos("AND titulo LIKE '%" + titulo    + "%'");
 		
 	}
 

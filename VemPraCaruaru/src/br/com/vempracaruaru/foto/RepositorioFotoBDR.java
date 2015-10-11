@@ -1,4 +1,4 @@
-package br.com.vempracaruaru.fotos;
+package br.com.vempracaruaru.foto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +35,6 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 	
 	
 	public RepositorioFotoBDR()throws Exception {
-		// TODO Auto-generated constructor stub
 		this.connection = Conexao.getConexao(dataBase);
 	}
 	
@@ -87,7 +86,7 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
-		sql += "WHERE ";
+		sql += "WHERE id IS NOT NULL ";
 		sql += complemento;
 		sql += " ORDER BY referencia";
 		ps = this.connection.prepareStatement(sql);
@@ -110,12 +109,12 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 
 	@Override
 	public Foto listarPorId(int id) throws SQLException, FotoNaoCadastradoException, Exception {
-		return listarTodos("id=" + id).get(0);
+		return listarTodos("AND id=" + id).get(0);
 		}
 
 	@Override
-	public ArrayList<Foto> listarPorReferencia(String referencia) throws SQLException, FotoNaoCadastradoException, Exception {
-		return listarTodos("referencia LIKE '%" + referencia + "%'");
+	public ArrayList<Foto> listarPorReferencia(String referencia, int idReferencia) throws SQLException, FotoNaoCadastradoException, Exception {
+		return listarTodos("AND id_referencia = " + idReferencia + " AND referencia = '" + referencia + "'");
 		}
 
 	@Override
@@ -144,14 +143,13 @@ public class RepositorioFotoBDR implements IRepositorioFoto{
 
 	@Override
 	public void deletar(int id) throws SQLException, FotoNaoCadastradoException, Exception {		
-		Foto foto = new Foto(id, 0, 0, "", "", "", 'N');
-		if(existeId(foto) == false){
+		if(id > 0){
 		PreparedStatement ps = null;
 		String sql = "";
-		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+		sql = "DELETE FROM " + NOME_TABELA + " WHERE id=?;";
 		ps = this.connection.prepareStatement(sql);
-		ps.setString(1, String.valueOf(foto.getAtivo()));
-		ps.setInt(2, foto.getId());
+		ps.setInt(1, id);
+		System.out.println(ps);
 		Integer resultado = ps.executeUpdate();
 		if (resultado == 0) throw new NaoFoiPossivelAlterarFotoException();
 		ps.close();

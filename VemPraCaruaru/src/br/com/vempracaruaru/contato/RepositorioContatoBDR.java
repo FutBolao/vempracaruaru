@@ -41,7 +41,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (nome, email, telefone, assunto,visualizado) VALUES (?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (nome, email, telefone, assunto, visualizado) VALUES (?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -59,7 +59,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 				while (rs.next()) {
 					id = rs.getInt(1);
 				}
-				contato.setIdContato(id);
+				contato.setId(id);
 			} else {
 				throw new NaoFoiPossivelCadastrarArtistaException();
 			}
@@ -79,8 +79,9 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
-		sql += "WHERE ";
+		sql += "WHERE id IS NOT NULL ";
 		sql += complemento;
+		sql += "ORDER BY id DESC;";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
@@ -112,7 +113,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 			ps.setString(3, contato.getTelefone());
 			ps.setString(4, contato.getAssunto());
 			ps.setString(5, String.valueOf(contato.getVisualizado()));
-			ps.setInt(6, contato.getIdContato());
+			ps.setInt(6, contato.getId());
 			Integer resultado = ps.executeUpdate();
 			if (resultado == 0) throw new NaofoiPossivelAlterarContatoException();
 			ps.close();
@@ -153,7 +154,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
 		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
-		ps.setInt(1, contato.getIdContato());
+		ps.setInt(1, contato.getId());
 		rs = ps.executeQuery();
 		if(rs != null){
 			resposta = false;

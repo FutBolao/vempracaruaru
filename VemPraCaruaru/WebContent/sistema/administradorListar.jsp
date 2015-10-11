@@ -38,29 +38,33 @@ String cssClasse = "";
                 Lista de Administradores
               </caption>
               <tr>
-                <th width="82">&nbsp;</td>
-                ID
+                <th width="93">ID</td>
                 <th width="608">NOME&nbsp;</td>
-                <th width="254">USU&Aacute;RIO
-                <th width="66">ATIVO
-                <th width="188">A&Ccedil;&Otilde;ES</tr>
+                <th width="254">USU&Aacute;RIO</th>
+                <th width="66">ATIVO</th>
+                <th width="188">A&Ccedil;&Otilde;ES</th>
+              </tr>
               <%
               try {
             	  administradores = Fachada.getInstance().administradorListarTodos("");
             	  for (Administrador administrador : administradores) {
             		ponteiro = ponteiro+1;
-		  			if (ponteiro%2==0){
+            		if (administrador.getAtivo() == 'N') {
+ 		  				cssClasse = "vermelho";
+ 		  			} else if (ponteiro%2==0){
 		  				cssClasse = "par";
 		  			} else {
 		  				cssClasse = "impar";
 		  			}
+		  			String imagemAtivarInativar = administrador.getAtivo() == 'S' ? "inativar.png" : "ativar.png";
+		  			String nomeAtivarInativar = administrador.getAtivo() == 'S' ? "Inativar" : "Ativar";
 	                %>
 	                <tr id="<%=cssClasse%>">
 	                  <td><%=administrador.getId()%></td>
 	                  <td><%=administrador.getNome()%></td>
 	                  <td><%=administrador.getUsuario()%></td>
 	                  <td style="text-align:center;"><%=administrador.getAtivo()%></td>
-	                 <td style="text-align:center;"><a href="administradorListarDetalhes.jsp?id=<%=administrador.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" title="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" width="44" height="24"></a> <a href="#"><img src="../img/inativar.png" alt="Inativar o administrador de ID <%=administrador.getId()%>" title="Inativar o administrador de ID <%=administrador.getId()%>" width="28" height="24"></a> <a href="#"><img src="../img/alterar.png" alt="Alterar o administrador de ID <%=administrador.getId()%>" title="Alterar o administrador de ID <%=administrador.getId()%>" width="24" height="24"></a></td>
+	                 <td style="text-align:center;"><a href="administradorListarDetalhes.jsp?id=<%=administrador.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" title="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" width="44" height="24"></a>&nbsp;<a href="#"><img src="../img/<%=imagemAtivarInativar %>" alt="<%=nomeAtivarInativar %> o administrador de ID <%=administrador.getId()%>" title="<%=nomeAtivarInativar %> o administrador de ID <%=administrador.getId()%>" width="28" height="24"></a>&nbsp;<a href="#"><img src="../img/alterar.png" alt="Alterar o administrador de ID <%=administrador.getId()%>" title="Alterar o administrador de ID <%=administrador.getId()%>" width="24" height="24"></a></td>
 	                </tr>
 	                <%        
             	  }

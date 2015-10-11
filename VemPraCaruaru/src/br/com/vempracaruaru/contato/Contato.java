@@ -2,7 +2,7 @@ package br.com.vempracaruaru.contato;
 
 public class Contato {
 
-	private int		idContato;
+	private int		id;
 	private String	nome;
 	private String	email;
 	private String	telefone;
@@ -10,8 +10,8 @@ public class Contato {
 	private String	dataHora;
 	private char	visualizado;
 	
-	public Contato(int idContato, String nome, String email, String telefone, String assunto,String dataHora, char visualizado) {
-		this.idContato = idContato;
+	public Contato(int id, String nome, String email, String telefone, String assunto,String dataHora, char visualizado) {
+		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
@@ -20,12 +20,12 @@ public class Contato {
 		this.visualizado = visualizado;
 	}
 
-	public int getIdContato() {
-		return idContato;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdContato(int idContato) {
-		this.idContato = idContato;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -78,7 +78,7 @@ public class Contato {
 
 	@Override
 	public String toString() {
-		return "Contato [idContato=" + idContato + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone
+		return "Contato [idContato=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone
 				+ ", assunto=" + assunto + ", dataHora=" + dataHora + ", visualizado=" + visualizado + "]";
 	}
 

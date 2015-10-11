@@ -1,4 +1,4 @@
-package br.com.vempracaruaru.fotos;
+package br.com.vempracaruaru.foto;
 
 public class Foto {
 

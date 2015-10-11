@@ -22,7 +22,7 @@ import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
 import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.fachada.Fachada;
-import br.com.vempracaruaru.fotos.Foto;
+import br.com.vempracaruaru.foto.Foto;
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
 /**
@@ -31,7 +31,7 @@ import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 @WebServlet("/PontoCadastrar")
 public class PontoCadastrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY = "arquivos" + File.separator + "pontos" + File.separator;
+	private static final String UPLOAD_DIRECTORY = "arquivos" + "/" + "pontos" + "/";
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 10; // 10MB
 	private static final int REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
@@ -65,7 +65,7 @@ public class PontoCadastrar extends HttpServlet {
 			// cadastro o ponto sem a foto principal para garantir o id.
 			// após upar e armazenar as imagens atualizo os dados com a imagem principal.
 			PontoTuristico ponto = Fachada.getInstance().pontoTuristicoCadastrar(new PontoTuristico(0, 1, "", nome, endereco, telefone, email, 
-					tempoVisitacao, horarioFuncionamento, historicoDescricao, foto, ativo));
+					tempoVisitacao, horarioFuncionamento, historicoDescricao, foto, ativo, qtdFotos));
 			
 			// verifica se o pedido realmente contém arquivo de upload
 			if (!ServletFileUpload.isMultipartContent(request)) {
@@ -83,8 +83,8 @@ public class PontoCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY 
-					+ File.separator + ponto.getId() + File.separator;
+			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY 
+					+ "/" + ponto.getId() + "/";
 			
 			// cria o diretório caso não exista
 			File uploadDir = new File(uploadPath);
@@ -109,7 +109,7 @@ public class PontoCadastrar extends HttpServlet {
 					String fileName = new File(item.getName()).getName();
 					String extencao = fileName.substring(fileName.lastIndexOf('.') + 1);
 					String filePath = uploadPath + fotoTemp.getId() + "." + extencao;
-					String imagem = UPLOAD_DIRECTORY + ponto.getId() + File.separator + fotoTemp.getId() + "." + extencao;
+					String imagem = UPLOAD_DIRECTORY + ponto.getId() + "/" + fotoTemp.getId() + "." + extencao;
 					fotoTemp.setImagem(imagem);
 					
 					// atualizo os dados do cadastro da foto com seu caminho correto

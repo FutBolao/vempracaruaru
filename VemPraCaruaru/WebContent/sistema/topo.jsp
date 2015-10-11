@@ -44,6 +44,11 @@
                         <li><a href='obraCadastrar.jsp'>Cadastrar</a></li>
                         <li><a href='obraListar.jsp'>Listar</a></li>
                     </ul></li>
+                <li class='singsub'><a href='#'>Contato</a>
+                    <ul class='sub-menu hidden'>
+                        <li><a href='contatoNovas.jsp'>Mensagens Novas</a></li>
+                        <li><a href='contatoLidas.jsp'>Mensagem Lidas</a></li>
+                    </ul></li>
             </ul>
         </nav>
     </div>

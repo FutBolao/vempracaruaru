@@ -4,30 +4,32 @@ import br.com.vempracaruaru.pessoa.Pessoa;
 
 public class Usuario extends Pessoa{
 	
-	private String		emial;
+	private String		email;
 	private String		localizacao;
 	private String		senha;
 	private String		userFacebook;
 	private String		linkfacebook;
+	private int 		pontos;
 	private char		ativo;
 	
-	public Usuario(int id, String nome, String emial, String localizacao, String senha, String userFacebook,
-			String link_facebook, char ativo) {
+	public Usuario(int id, String nome, String email, String localizacao, String senha, String userFacebook,
+			String link_facebook, int pontos, char ativo) {
 		super(id, nome);
-		this.emial = emial;
+		this.email = email;
 		this.localizacao = localizacao;
 		this.senha = senha;
 		this.userFacebook = userFacebook;
 		this.linkfacebook = link_facebook;
+		this.pontos = pontos;
 		this.ativo = ativo;
 	}
 
-	public String getEmial() {
-		return emial;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmial(String emial) {
-		this.emial = emial;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getLocalizacao() {
@@ -62,6 +64,14 @@ public class Usuario extends Pessoa{
 		this.linkfacebook = linkfacebook;
 	}
 
+	public int getPontos() {
+		return pontos;
+	}
+
+	public void setAtivo(int pontos) {
+		this.pontos = pontos;
+	}
+	
 	public char getAtivo() {
 		return ativo;
 	}
@@ -72,9 +82,8 @@ public class Usuario extends Pessoa{
 
 	@Override
 	public String toString() {
-		return "Usuario [emial=" + emial + ", localizacao=" + localizacao + ", senha=" + senha + ", userFacebook="
-				+ userFacebook + ", linkfacebook=" + linkfacebook + ", ativo=" + ativo + "]";
+		return "Usuario [emial=" + email + ", localizacao=" + localizacao + ", senha=" + senha + ", userFacebook="
+				+ userFacebook + ", linkfacebook=" + linkfacebook + ", pontos=" + pontos + ", ativo=" + ativo + "]";
 	}
-
-		
+	
 }

@@ -38,27 +38,31 @@ String cssClasse = "";
                 Lista de Pontos Tur&iacute;sticos
               </caption>
               <tr>
-                <th width="93">&nbsp;</td>
-                ID
-                <th width="817">T&Iacute;TULO
-                <th width="69">ATIVO
-                <th width="201">A&Ccedil;&Otilde;ES</tr>
+                <th width="93">ID</th>
+                <th width="817">T&Iacute;TULO</th>
+                <th width="69">ATIVO</th>
+                <th width="201">A&Ccedil;&Otilde;ES</th>
+              </tr>
               <%
               try {
             	  pontos = Fachada.getInstance().pontoTuristicoListarTodos("");
             	  for (PontoTuristico ponto : pontos) {
             		ponteiro = ponteiro+1;
-		  			if (ponteiro%2==0){
+            		if (ponto.getAtivo() == 'N') {
+ 		  				cssClasse = "vermelho";
+ 		  			} else if (ponteiro%2==0){
 		  				cssClasse = "par";
 		  			} else {
 		  				cssClasse = "impar";
 		  			}
+		  			String imagemAtivarInativar = ponto.getAtivo() == 'S' ? "inativar.png" : "ativar.png";
+		  			String nomeAtivarInativar = ponto.getAtivo() == 'S' ? "Inativar" : "Ativar";
 	                %>
 	                <tr id="<%=cssClasse%>">
 	                  <td><%=ponto.getId()%></td>
 	                  <td><%=ponto.getNome()%></td>
-	                  <td><%=ponto.getAtivo()%></td>
-	                  <td style="text-align:center;"><a href="pontoListarDetalhes.jsp?id=<%=ponto.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do ponto turístico de ID <%=ponto.getId()%>" title="Visualizar detalhes do ponto turístico de ID <%=ponto.getId()%>" width="44" height="24">&nbsp;</a><a href="destaqueListarDetalhes.jsp?id=<%=ponto.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/fotos.png" alt="Visualizar fotos do ponto turístico de ID <%=ponto.getId()%>" title="Visualizar fotos do ponto turístico de ID <%=ponto.getId()%>" width="33" height="24"></a>&nbsp;<a href="destaqueListarDetalhes.jsp?id=<%=ponto.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/lista.png" alt="Listar obras do ponto turístico de ID <%=ponto.getId()%>" title="Listar obras do ponto turístico de ID <%=ponto.getId()%>" width="19" height="24"></a>&nbsp;<a href="#"><img src="../img/inativar.png" alt="Inativar o ponto turístico de ID <%=ponto.getId()%>" title="Inativar o ponto turístico de ID <%=ponto.getId()%>" width="28" height="24">&nbsp;<img src="../img/alterar.png" alt="Alterar o ponto turístico de ID <%=ponto.getId()%>" title="Alterar o ponto turístico de ID <%=ponto.getId()%>" width="24" height="24"></a></td>
+	                  <td style="text-align:center;"><%=ponto.getAtivo()%></td>
+	                  <td style="text-align:center;"><a href="pontoListarDetalhes.jsp?id=<%=ponto.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '700', height: '420'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do ponto turístico de ID <%=ponto.getId()%>" title="Visualizar detalhes do ponto turístico de ID <%=ponto.getId()%>" width="44" height="24"></a>&nbsp;<a href="pontoListarFotos.jsp?id=<%=ponto.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '880', height: '600'} )"><img src="../img/fotos.png" alt="Visualizar fotos do ponto turístico de ID <%=ponto.getId()%>" title="Visualizar fotos do ponto turístico de ID <%=ponto.getId()%>" width="33" height="24"></a>&nbsp;<a href="pontoListarObras.jsp?id=<%=ponto.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/lista.png" alt="Listar obras do ponto turístico de ID <%=ponto.getId()%>" title="Listar obras do ponto turístico de ID <%=ponto.getId()%>" width="19" height="24"></a>&nbsp;<a href="#"><img src="../img/<%=imagemAtivarInativar %>" alt="<%=nomeAtivarInativar %> o ponto turístico de ID <%=ponto.getId()%>" title="<%=nomeAtivarInativar %> o ponto turístico de ID <%=ponto.getId()%>" width="28" height="24"></a>&nbsp;<a href="#"><img src="../img/alterar.png" alt="Alterar o ponto turístico de ID <%=ponto.getId()%>" title="Alterar o ponto turístico de ID <%=ponto.getId()%>" width="24" height="24"></a></td>
 	                </tr>
 	                <%        
             	  }

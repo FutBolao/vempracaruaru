@@ -23,7 +23,7 @@ import br.com.vempracaruaru.exception.ArtistaJaCadastradoException;
 import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
 import br.com.vempracaruaru.fachada.Fachada;
-import br.com.vempracaruaru.fotos.Foto;
+import br.com.vempracaruaru.foto.Foto;
 
 /**
  * Servlet implementation class ArtistaCadastrar
@@ -31,7 +31,7 @@ import br.com.vempracaruaru.fotos.Foto;
 @WebServlet("/ArtistaCadastrar")
 public class ArtistaCadastrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY = "arquivos" + File.separator + "artistas" + File.separator;
+	private static final String UPLOAD_DIRECTORY = "arquivos" + "/" + "artistas" + "/";
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 10; // 10MB
 	private static final int REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
@@ -83,8 +83,8 @@ public class ArtistaCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY 
-					+ File.separator + artista.getId() + File.separator;
+			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY 
+					+ "/" + artista.getId() + "/";
 			
 			// cria o diretório caso não exista
 			File uploadDir = new File(uploadPath);
@@ -109,7 +109,7 @@ public class ArtistaCadastrar extends HttpServlet {
 					String fileName = new File(item.getName()).getName();
 					String extencao = fileName.substring(fileName.lastIndexOf('.') + 1);
 					String filePath = uploadPath + fotoTemp.getId() + "." + extencao;
-					String imagem = UPLOAD_DIRECTORY + artista.getId() + File.separator + fotoTemp.getId() + "." + extencao;
+					String imagem = UPLOAD_DIRECTORY + artista.getId() + "/" + fotoTemp.getId() + "." + extencao;
 					fotoTemp.setImagem(imagem);
 					
 					// atualizo os dados do cadastro da foto com seu caminho correto

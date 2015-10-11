@@ -30,7 +30,7 @@
         <h3>Obras > Cadastrar</h3>
         <div id="form" class="form" style="width:1200px">
           <iframe style="display:none;" name="recebeForm"></iframe>
-		  <form id="formObra" name="formObra" method="post" target="recebeForm" action="../ObraCadastrar">
+		  <form id="formObra" name="formObra" method="post" target="recebeForm" action="../ObraCadastrar" enctype="multipart/form-data">
               <div class="coluna">
                 <label for="campoNome">Nome</label>
                 <input type="text" id="campoNome" name="campoNome" style="width:488px; margin-right:10px;" class="required" minlength="4" value="" />

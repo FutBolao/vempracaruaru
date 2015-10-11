@@ -1,4 +1,4 @@
-package br.com.vempracaruaru.fotos;
+package br.com.vempracaruaru.foto;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ public class ControladorFoto {
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		return repositorio.listarPorId(id);
 	}
-	public ArrayList<Foto> listarPorReferencia(String referencia) throws SQLException, FotoNaoCadastradoException, Exception{
+	public ArrayList<Foto> listarPorReferencia(String referencia, int idReferencia) throws SQLException, FotoNaoCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
-		return repositorio.listarPorReferencia(referencia);
+		return repositorio.listarPorReferencia(referencia, idReferencia);
 	}
 	public void alterar(Foto foto) throws SQLException, NaoFoiPossivelCadastrarFotoException, FotoNaoCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");

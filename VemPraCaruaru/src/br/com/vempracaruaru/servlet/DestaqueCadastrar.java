@@ -30,7 +30,7 @@ import br.com.vempracaruaru.fachada.Fachada;
 @WebServlet("/DestaqueCadastrar")
 public class DestaqueCadastrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY = "arquivos" + File.separator + "destaques" + File.separator;
+	private static final String UPLOAD_DIRECTORY = "arquivos" + "/" + "destaques" + "/";
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 10; // 10MB
 	private static final int REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
@@ -74,7 +74,7 @@ public class DestaqueCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY;
 			
 			// cria o diretório caso não exista
 			File uploadDir = new File(uploadPath);

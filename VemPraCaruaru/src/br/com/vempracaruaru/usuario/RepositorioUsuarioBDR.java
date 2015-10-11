@@ -23,7 +23,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 	private int dataBase = DataBase.MYSQL;
 	
 	public static RepositorioUsuarioBDR getInstace() throws Exception{
-		if(instance !=null){
+		if(instance != null){
 			instance = new RepositorioUsuarioBDR();
 		}
 		return instance;
@@ -48,7 +48,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 			} else {
 				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			}
-			ps.setString(1, usuario.getEmial());
+			ps.setString(1, usuario.getEmail());
 			ps.setString(2, usuario.getNome());
 			ps.setString(3, usuario.getLocalizacao());
 			ps.setString(4, usuario.getSenha());
@@ -82,15 +82,15 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
-		sql += " WHERE ";
+		sql += " WHERE id IS NOT NULL ";
 		sql += complemento;
-		sql += " ORDER BY nome";
+		sql += " ORDER BY nome DESC;";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
 				Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nome"),rs.getString("email"), rs.getString("localizacao"), rs.getString("senha"),
-						rs.getString("user_facebook"),rs.getString("link_facebook"),rs.getString("ativo").charAt(0));
+						rs.getString("user_facebook"),rs.getString("link_facebook"), rs.getInt("pontos"), rs.getString("ativo").charAt(0));
 				usuarios.add(usuario);
 			}
 		}else{
@@ -104,12 +104,12 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 
 	@Override
 	public Usuario listarPorId(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
-		return listarTodos("id=" + id).get(0);
+		return listarTodos("AND id=" + id).get(0);
 		}
 
 	@Override
 	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception {
-		return listarTodos("nome LIKE '%" + nome + "%'");
+		return listarTodos("AND nome LIKE '%" + nome + "%'");
 		}
 
 	@Override
@@ -121,7 +121,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 				String sql = "";
 				sql = "UPDATE " + NOME_TABELA + " SET email=?, nome=?, localizacao=?, senha=?, user_facebook=?, link_facebook=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
-				ps.setString(1, usuario.getEmial());
+				ps.setString(1, usuario.getEmail());
 				ps.setString(2, usuario.getNome());
 				ps.setString(3, usuario.getLocalizacao());
 				ps.setString(4, usuario.getSenha());
@@ -141,7 +141,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 	@Override
 	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		
-		Usuario usuario = new Usuario(0, "", "", "", "", "", "",'N');
+		Usuario usuario = new Usuario(0, "", "", "", "", "", "", 0,'N');
 		if (existeId(usuario) == false){
 			PreparedStatement ps = null;
 			String sql = "";

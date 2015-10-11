@@ -216,7 +216,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 				ponto = new PontoTuristico(rs.getInt("id"), rs.getInt("id_administrador"),
 						rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), rs.getString("endereco"),
 						rs.getString("telefone"), rs.getString("email"), rs.getString("tempo_visitacao"), rs.getString("horario_funcionamento"),
-						rs.getString("historico_descricao"), rs.getString("imagem_principal"), rs.getString("ativo").charAt(0));
+						rs.getString("historico_descricao"), rs.getString("imagem_principal"), rs.getString("ativo").charAt(0), rs.getInt("quantidade_fotos"));
 				}
 			}
 		ps.close();

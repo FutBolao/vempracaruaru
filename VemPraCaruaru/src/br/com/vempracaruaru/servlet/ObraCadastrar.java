@@ -22,7 +22,7 @@ import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
 import br.com.vempracaruaru.exception.ObraJaCadastradaException;
 import br.com.vempracaruaru.fachada.Fachada;
-import br.com.vempracaruaru.fotos.Foto;
+import br.com.vempracaruaru.foto.Foto;
 import br.com.vempracaruaru.obra.Obra;
 
 /**
@@ -31,7 +31,7 @@ import br.com.vempracaruaru.obra.Obra;
 @WebServlet("/ObraCadastrar")
 public class ObraCadastrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY = "arquivos" + File.separator + "obras" + File.separator;
+	private static final String UPLOAD_DIRECTORY = "arquivos" + "/" + "obras" + "/";
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 10; // 10MB
 	private static final int REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
@@ -79,8 +79,8 @@ public class ObraCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY 
-					+ File.separator + obra.getId() + File.separator;
+			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY 
+					+ "/" + obra.getId() + "/";
 			
 			// cria o diretório caso não exista
 			File uploadDir = new File(uploadPath);
@@ -105,7 +105,7 @@ public class ObraCadastrar extends HttpServlet {
 					String fileName = new File(item.getName()).getName();
 					String extencao = fileName.substring(fileName.lastIndexOf('.') + 1);
 					String filePath = uploadPath + fotoTemp.getId() + "." + extencao;
-					String imagem = UPLOAD_DIRECTORY + obra.getId() + File.separator + fotoTemp.getId() + "." + extencao;
+					String imagem = UPLOAD_DIRECTORY + obra.getId() + "/" + fotoTemp.getId() + "." + extencao;
 					fotoTemp.setImagem(imagem);
 					
 					// atualizo os dados do cadastro da foto com seu caminho correto

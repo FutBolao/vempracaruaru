@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
-import br.com.vempracaruaru.exception.ObraJaCadastradaException;
+import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.obra.Obra;
 
@@ -22,7 +22,7 @@ public class MainTesteObra {
 			
 //		Obra obra =	Fachada.getInstance().obraListarPorId(1);
 //		ArrayList<Obra> lista1 = Fachada.getInstance().obraListarPorNome("can");
-		ArrayList<Obra> lista2 = Fachada.getInstance().obraListarTodos("nome = nome");
+		ArrayList<Obra> lista2 = Fachada.getInstance().obraListarTodos("");
 //		
 //		System.out.println(obra.toString());
 //		
@@ -39,7 +39,7 @@ public class MainTesteObra {
 		} catch (NaoFoiPossivelCadastrarObraException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ObraJaCadastradaException e) {
+		} catch (ObraNaoCadastradaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {

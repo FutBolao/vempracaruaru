@@ -34,6 +34,9 @@ public class ControladorPontoTuristico{
 	public void alterar(PontoTuristico pontoTuristico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoNaoCadastradoException, Exception{
 		repositorio.alterar(pontoTuristico);
 	}
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelCadastrarPontoTuristicoException, Exception{
+		repositorio.definirImagemPrincipal(id, imagem);
+	}
 	public void deletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
 		repositorio.deletar(id);
 	}

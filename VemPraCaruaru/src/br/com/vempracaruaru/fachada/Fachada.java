@@ -38,8 +38,8 @@ import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioNaoCadastradoException;
-import br.com.vempracaruaru.fotos.ControladorFoto;
-import br.com.vempracaruaru.fotos.Foto;
+import br.com.vempracaruaru.foto.ControladorFoto;
+import br.com.vempracaruaru.foto.Foto;
 import br.com.vempracaruaru.lista.ControladorLista;
 import br.com.vempracaruaru.lista.Lista;
 import br.com.vempracaruaru.obra.ControladorObra;
@@ -227,8 +227,13 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladoraPontoTuristico.alterar(pontoTurustico);
 	}
+	
+	public void pontoTuristicoDefinirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelCadastrarPontoTuristicoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladoraPontoTuristico.definirImagemPrincipal(id, imagem);
+	}
 
-	public void pontoTuristicodeletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
+	public void pontoTuristicoDeletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladoraPontoTuristico.deletar(id);
 	}
@@ -317,10 +322,10 @@ public class Fachada {
 		return controladorFoto.listarPorId(id);
 	}
 
-	public ArrayList<Foto> fotoListarPorReferencia(String nome)
+	public ArrayList<Foto> fotoListarPorReferencia(String referencia, int idReferencia)
 			throws SQLException, FotoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladorFoto.listarPorReferencia(nome);
+		return controladorFoto.listarPorReferencia(referencia, idReferencia);
 	}
 
 	public void fotoAlterar(Foto foto)

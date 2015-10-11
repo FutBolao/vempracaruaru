@@ -97,7 +97,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 				PontoTuristico pontoTuristico = new PontoTuristico(rs.getInt("id"), rs.getInt("id_administrador"),
 				rs.getString("nome_administrador"),rs.getString("nome"), rs.getString("endereco"),
 				rs.getString("telefone"), rs.getString("email"), rs.getString("tempo_visitacao"), rs.getString("horario_funcionamento"),
-				rs.getString("historico_descricao"), rs.getString("imagem_principal"), rs.getString("ativo").charAt(0));
+				rs.getString("historico_descricao"), rs.getString("imagem_principal"), rs.getString("ativo").charAt(0), rs.getInt("quantidade_obras"));
 				
 				pontosTuristicos.add(pontoTuristico);
 			}
@@ -149,6 +149,20 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 			}
 				
 	}
+	
+	@Override
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelCadastrarPontoTuristicoException, Exception {			
+		PreparedStatement ps = null;
+		String sql = "";
+		sql = "UPDATE " + NOME_TABELA + " SET imagem_principal=? WHERE id=?;";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, imagem);
+		ps.setInt(2, id);
+		Integer resultado = ps.executeUpdate();
+		if (resultado == 0) throw new NaoFoiPossivelCadastrarPontoTuristicoException();
+		ps.close();
+	}
+	
 	@Override
 	public void deletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {			
 		PreparedStatement ps = null;
@@ -162,7 +176,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		ps.close();
 
 	
-}
+	}
 	@Override
 	public boolean existeId(PontoTuristico pontoTuristico)
 			throws SQLException, PontoTuristicoJaCadastradoException, Exception {		

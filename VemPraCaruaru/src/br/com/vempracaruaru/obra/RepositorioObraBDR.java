@@ -49,11 +49,10 @@ public class RepositorioObraBDR implements IRepositorioObra{
 			ps.setInt(1, obra.getIdAdministrador());
 			ps.setInt(2, obra.getIdArtista());
 			ps.setInt(3, obra.getIdPontoTuristico());
-			ps.setString(4,obra.getNome() );
+			ps.setString(4, obra.getNome());
 			ps.setString(5, String.valueOf(obra.getAtivo()));
 			ps.setString(6, obra.getFoto());
 			ps.setString(7, obra.getDescricao());
-			System.out.println(ps);
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -62,7 +61,6 @@ public class RepositorioObraBDR implements IRepositorioObra{
 					id = rs.getInt(1);
 				}
 				obra.setId(id);
-				adicionarPonto(obra);
 			} else {
 				throw new NaoFoiPossivelCadastrarObraException();
 			}
@@ -81,20 +79,22 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
-		sql = "SELECT * FROM vw_obra";
+		sql = "SELECT * FROM vw_obra ";
 		sql += "WHERE id IS NOT NULL ";
 		sql += complemento;
-		sql += " ORDER BY nome_obra";
+		sql += " ORDER BY nome";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
+
 		if (rs != null) {
+			System.out.println("QTD LINHAS: " + rs.getRow());
 			while (rs.next()) {
-				Obra obra = new Obra(rs.getInt("id"), rs.getInt("id_artista"), rs.getString("nome"), rs.getInt("id_administrador"), 
-						rs.getString("nome_Administrador"), rs.getInt("id_Ponto_Turistico"), rs.getString("nome_ponto_turistico"),
-						rs.getString("nome_obra"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"), rs.getString("descricao"));
+				Obra obra = new Obra(rs.getInt("id"), rs.getInt("id_artista"), rs.getString("nome_artista"), rs.getInt("id_administrador"), 
+						rs.getString("nome_administrador"), rs.getInt("id_ponto_turistico"), rs.getString("nome_ponto_turistico"),
+						rs.getString("nome"), rs.getString("ativo").charAt(0),rs.getString("imagem_principal"), rs.getString("descricao"));
 				obras.add(obra);
 			}
-		}else{
+		} else {
 			throw new ObraNaoCadastradaException();
 		}
 		System.out.println("- Consulta completada com sucesso -");
@@ -120,12 +120,16 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		if (existeId(obra) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, imagem_principal=?, ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET id_administrador=?, id_artista=?, id_ponto_turistico=?, nome=?, imagem_principal=?, descricao=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
-				ps.setString(1, obra.getNome());
-				ps.setString(2, obra.getFoto());
-				ps.setString(3, String.valueOf(obra.getAtivo()));
-				ps.setInt(3, obra.getId());
+				ps.setInt(1, obra.getIdAdministrador());
+				ps.setInt(2, obra.getIdArtista());
+				ps.setInt(3, obra.getIdPontoTuristico());
+				ps.setString(4, obra.getNome());
+				ps.setString(5, obra.getFoto());
+				ps.setString(6, obra.getDescricao());
+				ps.setString(7, String.valueOf(obra.getAtivo()));
+				ps.setInt(8, obra.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarObraException();
 				ps.close();
@@ -167,23 +171,4 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		return resposta;
 	}
 
-	private void adicionarPonto(Obra obra)
-		throws SQLException, NaoFoiPossivelCadastrarObraException, ObraJaCadastradaException, Exception {
-	System.out.println("Chegando ao repositorio");
-	PreparedStatement ps = null;
-	String sql = "";
-
-		sql = "INSERT INTO ponto_turistico_obra (id_ponto_turistico, id_obra) VALUES (?,?);";
-		if (this.dataBase == DataBase.ORACLE) {
-			ps = this.connection.prepareStatement(sql, new String[] { "id" });
-		} else {
-			ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		}
-		ps.setInt(1, obra.getIdPontoTuristico());
-		ps.setInt(2, obra.getId());
-		ps.execute();
-
-	ps.close();
-		
-	}
 }

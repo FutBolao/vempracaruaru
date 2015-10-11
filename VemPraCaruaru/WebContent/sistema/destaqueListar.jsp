@@ -38,8 +38,11 @@ String cssClasse = "";
                 Lista de Destaques
               </caption>
               <tr>
-                <th width="89">&nbsp;</td>
-                ID<th width="574">T&Iacute;TULO<th width="340">LINK<th width="177">A&Ccedil;&Otilde;ES</tr>
+                <th width="93">ID</th>
+                <th width="574">T&Iacute;TULO</th>
+                <th width="340">LINK</th>
+                <th width="177">A&Ccedil;&Otilde;ES</th>
+              </tr>
               <%
               try {
             	  destaques = Fachada.getInstance().destaqueListarTodos("");
@@ -55,7 +58,7 @@ String cssClasse = "";
 	                  <td><%=destaque.getId()%></td>
 	                  <td><%=destaque.getTitulo()%></td>
 	                  <td><%=destaque.getLink()%></td>
-	                  <td style="text-align:center;"><a href="destaqueListarDetalhes.jsp?id=<%=destaque.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do destaque de ID <%=destaque.getId()%>" title="Visualizar detalhes do destaque de ID <%=destaque.getId()%>" width="44" height="24"></a>&nbsp;<a href="#"><img src="../img/alterar.png" alt="Alterar o destaque de ID <%=destaque.getId()%>" title="Alterar o destaque de ID <%=destaque.getId()%>" width="24" height="24">&nbsp;<img src="../img/deletar.png" alt="Deletar o destaque de ID <%=destaque.getId()%>" title="Deletar o destaque de ID <%=destaque.getId()%>" width="24" height="24"></a></td>
+	                  <td style="text-align:center;"><a href="destaqueListarDetalhes.jsp?id=<%=destaque.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '650', height: '410'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do destaque de ID <%=destaque.getId()%>" title="Visualizar detalhes do destaque de ID <%=destaque.getId()%>" width="44" height="24"></a>&nbsp;<a href="#"><img src="../img/alterar.png" alt="Alterar o destaque de ID <%=destaque.getId()%>" title="Alterar o destaque de ID <%=destaque.getId()%>" width="24" height="24"></a>&nbsp;<a href="#"><img src="../img/deletar.png" alt="Deletar o destaque de ID <%=destaque.getId()%>" title="Deletar o destaque de ID <%=destaque.getId()%>" width="24" height="24"></a></td>
 	                </tr>
 	                <%        
             	  }
