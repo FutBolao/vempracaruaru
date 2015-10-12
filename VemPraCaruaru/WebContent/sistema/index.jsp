@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <jsp:include page="verificaLogin.jsp" />
+<%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <%-- <jsp:forward page="VerificaLoginSistema"> --%>
 <%-- 	<jsp:param name="URL" value="<%=request.getRequestURL() %>" /> --%>
 <%-- </jsp:forward> --%>

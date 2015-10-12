@@ -1,3 +1,4 @@
+<jsp:include page="verificaLogin.jsp" />
 <%@page import="br.com.vempracaruaru.foto.Foto"%>
 <%@page import="br.com.vempracaruaru.util.Formatacao"%>
 <%@page import="br.com.vempracaruaru.artista.Artista"%>
@@ -36,7 +37,7 @@ try {
 		<div>
 			<span class="btn btn-success fileinput-button"> <i
 				class="glyphicon glyphicon-plus"></i> <span>Selecione os arquivos...</span>
-				<input id="fileupload" type="file" name="files[]" multiple>
+				<input id="fileupload" type="file" name="files[]" accept="image/*" multiple>
 			</span><br><br>
 			<!-- The global progress bar -->
 			<div id="progress" class="progress">

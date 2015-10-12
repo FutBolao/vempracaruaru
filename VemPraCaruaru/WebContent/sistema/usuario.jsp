@@ -1,3 +1,4 @@
+<jsp:include page="verificaLogin.jsp" />
 <%@page import="br.com.vempracaruaru.usuario.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.com.vempracaruaru.fachada.Fachada"%>

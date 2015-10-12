@@ -1,3 +1,4 @@
+<jsp:include page="verificaLogin.jsp" />
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <!doctype html>
 <html>
@@ -26,7 +27,7 @@
 		  <form id="formDestaque" name="formDestaque" method="post" target="recebeForm" action="../DestaqueCadastrar" enctype="multipart/form-data">
               <div class="coluna">
                 <label for="campoImagem">Imagem</label>
-                <input type="file" id="campoImagem" name="campoImagem" style="width:438px; margin-right:10px" class="required" minlength="1" />
+                <input type="file" id="campoImagem" name="campoImagem" accept="image/*" style="width:438px; margin-right:10px" class="required" minlength="1" />
                 <span>Selecione a imagem de destaque</span>
               </div>
               <div class="coluna">

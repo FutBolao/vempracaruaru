@@ -1,3 +1,4 @@
+<jsp:include page="verificaLogin.jsp" />
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <!doctype html>
 <html>
@@ -75,7 +76,7 @@
               </div>
                             <div class="coluna">
                 <label for="campoImagem">Imagem</label>
-                <input type="file" id="campoImagem" name="campoImagem[]" multiple style="width:1188px;" class="required" minlength="1" />
+                <input type="file" id="campoImagem" name="campoImagem[]" accept="image/*" multiple style="width:1188px;" class="required" minlength="1" />
                 <span>Selecione as imagens do artista</span>
               </div>
               <div class="coluna">

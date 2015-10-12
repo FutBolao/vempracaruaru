@@ -1,3 +1,4 @@
+<jsp:include page="verificaLogin.jsp" />
 <%@page import="br.com.vempracaruaru.pontoturistico.PontoTuristico"%>
 <%@page import="br.com.vempracaruaru.artista.Artista"%>
 <%@page import="java.util.ArrayList"%>
@@ -77,7 +78,7 @@
               </div>
               <div class="coluna">
                 <label for="campoImagem">Imagem</label>
-                <input type="file" id="campoImagem" name="campoImagem[]" multiple style="width:1188px;" class="required" minlength="1" />
+                <input type="file" id="campoImagem" name="campoImagem[]" accept="image/*" multiple style="width:1188px;" class="required" minlength="1" />
                 <span>Selecione as imagens da obra</span>
               </div>
               <div class="coluna">

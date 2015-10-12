@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.com.vempracaruaru.fachada.Fachada"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
+<jsp:include page="verificaLogin.jsp" />
 <%
 PontoTuristico ponto = null;
 ArrayList<Foto> fotos = new ArrayList<Foto>();
@@ -36,7 +37,7 @@ try {
 		<div>
 			<span class="btn btn-success fileinput-button"> <i
 				class="glyphicon glyphicon-plus"></i> <span>Selecione os arquivos...</span>
-				<input id="fileupload" type="file" name="files[]" multiple>
+				<input id="fileupload" type="file" name="files[]" accept="image/*" multiple>
 			</span><br><br>
 			<!-- The global progress bar -->
 			<div id="progress" class="progress">

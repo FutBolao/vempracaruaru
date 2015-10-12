@@ -1,3 +1,4 @@
+<jsp:include page="verificaLogin.jsp" />
 <%@page import="br.com.vempracaruaru.obra.Obra"%>
 <%@page import="br.com.vempracaruaru.artista.Artista"%>
 <%@page import="java.util.ArrayList"%>
