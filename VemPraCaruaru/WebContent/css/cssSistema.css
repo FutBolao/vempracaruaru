@@ -7,6 +7,17 @@
 html,body{
 	background-color:#FFF;
 }
+.login{
+	background-color:#FFFFFF;
+	width:420px;
+	height:320px;
+	border: solid 1px #CCCCCC;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-210px;
+	margin-top:-160px;
+}
 #corpo{
 	position:absolute;
 	margin:0;

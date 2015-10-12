@@ -3,6 +3,8 @@ package br.com.vempracaruaru.obra;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.vempracaruaru.exception.ArtistaNaoCadastradoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
 import br.com.vempracaruaru.exception.ObraJaCadastradaException;
 import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
@@ -33,6 +35,9 @@ public class ControladorObra {
 	}
 	public void alterar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradaException, Exception{
 		repositorio.alterar(obra);
+	}
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, ArtistaNaoCadastradoException, NaoFoiPossivelCadastrarArtistaException, Exception {
+		repositorio.definirImagemPrincipal(id, imagem);
 	}
 	public void deletar(int id) throws SQLException, ObraNaoCadastradaException, Exception{
 		repositorio.deletar(id);

@@ -11,6 +11,7 @@ import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
+import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarAdministradorException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 
@@ -41,7 +42,7 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 		ResultSet rs = null;
 		String sql = "";
 		if (existeCpf(administrador) == false){
-			sql = "INSERT INTO " + NOME_TABELA + " (nome, cpf, telefone, usuario, senha, ativo) VALUES (?,?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (nome, cpf, telefone, usuario, senha, ativo) VALUES (?,?,?,?,password(?),?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -122,6 +123,37 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 	public Administrador listarPorCpf(String cpf)
 			throws SQLException, AdministradorNaoCadastradoException, Exception {
 		return listarTodos("AND cpf='" + cpf + "'").get(0);
+	}
+	
+	@Override
+	public Administrador login(String usuario, String senha) throws SQLException, BusinessException, Exception {
+		System.out.println("Chegando ao repositorio");
+		Administrador administrador = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "";
+		sql = "SELECT * FROM " + NOME_TABELA + " WHERE usuario=? AND senha=password(?) AND ativo='S'";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, usuario);
+		ps.setString(2, senha);
+		System.out.println(ps);
+		rs = ps.executeQuery();
+		if (rs != null) {
+			int qtdLinhas = 0;
+			while (rs.next()) {
+				qtdLinhas++;
+				administrador = new Administrador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"),
+						rs.getString("usuario"), rs.getString("senha"), rs.getString("ativo").charAt(0));
+			}
+			if (qtdLinhas == 0) {
+				throw new BusinessException("Login inválido!");
+			}
+			System.out.println("- consulta completada com sucesso -");
+		}
+		ps.close();
+		rs.close();
+		return administrador;
+		
 	}
 
 	@Override

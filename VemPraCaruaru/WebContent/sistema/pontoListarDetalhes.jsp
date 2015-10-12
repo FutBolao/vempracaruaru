@@ -32,7 +32,7 @@ try {
 	<div id="detalhes">
 	  <h3>Detalhes do Ponto Tur&iacute;stico de ID 
 	    <% out.print(request.getParameter("id")); %></h3>
-	    <p style="line-height:22px; padding-top:10px;">ID: <%=ponto.getId() %><br/>
+	    <p style="line-height:22px; padding-top:10px;">
 	       Nome: <%=ponto.getNome() %><br/>
 	       Endere&ccedil;o: <%=ponto.getEndereco() %><br/>
 	       Telefone: <%=ponto.getTelefone() %><br/>

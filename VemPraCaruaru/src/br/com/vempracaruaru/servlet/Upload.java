@@ -53,7 +53,7 @@ public class Upload extends HttpServlet {
 	    if (request.getParameter("referencia").equalsIgnoreCase("ponto")) {
 	    	referencia = "ponto";
 	    } else if (request.getParameter("referencia").equalsIgnoreCase("artista")) {
-	    	referencia = "artosta";
+	    	referencia = "artista";
 	    } else if (request.getParameter("referencia").equalsIgnoreCase("obra")) {
 	    	referencia = "obra";
 	    }

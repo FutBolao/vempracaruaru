@@ -3,6 +3,7 @@ package br.com.vempracaruaru.pontoturistico;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarPontoTuristicoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarPontoTuristicoException;
 import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
@@ -34,7 +35,7 @@ public class ControladorPontoTuristico{
 	public void alterar(PontoTuristico pontoTuristico) throws SQLException, NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoNaoCadastradoException, Exception{
 		repositorio.alterar(pontoTuristico);
 	}
-	public void definirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelCadastrarPontoTuristicoException, Exception{
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelAlterarPontoTuristicoException, Exception{
 		repositorio.definirImagemPrincipal(id, imagem);
 	}
 	public void deletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{

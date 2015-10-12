@@ -24,10 +24,14 @@ public class ControladorContato {
 	}
 
 
-	public ArrayList<Contato> listarTodos(String complemento)
-			throws SQLException, ContatoNaoCadastradoException, Exception {
+	public ArrayList<Contato> listarTodos(String complemento) throws SQLException, ContatoNaoCadastradoException, Exception {
 		System.out.println("passando pela controladora - concluido com sucesso -");
 		return repositorio.listarTodos(complemento);
+	}
+	
+	public Contato listarPorId(int id) throws SQLException, ContatoNaoCadastradoException, Exception {
+		System.out.println("passando pela controladora - concluido com sucesso -");
+		return repositorio.listarPorId(id);
 	}
 
 	public void alterar(Contato contato) throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoNaoCadastradoException, Exception{

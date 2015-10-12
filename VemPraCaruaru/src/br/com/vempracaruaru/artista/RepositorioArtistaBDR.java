@@ -30,7 +30,6 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 	}
 
 	public RepositorioArtistaBDR()throws Exception{
-		// TODO Auto-generated constructor stub
 		this.connection = Conexao.getConexao(dataBase);
 	}
 	
@@ -156,6 +155,19 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		}
 				
 	}
+	
+	@Override
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, ArtistaNaoCadastradoException, NaoFoiPossivelCadastrarArtistaException, Exception {			
+		PreparedStatement ps = null;
+		String sql = "";
+		sql = "UPDATE " + NOME_TABELA + " SET imagem_principal=? WHERE id=?;";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, imagem);
+		ps.setInt(2, id);
+		Integer resultado = ps.executeUpdate();
+		if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
+		ps.close();
+	}
 
 	@Override
 	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {		
@@ -170,8 +182,6 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 			Integer resultado = ps.executeUpdate();
 			if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
 			ps.close();
-
-		
 	}
 
 	@Override

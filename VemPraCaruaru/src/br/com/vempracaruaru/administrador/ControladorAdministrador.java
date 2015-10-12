@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
+import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.util.Validacao;
 
@@ -61,6 +62,10 @@ private IRepositorioAdministrador repositorio;
 	public void deletar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception{
 		System.out.println("passando pela controladora - concluido com sucesso -");
 		repositorio.deletar(id);
+	}
+	
+	public Administrador login(String usuario, String senha) throws SQLException, BusinessException, Exception{
+		return repositorio.login(usuario, senha);
 	}
 
 }

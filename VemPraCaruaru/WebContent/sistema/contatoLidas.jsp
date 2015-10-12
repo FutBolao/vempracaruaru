@@ -39,8 +39,8 @@ String cssClasse = "";
               </caption>
               <tr>
                 <th width="93">ID</th>
-                <th width="574">ASSUNTO</th>
-                <th width="340">NOME</th>
+                <th width="474">NOME</th>
+                <th width="440">EMAIL</th>
                 <th width="177">A&Ccedil;&Otilde;ES</th>
               </tr>
               <%
@@ -56,9 +56,9 @@ String cssClasse = "";
 	                %>
 	                <tr id="<%=cssClasse%>">
 	                  <td><%=contato.getId()%></td>
-	                  <td><%=contato.getAssunto()%></td>
 	                  <td><%=contato.getNome()%></td>
-	                  <td style="text-align:center;"><a href="contatoListarDetalhes.jsp?id=<%=contato.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes da mensagem de ID <%=contato.getId()%>" title="Visualizar detalhes da mensagem de ID <%=contato.getId()%>" width="44" height="24"></a>&nbsp;<a href="#"><img src="../img/alterar.png" alt="Alterar a mensagem de ID <%=contato.getId()%>" title="Alterar a mensagem de ID <%=contato.getId()%>" width="24" height="24"></a>&nbsp;<a href="#"><img src="../img/deletar.png" alt="Deletar a mensagem de ID <%=contato.getId()%>" title="Deletar a mensagem de ID <%=contato.getId()%>" width="24" height="24"></a></td>
+	                  <td><%=contato.getEmail()%></td>
+	                  <td style="text-align:center;"><a href="contatoListarDetalhes.jsp?id=<%=contato.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '400'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes da mensagem de ID <%=contato.getId()%>" title="Visualizar detalhes da mensagem de ID <%=contato.getId()%>" width="44" height="24"></a>&nbsp;<a href="#"><img src="../img/alterar.png" alt="Alterar a mensagem de ID <%=contato.getId()%>" title="Alterar a mensagem de ID <%=contato.getId()%>" width="24" height="24"></a>&nbsp;<a href="#"><img src="../img/deletar.png" alt="Deletar a mensagem de ID <%=contato.getId()%>" title="Deletar a mensagem de ID <%=contato.getId()%>" width="24" height="24"></a></td>
 	                </tr>
 	                <%        
             	  }

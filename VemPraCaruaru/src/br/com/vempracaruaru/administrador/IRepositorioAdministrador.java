@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
+import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 
 public interface IRepositorioAdministrador {
@@ -18,5 +19,6 @@ public interface IRepositorioAdministrador {
 	public void deletar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception;
 	public boolean existeId(Administrador administrador) throws SQLException, AdministradorJaCadastradoException, Exception;
 	public boolean existeCpf(Administrador administrador) throws SQLException, AdministradorJaCadastradoException, Exception;
+	public Administrador login(String usuario, String senha) throws SQLException, BusinessException, Exception;
 
 }

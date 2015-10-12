@@ -15,6 +15,7 @@ import br.com.vempracaruaru.exception.AdministradorJaCadastradoException;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.ArtistaJaCadastradoException;
 import br.com.vempracaruaru.exception.ArtistaNaoCadastradoException;
+import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.ContatoJaCadastradoException;
 import br.com.vempracaruaru.exception.ContatoNaoCadastradoException;
 import br.com.vempracaruaru.exception.DestaqueJaCadastradoException;
@@ -23,6 +24,8 @@ import br.com.vempracaruaru.exception.FotoJaCadastradoException;
 import br.com.vempracaruaru.exception.FotoNaoCadastradoException;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarArtistaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarPontoTuristicoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarContatoException;
@@ -56,7 +59,7 @@ public class Fachada {
 	private ControladorAdministrador controladorAdministrador;
 	private ControladorArtista controladorArtista;
 	private ControladorUsuario controladorUsuario;
-	private ControladorPontoTuristico controladoraPontoTuristico;
+	private ControladorPontoTuristico controladorPontoTuristico;
 	private ControladorObra controladorObra;
 	private ControladorLista controladorLista;
 	private ControladorFoto controladorFoto;
@@ -67,7 +70,7 @@ public class Fachada {
 		this.controladorAdministrador = new ControladorAdministrador();
 		this.controladorArtista = new ControladorArtista();
 		this.controladorUsuario = new ControladorUsuario();
-		this.controladoraPontoTuristico = new ControladorPontoTuristico();
+		this.controladorPontoTuristico = new ControladorPontoTuristico();
 		this.controladorObra = new ControladorObra();
 		this.controladorLista = new ControladorLista();
 		this.controladorFoto = new ControladorFoto();
@@ -124,6 +127,10 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorAdministrador.deletar(id);
 	}
+	
+	public Administrador administradorLogin(String usuario, String senha) throws SQLException, BusinessException, Exception{
+		return controladorAdministrador.login(usuario, senha);
+	}
 
 	// MÉTODOS DO ARTISTA
 	public Artista artistaCadastrar(Artista artista)
@@ -153,6 +160,11 @@ public class Fachada {
 			throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorArtista.alterar(artista);
+	}
+	
+	public void artistaDefinirImagemPrincipal(int id, String imagem) throws SQLException, ArtistaNaoCadastradoException, NaoFoiPossivelAlterarArtistaException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorArtista.definirImagemPrincipal(id, imagem);
 	}
 
 	public void artistaDeletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {
@@ -201,41 +213,41 @@ public class Fachada {
 	public PontoTuristico pontoTuristicoCadastrar(PontoTuristico pontoTurustico) throws SQLException,
 			NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladoraPontoTuristico.cadastrar(pontoTurustico);
+		return controladorPontoTuristico.cadastrar(pontoTurustico);
 	}
 
 	public ArrayList<PontoTuristico> pontoTuristicoListarTodos(String complemento)
 			throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladoraPontoTuristico.listarTodos(complemento);
+		return controladorPontoTuristico.listarTodos(complemento);
 	}
 
 	public PontoTuristico pontoTuristicoListarPorId(int id)
 			throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladoraPontoTuristico.listarPorId(id);
+		return controladorPontoTuristico.listarPorId(id);
 	}
 
 	public ArrayList<PontoTuristico> pontoTuristicoListarPorNome(String nome)
 			throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladoraPontoTuristico.listarPorNome(nome);
+		return controladorPontoTuristico.listarPorNome(nome);
 	}
 
 	public void pontoTuristicoAlterar(PontoTuristico pontoTurustico) throws SQLException,
 			NaoFoiPossivelCadastrarPontoTuristicoException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		controladoraPontoTuristico.alterar(pontoTurustico);
+		controladorPontoTuristico.alterar(pontoTurustico);
 	}
 	
-	public void pontoTuristicoDefinirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelCadastrarPontoTuristicoException, Exception {
+	public void pontoTuristicoDefinirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelAlterarPontoTuristicoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		controladoraPontoTuristico.definirImagemPrincipal(id, imagem);
+		controladorPontoTuristico.definirImagemPrincipal(id, imagem);
 	}
 
 	public void pontoTuristicoDeletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		controladoraPontoTuristico.deletar(id);
+		controladorPontoTuristico.deletar(id);
 	}
 
 	// METODOS DAS OBRAS
@@ -266,6 +278,11 @@ public class Fachada {
 			throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorObra.alterar(obra);
+	}
+	
+	public void obraDefinirImagemPrincipal(int id, String imagem) throws SQLException, ArtistaNaoCadastradoException, NaoFoiPossivelCadastrarArtistaException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorObra.definirImagemPrincipal(id, imagem);
 	}
 
 	public void obraDeletar(int id) throws SQLException, ObraNaoCadastradaException, Exception {
@@ -388,6 +405,12 @@ public class Fachada {
 			throws SQLException, ContatoNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorContato.listarTodos(complemento);
+	}
+	
+	public Contato contatoListarPorId(int id)
+			throws SQLException, ContatoNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorContato.listarPorId(id);
 	}
 
 	public void contatoAlterar(Contato contato)

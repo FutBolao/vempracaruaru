@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.vempracaruaru.artista.Artista;
 import br.com.vempracaruaru.exception.FotoNaoCadastradoException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.foto.Foto;
+import br.com.vempracaruaru.obra.Obra;
 import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
 /**
@@ -42,9 +44,9 @@ public class Fotos extends HttpServlet {
     			if (foto.getReferencia().equals("ponto")) {
     				Fachada.getInstance().pontoTuristicoDefinirImagemPrincipal(foto.getIdReferencia(), foto.getImagem());
     			} else if (foto.getReferencia().equals("obra")) {
-    				
+    				Fachada.getInstance().obraDefinirImagemPrincipal(foto.getIdReferencia(), foto.getImagem());
     			} else if (foto.getReferencia().equals("artista")) {
-    				
+    				Fachada.getInstance().artistaDefinirImagemPrincipal(foto.getIdReferencia(), foto.getImagem());
     			}
     			out.println( "<script>parent.alert(\"Imagem principal definida com sucesso!!!\");</script>" );
     			out.println( "<script>window.parent.location.reload(true);</script>" );
@@ -64,9 +66,31 @@ public class Fotos extends HttpServlet {
     					arquivo.delete();
     				}
     			} else if (foto.getReferencia().equals("obra")) {
-    				
+    				Obra obra = Fachada.getInstance().obraListarPorId(foto.getIdReferencia());
+    				if (obra.getFoto().equals(foto.getImagem())) {
+    					Fachada.getInstance().fotoDeletar(foto.getId());
+    					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("obra", obra.getId()).get(0);
+    					Fachada.getInstance().obraDefinirImagemPrincipal(obra.getId(), fotoNova.getImagem());
+    					File arquivo = new File(foto.getImagem());
+    					arquivo.delete();
+    				} else {
+    					Fachada.getInstance().fotoDeletar(foto.getId());
+    					File arquivo = new File(foto.getImagem());
+    					arquivo.delete();
+    				}
     			} else if (foto.getReferencia().equals("artista")) {
-    				
+    				Artista artista = Fachada.getInstance().artistaListarPorId(foto.getIdReferencia());
+    				if (artista.getFoto().equals(foto.getImagem())) {
+    					Fachada.getInstance().fotoDeletar(foto.getId());
+    					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("artista", artista.getId()).get(0);
+    					Fachada.getInstance().artistaDefinirImagemPrincipal(artista.getId(), fotoNova.getImagem());
+    					File arquivo = new File(foto.getImagem());
+    					arquivo.delete();
+    				} else {
+    					Fachada.getInstance().fotoDeletar(foto.getId());
+    					File arquivo = new File(foto.getImagem());
+    					arquivo.delete();
+    				}
     			}
     			out.println( "<script>parent.alert(\"Foto deletada com sucesso!!!\");</script>" );
     			out.println( "<script>window.parent.location.reload(true);</script>" );

@@ -84,6 +84,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		sql += complemento;
 		sql += " ORDER BY nome";
 		ps = this.connection.prepareStatement(sql);
+		System.out.println(ps);
 		rs = ps.executeQuery();
 
 		if (rs != null) {
@@ -106,7 +107,7 @@ public class RepositorioObraBDR implements IRepositorioObra{
 
 	@Override
 	public Obra listarPorId(int id) throws SQLException, ObraNaoCadastradaException, Exception {
-		return listarTodos("AND id_obra=" + id).get(0);
+		return listarTodos("AND id=" + id).get(0);
 		}
 
 	@Override
@@ -137,6 +138,19 @@ public class RepositorioObraBDR implements IRepositorioObra{
 				throw new NaoFoiPossivelAlterarObraException();
 			}
 				
+	}
+	
+	@Override
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, ObraNaoCadastradaException, NaoFoiPossivelCadastrarObraException, Exception {			
+		PreparedStatement ps = null;
+		String sql = "";
+		sql = "UPDATE " + NOME_TABELA + " SET imagem_principal=? WHERE id=?;";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, imagem);
+		ps.setInt(2, id);
+		Integer resultado = ps.executeUpdate();
+		if (resultado == 0) throw new NaoFoiPossivelAlterarObraException();
+		ps.close();
 	}
 
 	@Override

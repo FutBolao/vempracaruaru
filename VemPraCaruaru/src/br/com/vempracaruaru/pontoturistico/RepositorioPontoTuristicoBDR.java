@@ -11,6 +11,7 @@ import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarArtistaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarPontoTuristicoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarPontoTuristicoException;
 import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
 import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
@@ -151,7 +152,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 	}
 	
 	@Override
-	public void definirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelCadastrarPontoTuristicoException, Exception {			
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, PontoTuristicoNaoCadastradoException, NaoFoiPossivelAlterarPontoTuristicoException, Exception {			
 		PreparedStatement ps = null;
 		String sql = "";
 		sql = "UPDATE " + NOME_TABELA + " SET imagem_principal=? WHERE id=?;";
@@ -159,7 +160,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		ps.setString(1, imagem);
 		ps.setInt(2, id);
 		Integer resultado = ps.executeUpdate();
-		if (resultado == 0) throw new NaoFoiPossivelCadastrarPontoTuristicoException();
+		if (resultado == 0) throw new NaoFoiPossivelAlterarPontoTuristicoException();
 		ps.close();
 	}
 	

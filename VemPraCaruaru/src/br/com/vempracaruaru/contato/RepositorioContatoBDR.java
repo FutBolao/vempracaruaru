@@ -71,8 +71,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 	}
 
 	@Override
-	public ArrayList<Contato> listarTodos(String complemento)
-			throws SQLException, ContatoNaoCadastradoException, Exception {
+	public ArrayList<Contato> listarTodos(String complemento) throws SQLException, ContatoNaoCadastradoException, Exception {
 		System.out.println("Chegando ao repositorio");
 		ArrayList<Contato> contatos = new ArrayList<Contato>();
 		PreparedStatement ps = null;
@@ -81,7 +80,7 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		sql = "SELECT * FROM " + NOME_TABELA + " ";
 		sql += "WHERE id IS NOT NULL ";
 		sql += complemento;
-		sql += "ORDER BY id DESC;";
+		sql += " ORDER BY id DESC;";
 		ps = this.connection.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if (rs != null) {
@@ -98,6 +97,11 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 		rs.close();
 		return contatos;
 		
+	}
+	
+	@Override
+	public Contato listarPorId(int id) throws SQLException, ContatoNaoCadastradoException, Exception {
+		return listarTodos("AND id=" + id).get(0);
 	}
 	
 	@Override

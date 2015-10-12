@@ -12,9 +12,8 @@ public interface IRepositorioContado {
 
 	public void cadastrar(Contato contato) throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoJaCadastradoException, Exception;
 	public ArrayList<Contato> listarTodos(String complemento) throws SQLException, ContatoNaoCadastradoException, Exception;
+	public Contato listarPorId(int id) throws SQLException, ContatoNaoCadastradoException, Exception;
 	public void alterar(Contato contato) throws SQLException, NaoFoiPossivelCadastrarContatoException, ContatoNaoCadastradoException, Exception;
 	public void deletar(int id) throws SQLException, ContatoNaoCadastradoException, Exception;
 	public boolean existeId(Contato contato) throws SQLException, ContatoJaCadastradoException, Exception;
-
-
 }

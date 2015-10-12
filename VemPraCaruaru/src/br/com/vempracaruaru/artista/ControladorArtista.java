@@ -41,6 +41,10 @@ public class ControladorArtista {
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		repositorio.alterar(artista);
 	}
+	public void definirImagemPrincipal(int id, String imagem) throws SQLException, ArtistaNaoCadastradoException, NaoFoiPossivelCadastrarArtistaException, Exception {
+		System.out.println("Passando pela Controladora - concluido com sucesso -");
+		repositorio.definirImagemPrincipal(id, imagem);
+	}
 	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		repositorio.deletar(id);
