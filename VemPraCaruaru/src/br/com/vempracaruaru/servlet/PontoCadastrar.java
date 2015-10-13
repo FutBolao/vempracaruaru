@@ -51,6 +51,8 @@ public class PontoCadastrar extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    String nome = "";
 	    String endereco = "";
+	    String latitude = "";
+	    String longitude = "";
 	    String telefone = "";
 	    String email = "";
 	    String tempoVisitacao = "";
@@ -64,7 +66,7 @@ public class PontoCadastrar extends HttpServlet {
 			Conexao.connection.setAutoCommit(false);
 			// cadastro o ponto sem a foto principal para garantir o id.
 			// após upar e armazenar as imagens atualizo os dados com a imagem principal.
-			PontoTuristico ponto = Fachada.getInstance().pontoTuristicoCadastrar(new PontoTuristico(0, 1, "", nome, endereco, telefone, email, 
+			PontoTuristico ponto = Fachada.getInstance().pontoTuristicoCadastrar(new PontoTuristico(0, 1, "", nome, endereco, latitude, longitude, telefone, email, 
 					tempoVisitacao, horarioFuncionamento, historicoDescricao, foto, ativo, qtdFotos));
 			
 			// verifica se o pedido realmente contém arquivo de upload
@@ -132,6 +134,12 @@ public class PontoCadastrar extends HttpServlet {
 				} else if (item.getFieldName().equals("campoEndereco")) {
 					endereco = item.getString();
 					ponto.setEndereco(endereco);
+				} else if (item.getFieldName().equals("campoLatitude")) {
+					latitude = item.getString();
+					ponto.setLatitude(latitude);
+				} else if (item.getFieldName().equals("campoLongitude")) {
+					longitude = item.getString();
+					ponto.setLongitude(longitude);
 				} else if (item.getFieldName().equals("campoTelefone")) {
 					telefone = item.getString();
 					ponto.setTelefone(telefone);

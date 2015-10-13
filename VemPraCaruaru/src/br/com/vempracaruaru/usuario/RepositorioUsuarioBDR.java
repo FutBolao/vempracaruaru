@@ -42,7 +42,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (email, nome, localizacao, senha, user_facebook, link_facebook, ativo) VALUES (?,?,?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (email, nome, localizacao, senha, user_facebook, link_facebook, ativo) VALUES (?,?,?,password(?),?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -119,7 +119,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		if (existeId(usuario) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				sql = "UPDATE " + NOME_TABELA + " SET email=?, nome=?, localizacao=?, senha=?, user_facebook=?, link_facebook=?, ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET email=?, nome=?, localizacao=?, senha=password(?), user_facebook=?, link_facebook=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setString(1, usuario.getEmail());
 				ps.setString(2, usuario.getNome());

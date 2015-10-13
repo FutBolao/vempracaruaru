@@ -44,8 +44,8 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, endereco, telefone, email, tempo_visitacao, horario_funcionamento, "
-					+ "historico_descricao, imagem_principal, ativo) VALUES (?,?,?,?,?,?,?,?,?,?);";
+			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, endereco, latitude, longitude, telefone, email, tempo_visitacao, horario_funcionamento, "
+					+ "historico_descricao, imagem_principal, ativo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 			if (this.dataBase == DataBase.ORACLE) {
 				ps = this.connection.prepareStatement(sql, new String[] { "id" });
 			} else {
@@ -54,13 +54,15 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 			ps.setInt(1, pontoTuristico.getIdAdministrador());
 			ps.setString(2, pontoTuristico.getNome());
 			ps.setString(3, pontoTuristico.getEndereco());
-			ps.setString(4, pontoTuristico.getTelefone());
-			ps.setString(5, pontoTuristico.getEmail());
-			ps.setString(6, pontoTuristico.getTempoVisitacao());
-			ps.setString(7, pontoTuristico.getHorarioFuncionamento());
-			ps.setString(8, pontoTuristico.getHistoricoDescricao());
-			ps.setString(9, pontoTuristico.getFoto());
-			ps.setString(10, String.valueOf(pontoTuristico.getAtivo()));
+			ps.setString(4, pontoTuristico.getLatitude());
+			ps.setString(5, pontoTuristico.getLongitude());
+			ps.setString(6, pontoTuristico.getTelefone());
+			ps.setString(7, pontoTuristico.getEmail());
+			ps.setString(8, pontoTuristico.getTempoVisitacao());
+			ps.setString(9, pontoTuristico.getHorarioFuncionamento());
+			ps.setString(10, pontoTuristico.getHistoricoDescricao());
+			ps.setString(11, pontoTuristico.getFoto());
+			ps.setString(12, String.valueOf(pontoTuristico.getAtivo()));
 			ps.execute();
 			rs = ps.getGeneratedKeys();
 			int id = 0;
@@ -96,7 +98,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		if (rs != null) {
 			while (rs.next()) {
 				PontoTuristico pontoTuristico = new PontoTuristico(rs.getInt("id"), rs.getInt("id_administrador"),
-				rs.getString("nome_administrador"),rs.getString("nome"), rs.getString("endereco"),
+				rs.getString("nome_administrador"),rs.getString("nome"), rs.getString("endereco"), rs.getString("latitude"), rs.getString("longitude"),
 				rs.getString("telefone"), rs.getString("email"), rs.getString("tempo_visitacao"), rs.getString("horario_funcionamento"),
 				rs.getString("historico_descricao"), rs.getString("imagem_principal"), rs.getString("ativo").charAt(0), rs.getInt("quantidade_obras"));
 				
@@ -127,20 +129,22 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 		if (existeId(pontoTuristico) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				sql = "UPDATE " + NOME_TABELA + " SET id_administrador=?, nome=?, endereco=?, telefone=?, email=?, tempo_visitacao=?, "
+				sql = "UPDATE " + NOME_TABELA + " SET id_administrador=?, nome=?, endereco=?, latitude=?, longitude=?, telefone=?, email=?, tempo_visitacao=?, "
 						+ "horario_funcionamento=?, historico_descricao=?, imagem_principal=?, ativo=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setInt(1, pontoTuristico.getIdAdministrador());
 				ps.setString(2, pontoTuristico.getNome());
 				ps.setString(3, pontoTuristico.getEndereco());
-				ps.setString(4, pontoTuristico.getTelefone());
-				ps.setString(5, pontoTuristico.getEmail());
-				ps.setString(6, pontoTuristico.getTempoVisitacao());
-				ps.setString(7, pontoTuristico.getHorarioFuncionamento());
-				ps.setString(8, pontoTuristico.getHistoricoDescricao());
-				ps.setString(9, pontoTuristico.getFoto());
-				ps.setString(10, String.valueOf(pontoTuristico.getAtivo()));		
-				ps.setInt(11, pontoTuristico.getId());
+				ps.setString(4, pontoTuristico.getLatitude());
+				ps.setString(5, pontoTuristico.getLongitude());
+				ps.setString(6, pontoTuristico.getTelefone());
+				ps.setString(7, pontoTuristico.getEmail());
+				ps.setString(8, pontoTuristico.getTempoVisitacao());
+				ps.setString(9, pontoTuristico.getHorarioFuncionamento());
+				ps.setString(10, pontoTuristico.getHistoricoDescricao());
+				ps.setString(11, pontoTuristico.getFoto());
+				ps.setString(12, String.valueOf(pontoTuristico.getAtivo()));		
+				ps.setInt(13, pontoTuristico.getId());
 
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();

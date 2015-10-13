@@ -8,6 +8,8 @@ public class PontoTuristico {
 	private String			nomeAdministrador;
 	private String			nome;
 	private String			endereco;
+	private String			latitude;
+	private String			longitude;
 	private String			telefone;
 	private String			email;
 	private String			tempoVisitacao;
@@ -18,7 +20,7 @@ public class PontoTuristico {
 	private int 			quantidadeObras;
 	
 	public PontoTuristico(int id, int idAdministrador,
-			String nomeAdministrador, String nome, String endereco,
+			String nomeAdministrador, String nome, String endereco, String latitude, String longitude,
 			String telefone, String email, String tempoVisitacao,
 			String horarioFuncionamento, String historicoDescricao, String foto, char ativo, int quantidadeObras) {
 		super();
@@ -27,6 +29,8 @@ public class PontoTuristico {
 		this.nomeAdministrador = nomeAdministrador;
 		this.nome = nome;
 		this.endereco = endereco;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.telefone = telefone;
 		this.email = email;
 		this.tempoVisitacao = tempoVisitacao;
@@ -75,6 +79,22 @@ public class PontoTuristico {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	public String getTelefone() {

@@ -15,9 +15,9 @@ String url = String.valueOf(request.getRequestURL());
             <nav id='nav'>
                 <ul class='menunav' id='navinti'>
                     <li<%if (url.endsWith("index.jsp")) out.print(" class='menuSelecionado'"); %>><a href='index.jsp' alt="Link para página inicial" title="Link para página inicial">Início</a></li>
-                    <li<%if (url.endsWith("pontosTuristucos.jsp")) out.print(" class='menuSelecionado'"); %>><a href='pontosTuristucos.jsp' alt="Link para página de pontos turísticos" title="Link para página de pontos turísticos">Pontos Turísticos</a></li>
-                    <li<%if (url.endsWith("artistas.jsp")) out.print(" class='menuSelecionado'"); %>><a href='artistas.jsp' alt="Link para página de artistas" title="Link para página de artistas">Artistas</a></li>
-                    <li<%if (url.endsWith("obras.jsp")) out.print(" class='menuSelecionado'"); %>><a href='obras.jsp' alt="Link para página de obras" title="Link para página de obras">Obras</a></li>
+                    <li<%if (url.endsWith("pontosTuristicos.jsp") || url.endsWith("pontosTuristicosDetalhes.jsp")) out.print(" class='menuSelecionado'"); %>><a href='pontosTuristicos.jsp' alt="Link para página de pontos turísticos" title="Link para página de pontos turísticos">Pontos Turísticos</a></li>
+                    <li<%if (url.endsWith("artistas.jsp") || url.endsWith("artistasDetalhes.jsp")) out.print(" class='menuSelecionado'"); %>><a href='artistas.jsp' alt="Link para página de artistas" title="Link para página de artistas">Artistas</a></li>
+                    <li<%if (url.endsWith("obras.jsp") || url.endsWith("obrasDetalhes.jsp")) out.print(" class='menuSelecionado'"); %>><a href='obras.jsp' alt="Link para página de obras" title="Link para página de obras">Obras</a></li>
                     <li<%if (url.endsWith("contato.jsp")) out.print(" class='menuSelecionado'"); %>><a href='contato.jsp' alt="Link para página de contato" title="Link para página de contato">Contato</a></li>
                     <li<%if (url.endsWith("cadastro.jsp")) out.print(" class='menuSelecionado'"); %>><a href='cadastro.jsp' alt="Link para página de cadastro" title="Link para página de cadastro">Cadastre-se</a></li>
                     <li<%if (url.endsWith("entrar.jsp")) out.print(" class='menuSelecionado'"); %>><a href='entrar.jsp' alt="Link para página de login" title="Link para página de login">Entrar</a></li>
@@ -31,12 +31,18 @@ String url = String.valueOf(request.getRequestURL());
     <div class="ws_images">
         <ul>
             <%int contadorDestaque = 0;
+              try{
+            	  
+              } catch (Exception e) {
+            	  e.printStackTrace();
+            	  
+              }
               destaques = Fachada.getInstance().destaqueListarTodos("");
               for (Destaque destaque : destaques){ 
                 if (destaque.getLink().equals("")) {
                     destaque.setLink("#");
                 }%>
-            <li><a href="<%=destaque.getLink() %>" target="_blank"><img src="<%=destaque.getImagem() %>"
+            <li><a href="<%=destaque.getLink() %>"><img src="<%=destaque.getImagem() %>"
                     alt="Imagem do destaque <%=destaque.getTitulo() %>"
                     title="<%=destaque.getTitulo() %>" id="wows1_<%=contadorDestaque %>" /></a></li>
             <%contadorDestaque++; } %>
@@ -57,5 +63,5 @@ String url = String.valueOf(request.getRequestURL());
     </div>
     <div class="ws_shadow"></div>
 </div>
-<script src="js/wowslider.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/script.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wowslider.js" type="text/javascript" charset="ISO-8859-1"></script>
+<script src="js/script.js" type="text/javascript" charset="ISO-8859-1"></script>

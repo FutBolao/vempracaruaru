@@ -9,11 +9,11 @@ $(function() {
 	/*Checkbox Mensagem*/
 	var chkMsg = "Marque uma opção!";
     /* E-mail message */
-    var mailMsg = "O e-mail informado é inválido!";
+    var mailMsg = "O e-mail informado &eacute; inv&aacute;lido!";
     /* CPF message */
-    var cpfMsg = "CPF não é inválido!";
+    var cpfMsg = "CPF não &eacute; inv&aacute;lido!";
     /* cnpj message */
-    var cnpjMsg = "CNPJ informado é inválido!";
+    var cnpjMsg = "CNPJ informado &eacute; inv&aacute;lido!";
     /* Data message */
     var dataMsg = "Data informada é inválida!";    
     /* Numeric message */

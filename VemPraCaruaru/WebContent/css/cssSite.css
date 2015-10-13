@@ -1,0 +1,501 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+	outline:none;
+}
+html,body{
+	background-color:#FFF;
+}
+a{
+	text-decoration:none;
+	color:#666;
+}
+a:hover{
+	text-decoration:none;
+	color:#FF6601;
+}
+h3{
+	color:#F3660A;
+	font-size:20px;
+}
+#corpo{
+	position:absolute;
+	margin:0;
+	width:100%;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:14px;
+	color:#666;
+}
+#topo{
+	position:absolute;
+	background-image:url(../img/fundoTopo.png);
+	background-repeat:repeat-x;
+	min-width:100%;
+	min-height:154px;
+	margin:0 auto;
+	margin-top:0px;
+	z-index:100;
+}
+#topoMenuConteudo{
+	width:1200px;
+	min-height:124px;
+	margin:0 auto;
+	margin-top:10px;
+	z-index:102;
+}
+#conteudo{
+	width:1200px;
+	margin: 0 auto;
+	padding-top:40px;
+}
+#rodape{
+	position:absolute;
+	background-color:#FECC47;
+	min-width:100%;
+	min-height:150px;
+	margin-top:60px;
+	z-index:1;
+}
+#rodapeConteudo{
+	width:1200px;
+	background-image:url(../img/fundoRodape.png);
+	background-position:top right;
+	background-repeat:no-repeat;
+	padding-top:25px;
+	margin:0 auto;
+}
+#menuRodape{
+	line-height:26px;
+	color:#FFF;
+}
+#menuRodape a{
+	text-decoration:none;
+	color:#FFF;
+}
+#menuRodape a:hover{
+	text-decoration:none;
+	color:#666;
+}
+#pontoTuristicoTitulo{
+	width:247px;;
+	min-height:40px;
+	margin-top:2px;
+	padding:4px;
+	background-color:#FF6601;
+	color:#FFF;
+	font-size:16px;
+	text-align:center;
+	cursor:pointer;
+}
+#artistaTitulo{
+	width:142px;;
+	min-height:20px;
+	margin-top:2px;
+	padding:4px;
+	background-color:#FF6601;
+	color:#FFF;
+	font-size:16px;
+	text-align:center;
+	cursor:pointer;
+}
+.colunaMenu{
+	float:left;
+	display:table;
+	min-height:72px;
+	padding: 20px;
+	padding-top:56px;
+	text-align:center;
+	font-size:20px;
+	cursor:pointer;
+}
+.colunaMenu:hover{
+	background-color:#FECC47;
+	color:#FFF;
+}
+.menuSelecionado{
+	background-image:url(../img/fundoMenuSelecionado.png);
+	background-position:center top;
+	background-repeat:no-repeat;
+}
+.coluna{
+	float:left;
+	display:table;
+}
+#logoTopo{
+	width:368px;
+}
+#textoCadastro{
+	font-family: 'Dosis', sans-serif;
+	font-size:44px;
+	color:#EA2A27;
+	padding-top:30px;
+	padding-bottom:30px;
+	text-align:center;
+}
+#textoCadastro a{
+	text-decoration:none;
+	color:#EA2A27;
+}
+#textoCadastro a:hover{
+	text-decoration:none;
+	color:#B81612;
+}
+#menu{	
+/*	background-color:#FECC47;
+	width:1014px;
+	height:40px;
+	margin-bottom:20px;*/
+}
+/* MENU */
+#navmobi,#navmobitop{
+display:none;
+}
+#nav{
+width:100%;
+margin:0 auto;
+height:40px;
+}
+ul#navinti{
+height:42px;
+float:left;
+margin:0;
+padding:0;
+}
+#navinti li{
+list-style:none;
+display:inline-block;
+zoom:1;
+float:left;
+position:relative;
+margin:0;
+padding:0;
+}
+#navinti li a{
+display:block;
+line-height:144px;
+text-decoration:none;
+color:#666666;
+font-size:20px;
+padding:0 15px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+#navinti li:hover > a{
+background-color:#FECC47;
+color:#FFFFFF;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti .sub-menu{
+position:absolute;
+padding:0;
+width:180px;
+z-index:5;
+margin:0;
+background-color:#666666;
+color:#FFFFFF;
+box-shadow:0 0 30px rgba(0,0,0,.35);
+-moz-box-shadow:0 0 30px rgba(0,0,0,.35);
+-webkit-box-shadow:0 0 30px rgba(0,0,0,.35);
+top:100%;left:0;display:none;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti .sub-sub-menu{
+display:none;
+padding:0;
+margin:0;
+width:170px;
+position:absolute;
+left:100%;
+z-index:-1;
+box-shadow:0 0 30px rgba(0,0,0,.35);
+-moz-box-shadow:0 0 30px rgba(0,0,0,.35);
+-webkit-box-shadow:0 0 30px rgba(0,0,0,.35);
+top:0;background-color:#FCFCFC;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti li:last-child .sub-sub-menu{
+left:auto;
+right:100%;
+text-align:right;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti li:last-child .sub-menu{
+right:0;
+left:auto;
+text-align:right;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti .sub-menu a{
+line-height:32px;
+font-weight:normal;
+background-color:#666666;
+color:#FFFFFF;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti .sub-menu li:hover > a{
+background-color:#777777;
+color:#FFFFFF;
+border-left:4px solid #303030;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti li:last-child .sub-menu a:hover,ul#navinti li:last-child .sub-menu li:hover > a{
+background-color:#777777;
+border-left:0;
+border-right:4px solid #303030;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti .sub-menu li{
+float:none;
+display:block;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti ul.hidden{
+display:none;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+ul#navinti li:hover .sub-menu.hidden,ul#navinti .sub-menu li:hover .sub-sub-menu.hidden{
+display:block;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+#navinti li.singsub > a{
+padding-right:22px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+#navinti li.singsub > a::after,#navinti li.multsub > a::after{
+content:"";
+width:0;
+height:0;
+border-width:5px 3px;
+border-style:solid;
+border-color:white transparent transparent transparent;
+position:absolute;
+top:18px;right:8px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+#navinti li.multsub > a::after{
+border-color:transparent transparent transparent #303030;
+border-width:5px 4px;
+top:50%;
+margin-top:-5px;
+right:2px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+#navinti li:last-child li.multsub > a::after{
+border-color:transparent #303030 transparent transparent;
+right:auto;
+left:2px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+#nav-top{
+background-color:#666666;
+color:#FFFFFF;
+border-bottom:1px solid #DFDFDF;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+#nav-top .menutopx{
+margin:0 auto;
+width:98%;
+height:25px;
+line-height:25px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+transition: all 0.5s ease;
+}
+.clear{
+	clear: both;
+}
+/* =============== Estilos de formulários =============== */
+.hide{
+    display:none;
+}
+.form label {
+	margin-top:10px;
+	margin-bottom: 4px;
+	color: #666666;
+	display: block;
+}
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="url"],
+.form input[type="tel"],
+.form input[type="password"],
+.form input[type="file"],
+.form textarea {
+	padding-left:4px;
+	padding-right:4px;
+	border: 1px solid #999999;
+	background: #EEEEEE;
+	color: #666666;
+	font-size:14px;
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+	height:30px;
+	display: block;
+}
+.form select{
+	padding-left:4px;
+	padding-right:4px;
+	border: 1px solid #999999;
+	background: #EEEEEE;
+	color: #666666;
+	font-size:14px;
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+	height:32px;
+	display: block;
+}
+.form select option {
+	padding-right: 1em;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+	background: #FFC;
+}
+.form label.checkbox {
+	display: inline-block;
+	margin-right: 1em;
+}
+select.required.invalid{
+    border:1px solid red;
+    -moz-box-shadow: 0 0 3px red;
+    -webkit-box-shadow: 0 0 3px red;
+    box-shadow: 0 0 3px red;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    background: #EEEEEE url(../img/error.png) no-repeat 96%;
+}
+select:focus.required.invalid{
+    border:1px solid red;
+    -moz-box-shadow: 0 0 3px red;
+    -webkit-box-shadow: 0 0 3px red;
+    box-shadow: 0 0 3px red;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    background: #FFC url(../img/error.png) no-repeat 96%;
+}
+select.required.valid{
+    background: #EEEEEE url(../img/success.png) no-repeat 96%;
+}
+select:focus.required.valid{
+    background: #FFC url(../img/success.png) no-repeat 96%;
+}
+input.required.invalid{
+    border:1px solid red;
+    -moz-box-shadow: 0 0 3px red;
+    -webkit-box-shadow: 0 0 3px red;
+    box-shadow: 0 0 3px red;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    background: #EEEEEE url(../img/error.png) no-repeat right;
+}
+input:focus.required.invalid{
+    border:1px solid red;
+    -moz-box-shadow: 0 0 3px red;
+    -webkit-box-shadow: 0 0 3px red;
+    box-shadow: 0 0 3px red;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    background: #FFC url(../img/error.png) no-repeat right;
+}
+input.required.valid{
+    background: #EEEEEE url(../img/success.png) no-repeat right;
+}
+input:focus.required.valid{
+    background: #FFC url(../img/success.png) no-repeat right;
+}
+.form span{
+	border:0px solid red;
+    color:red;
+    font-size: 11px;    
+	display:block;
+}
+select, label.checkbox {
+	cursor: pointer;
+}
+.tabelaListar{
+	width:1200px;
+	background-color:#CCC;
+	border-spacing:1px;
+	margin-bottom:20px;
+}
+.tabelaListar caption{
+	color:#666;
+	font-size:16px;
+	font-weight:bold;
+	margin-top:20px;
+	margin-bottom:10px;
+}
+.tabelaListar th{
+	height:40px;
+	line-height:30px;
+	background-color:#DFDFDF;
+	color:#666;
+	font-size:16px;
+	font-weight:bold;
+	padding:4px;
+}
+.tabelaListar tr#impar td{
+	height:34px;
+	background-color:#FFFFFF;
+	color:#666;
+	padding-left:4px;
+	padding-right:4px;
+}
+.tabelaListar tr#impar:hover td{
+	background-color:#FFFFE8;
+}
+.tabelaListar tr#par td{
+	height:34px;
+	background-color:#FCFCFC;
+	color:#666;
+	padding-left:4px;
+	padding-right:4px;
+}
+.tabelaListar tr#vermelho td{
+	height:34px;
+	background-color:#F00;
+	color:#FFF;
+	padding-left:4px;
+	padding-right:4px;
+}
+.tabelaListar tr#verde td{
+	height:34px;
+	background-color:#090;
+	color:#FFF;
+	padding-left:4px;
+	padding-right:4px;
+}
+.tabelaListar tr#par:hover td{
+	background-color:#FFFFE8;
+}

@@ -1,17 +1,11 @@
-<%@page import="br.com.vempracaruaru.fachada.Fachada"%>
-<%@page import="br.com.vempracaruaru.destaque.Destaque"%>
-<%@page import="java.util.ArrayList"%>
 <jsp:include page="verificaLogin.jsp" />
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
-<%
-ArrayList<Destaque> destaques = new ArrayList<Destaque>();
-%>
 <!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="ISO-8859-1" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sistema de gerenciamento do aplicativo "Vem Pra Caruaru"</title>
+<title>Vem Pra Caruaru</title>
 <link href="css/cssSite.css" type="text/css" media="screen" rel="stylesheet" />
 <link href="css/style.css" type="text/css" media="screen" rel="stylesheet" />
 <link href='https://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
