@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 
+
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
+import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarUsuarioException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
 import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
@@ -99,9 +101,37 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		ps.close();
 		rs.close();
 		return usuarios;
-		
 	}
+	
+	@Override
+	public Usuario loginSite(String email, String senha) throws SQLException, BusinessException, Exception {
 
+		Usuario usuario = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "";
+		sql = "SELECT * FROM " + NOME_TABELA + " WHERE email=? AND senha=password(?) AND ativo='S'";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, email);
+		ps.setString(2, senha);
+		System.out.println("QUERY DO LOGIN: " + ps);
+		rs = ps.executeQuery();
+		if (rs != null) {
+			int qtdLinhas = 0;
+			while (rs.next()) {
+				qtdLinhas++;
+				usuario = new Usuario(rs.getInt("id"), rs.getString("nome"),rs.getString("email"), rs.getString("localizacao"), rs.getString("senha"),
+						rs.getString("user_facebook"),rs.getString("link_facebook"), rs.getInt("pontos"), rs.getString("ativo").charAt(0));
+			}
+			if (qtdLinhas == 0) {
+				throw new BusinessException("Login inválido!");
+			}
+		}
+		ps.close();
+		rs.close();
+		return usuario;
+	}
+	
 	@Override
 	public Usuario listarPorId(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		return listarTodos("AND id=" + id).get(0);

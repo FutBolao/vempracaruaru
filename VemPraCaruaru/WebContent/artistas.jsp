@@ -1,7 +1,6 @@
 <%@page import="br.com.vempracaruaru.artista.Artista"%>
 <%@page import="br.com.vempracaruaru.fachada.Fachada"%>
 <%@page import="java.util.ArrayList"%>
-<jsp:include page="verificaLogin.jsp" />
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <%ArrayList<Artista> artistas = new ArrayList<Artista>(); %>
 <!doctype html>

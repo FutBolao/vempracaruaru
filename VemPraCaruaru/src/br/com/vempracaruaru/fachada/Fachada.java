@@ -196,6 +196,10 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorUsuario.listarPorNome(nome);
 	}
+	
+	public Usuario usuarioLoginSite(String email, String senha) throws SQLException, BusinessException, Exception{
+		return controladorUsuario.loginSite(email, senha);
+	}
 
 	public void usuarioAlterar(Usuario usuario)
 			throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception {

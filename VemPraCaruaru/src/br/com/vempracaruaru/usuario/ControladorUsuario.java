@@ -3,6 +3,7 @@ package br.com.vempracaruaru.usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
 import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioNaoCadastradoException;
@@ -31,6 +32,9 @@ public class ControladorUsuario {
 	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
 		return repositorio.listarPorNome(nome);
+	}
+	public Usuario loginSite(String email, String senha) throws SQLException, BusinessException, Exception{
+		return repositorio.loginSite(email, senha);
 	}
 	public void alterar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");

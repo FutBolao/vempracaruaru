@@ -1,17 +1,6 @@
-<%@page import="br.com.vempracaruaru.foto.Foto"%>
-<%@page import="br.com.vempracaruaru.obra.Obra"%>
 <%@page import="br.com.vempracaruaru.fachada.Fachada"%>
 <%@page import="java.util.ArrayList"%>
-<jsp:include page="verificaLogin.jsp" />
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
-<%
-ArrayList<Obra> obras = new ArrayList<Obra>();
-ArrayList<Foto> fotos = new ArrayList<Foto>();
-String complemento = "AND ativo='S'";
-if (request.getParameter("idPonto") != null) {
-	complemento += " AND id_ponto_turistico=" + request.getParameter("idPonto");
-}
-%>
 <!doctype html>
 <html>
 <head>

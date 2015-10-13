@@ -1,6 +1,16 @@
+<%@page import="br.com.vempracaruaru.foto.Foto"%>
+<%@page import="br.com.vempracaruaru.obra.Obra"%>
 <%@page import="br.com.vempracaruaru.fachada.Fachada"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
+<%
+ArrayList<Obra> obras = new ArrayList<Obra>();
+ArrayList<Foto> fotos = new ArrayList<Foto>();
+String complemento = "AND ativo='S'";
+if (request.getParameter("idPonto") != null) {
+	complemento += " AND id_ponto_turistico=" + request.getParameter("idPonto");
+}
+%>
 <!doctype html>
 <html>
 <head>
@@ -30,32 +40,22 @@
 			<div id="form" class="form" style="width:1200px; text-align:center;">
 				<a href="#"><img alt="Imagem com link para cadastrar-se usando os dados do facebook" src="img/facebookEntrar.png"></a>
 				<br/><br/><br/><br/>
-				<strong>ou registre-se conosco</strong>
-				<br/><br/><br/><br/>
-				<form id="form" name="formCadastroUsuario" method="post" target="recebeForm" action="UsuarioCadastrar">
-					<div class="coluna" style="text-align:left;">
-                		<label for="campoNome">Nome</label>
-                		<input type="text" id="campoNome" name="campoNome" style="width:250px; margin-right:20px;" class="required" minlength="4" value="" />
-                		<span>Informe o seu nome</span>
-              		</div>
-              		<div class="coluna" style="text-align:left;">
-                		<label for="campoEmail">Email</label>
-                		<input type="text" id="campoEmail" name="campoEmail" style="width:250px; margin-right:20px;" class="required email" value="" />
-                		<span>Informe o seu email</span>
-              		</div>
-              		<div class="coluna" style="text-align:left;">
-                		<label for="campoSenha">Senha</label>
-                		<input type="password" id="campoSenha" name="campoSenha" style="width:200px; margin-right:20px;" class="required password" value="" />
-                		<span>Digite a senha</span>
-              		</div>
-					<div class="coluna" style="text-align:left;">
-                		<label for="campoSenhaR">Senha</label>
-                		<input type="password" id="campoSenhaR" name="campoSenhaR" style="width:200px; margin-right:20px;" class="required password" value="" />
-                		<span>Confirme a senha digitada</span>
-              		</div>
-              		<div class="coluna">
-		                <button class="button blue submit" type="submit" style="margin-top:32px;">Resgistrar-se</button>
-              		</div>
+				<strong>ou</strong>
+				<br/><br/>
+				<form id="form" name="formCadastroUsuario" method="post" target="recebeForm" action="UsuarioLoginSite">
+	                <div style="padding-left:15px; margin-left: 390px; text-align: left;">
+	                    <label for="campoEmail">Email</label>
+	                    <input type="text" id="campoEmail" name="campoEmail" style="width:380px; margin-top:2px;" class="required email" minlength="4" value="" />
+	                    <span>Informe o email</span>
+	                </div>
+	                <div style="padding-left:15px; margin-left: 390px; text-align: left;">
+	                    <label for="campoSenha">Senha</label>
+	                    <input type="password" id="campoSenha" name="campoSenha" style="width:380px; margin-top:2px;" class="required password" minlength="4" value="" />
+	                    <span>Informe a senha</span>
+	                </div>
+	                <div>
+	                	<button class="button blue submit" type="submit" style="margin-top:14px; margin-left:15px; margin-right:15px; width:390px">Entrar</button>
+	                </div>
               		<div class="clear"></div>
 				</form>
 			</div>
