@@ -6,35 +6,18 @@ import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
 public class Lista {
 
-	private int 						id;
-	private ArrayList<PontoTuristico>	listaPontoTuristico;
 	private int 						idUsuario;
-	private String 						dataHoraCriacao;
-	private char						ativo;
+	private int 						idPontoTuristico;
+	private String 						dataHora;
+	private char						visitado;
 	
-	public Lista(int id, ArrayList<PontoTuristico> listaPontoTuristico, int idUsuario, String dataHoraCriacao,
-			char ativo) {
-		this.id = id;
-		this.listaPontoTuristico = listaPontoTuristico;
+	public Lista(int idUsuario, int idPontoTuristico, String dataHora,
+			char visitado) {
+		super();
 		this.idUsuario = idUsuario;
-		this.dataHoraCriacao = dataHoraCriacao;
-		this.ativo = ativo;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public ArrayList<PontoTuristico> getListaPontoTuristico() {
-		return listaPontoTuristico;
-	}
-
-	public void setListaPontoTuristico(ArrayList<PontoTuristico> listaPontoTuristico) {
-		this.listaPontoTuristico = listaPontoTuristico;
+		this.idPontoTuristico = idPontoTuristico;
+		this.dataHora = dataHora;
+		this.visitado = visitado;
 	}
 
 	public int getIdUsuario() {
@@ -45,26 +28,37 @@ public class Lista {
 		this.idUsuario = idUsuario;
 	}
 
-	public String getDataHoraCriacao() {
-		return dataHoraCriacao;
+	public int getIdPontoTuristico() {
+		return idPontoTuristico;
 	}
 
-	public void setDataHoraCriacao(String dataHoraCriacao) {
-		this.dataHoraCriacao = dataHoraCriacao;
+	public void setIdPontoTuristico(int idPontoTuristico) {
+		this.idPontoTuristico = idPontoTuristico;
 	}
 
-	public char getAtivo() {
-		return ativo;
+	public String getDataHora() {
+		return dataHora;
 	}
 
-	public void setAtivo(char ativo) {
-		this.ativo = ativo;
+	public void setDataHora(String dataHora) {
+		this.dataHora = dataHora;
+	}
+
+	public char getVisitado() {
+		return visitado;
+	}
+
+	public void setVisitado(char visitado) {
+		this.visitado = visitado;
 	}
 
 	@Override
 	public String toString() {
-		return "Lista [id=" + id + ", listaPontoTuristico=" + listaPontoTuristico + ", idUsuario=" + idUsuario
-				+ ", dataHoraCriacao=" + dataHoraCriacao + ", ativo=" + ativo + "]";
+		return "Lista [idUsuario=" + idUsuario + ", idPontoTuristico="
+				+ idPontoTuristico + ", dataHora=" + dataHora + ", visitado="
+				+ visitado + "]";
 	}
+	
+	
 
 }

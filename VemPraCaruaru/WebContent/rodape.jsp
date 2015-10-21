@@ -23,8 +23,13 @@
           <div class="coluna" id="menuRodape" style="margin-left:20px;">
               <ul>
                 <li><img src="img/quadrado8x8.png" width="8" height="8"> <a href="contato.jsp">Contato</a></li>
+                <%if (session.getAttribute("loginUsuario") == null){ %>
                 <li><img src="img/quadrado8x8.png" width="8" height="8"> <a href="cadastro.jsp">Cadastre-se</a></li>
                 <li><img src="img/quadrado8x8.png" width="8" height="8"> <a href="entrar.jsp">Entrar</a></li>
+                <%} else {%>
+                <li><img src="img/quadrado8x8.png" width="8" height="8"> <a href="minhaConta.jsp">Minha Conta</a></li>
+                <li><img src="img/quadrado8x8.png" width="8" height="8"> <a href="Sair">Sair</a></li>
+                <%} %>
               </ul>
           </div>
      </div>             

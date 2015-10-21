@@ -35,7 +35,9 @@ ArrayList<Foto> fotos = new ArrayList<Foto>();
         	</div>
         	<div class="coluna" style="float:right;">
         		<div class="coluna" style="background-color:#FECC47; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px;" onClick="window.open('obras.jsp?idPonto=<%=ponto.getId() %>', '_self')">ver obras</div>
-        		<div class="coluna" style="background-color:#F3660A; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px; margin-left:30px;" onClick="window.open('pontosTuristicosDetalhes.jsp?id=<%=ponto.getId() %>', 'recebeForm'); $(this).hide();">+ adicionar à lista</div>
+        		<%if (session.getAttribute("loginUsuario") != null){ %>
+        		<div class="coluna" style="background-color:#F3660A; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px; margin-left:30px;" onClick="window.open('ListaCadastrar?idPonto=<%=ponto.getId() %>', 'recebeForm'); $(this).hide();">+ adicionar à lista</div>
+        		<%} %>
         	</div>
         	<br/><br/><br/><br/>
         	<div class="clear">

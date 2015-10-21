@@ -26,7 +26,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	
 	
 	private static RepositorioListaBDR instance;
-	public static final String NOME_TABELA = "lista";
+	public static final String NOME_TABELA = "lista_ponto";
 	private Connection connection;
 	private int dataBase = DataBase.MYSQL;
 	
@@ -52,25 +52,22 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		ResultSet rs = null;
 		String sql = "";
 	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_usuario) VALUES (?);";
-			if (this.dataBase == DataBase.ORACLE) {
-				ps = this.connection.prepareStatement(sql, new String[] { "id" });
-			} else {
-				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			}
+			sql = "INSERT INTO " + NOME_TABELA + " (id_usuario, id_ponto_turistico) VALUES (?,?);";
+			ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, lista.getIdUsuario());
+			ps.setInt(2, lista.getIdPontoTuristico());
 			ps.execute();
 			rs = ps.getGeneratedKeys();
-			int id = 0;
-			if (rs != null) {
-				while (rs.next()) {
-					id = rs.getInt(1);
-				}
-				lista.setId(id);
-				cardastrarLista(lista);
-			} else {
-				throw new NaoFoiPossivelCadastrarArtistaException();
-			}
+//			int id = 0;
+//			if (rs != null) {
+//				while (rs.next()) {
+//					id = rs.getInt(1);
+//				}
+//				lista.setId(id);
+//				cardastrarLista(lista);
+//			} else {
+//				throw new NaoFoiPossivelCadastrarArtistaException();
+//			}
 			System.out.println("Cadastro concluido com sucesso");
 		
 		ps.close();
@@ -92,8 +89,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		rs = ps.executeQuery();
 		if (rs != null) {
 			while (rs.next()) {
-				Lista lista = new Lista(rs.getInt("ID"), listarPonto(rs.getInt("ID")),
-					rs.getInt("ID_USUARIO"), rs.getString("DATA_HORA_CRIACAO"),(rs.getString("ativo").charAt(0)));
+				Lista lista = new Lista(rs.getInt("id_usuario"), rs.getInt("id_ponto_turistico"), rs.getString("data_hora"), rs.getString("visitado").charAt(0));
 				listas.add(lista);
 			}
 		}else{
@@ -121,21 +117,21 @@ public class RepositorioListaBDR implements IRepositorioLista{
 
 	@Override
 	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception {
-		Lista lista = new Lista(id, null, 0, "", 'N');
-		if(existeId(lista) == false){
-		PreparedStatement ps = null;
-		String sql = "";
-		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
-		ps = this.connection.prepareStatement(sql);
-		ps.setString(1, String.valueOf(lista.getAtivo()));
-		ps.setInt(2, lista.getId());
-		Integer resultado = ps.executeUpdate();
-		if (resultado == 0) throw new NaoFoiPossivelAlterarListaException();
-		ps.close();
-		System.out.println("- consulta completada com sucesso -");
-	}else{
-		throw new ListaNaoCadastradoException();
-		}
+//		Lista lista = new Lista(id, null, 0, "", 'N');
+//		if(existeId(lista) == false){
+//		PreparedStatement ps = null;
+//		String sql = "";
+//		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+//		ps = this.connection.prepareStatement(sql);
+//		ps.setString(1, String.valueOf(lista.getAtivo()));
+//		ps.setInt(2, lista.getId());
+//		Integer resultado = ps.executeUpdate();
+//		if (resultado == 0) throw new NaoFoiPossivelAlterarListaException();
+//		ps.close();
+//		System.out.println("- consulta completada com sucesso -");
+//	}else{
+//		throw new ListaNaoCadastradoException();
+//		}
 	}
 
 	@Override
@@ -144,14 +140,14 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
 		boolean resposta = false;		
-		ps = connection.prepareStatement(sql);
-		ps.setInt(1, lista.getId());
-		rs = ps.executeQuery();
-		if(rs != null){
-			resposta = true;
-		}
-		ps.close();
-		rs.close();
+//		ps = connection.prepareStatement(sql);
+//		ps.setInt(1, lista.getId());
+//		rs = ps.executeQuery();
+//		if(rs != null){
+//			resposta = true;
+//		}
+//		ps.close();
+//		rs.close();
 		return resposta;		
 	}
 	
@@ -167,12 +163,12 @@ public class RepositorioListaBDR implements IRepositorioLista{
 				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			}
 			
-			for (PontoTuristico ponto : lista.getListaPontoTuristico()) {
-				ps.setInt(1, lista.getId());
-				ps.setInt(2,ponto.getId());
-				ps.execute();
-				
-			}		
+//			for (PontoTuristico ponto : lista.getListaPontoTuristico()) {
+//				ps.setInt(1, lista.getId());
+//				ps.setInt(2,ponto.getId());
+//				ps.execute();
+//				
+//			}		
 		ps.close();
 	
 	}
