@@ -12,11 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import br.com.vempracaruaru.administrador.Administrador;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
@@ -47,6 +49,12 @@ public class PontoCadastrar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		Administrador sessionAdministrador = null;
+		if (session.getAttribute("loginAdministrador") != null){
+			sessionAdministrador = (Administrador) session.getAttribute("loginAdministrador");
+		}
+		
 		response.setContentType("text/html;");
 	    PrintWriter out = response.getWriter();
 	    String nome = "";
@@ -66,7 +74,7 @@ public class PontoCadastrar extends HttpServlet {
 			Conexao.connection.setAutoCommit(false);
 			// cadastro o ponto sem a foto principal para garantir o id.
 			// após upar e armazenar as imagens atualizo os dados com a imagem principal.
-			PontoTuristico ponto = Fachada.getInstance().pontoTuristicoCadastrar(new PontoTuristico(0, 1, "", nome, endereco, latitude, longitude, telefone, email, 
+			PontoTuristico ponto = Fachada.getInstance().pontoTuristicoCadastrar(new PontoTuristico(0, sessionAdministrador.getId(), "", nome, endereco, latitude, longitude, telefone, email, 
 					tempoVisitacao, horarioFuncionamento, historicoDescricao, foto, ativo, qtdFotos));
 			
 			// verifica se o pedido realmente contém arquivo de upload

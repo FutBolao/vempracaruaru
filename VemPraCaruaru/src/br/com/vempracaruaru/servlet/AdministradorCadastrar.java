@@ -41,6 +41,7 @@ public class AdministradorCadastrar extends HttpServlet {
 		String usuario = request.getParameter("campoUsuario");
 		String senha = request.getParameter("campoSenha");
 		try {
+			if (!senha.equals(request.getParameter("campoSenhaR"))) throw new Exception("As senhas digitadas não são iguais, por favor verifique!");
 			Fachada.getInstance().administradorCadastrar(new Administrador(0, nome, cpf, telefone, usuario, senha, 'S'));
 			out.println( "<script>parent.alert(\"Cadastro efetuado com sucesso!!!\");</script>" );
 			out.println( "<script>parent.limparFormulario();</script>" );
@@ -55,7 +56,7 @@ public class AdministradorCadastrar extends HttpServlet {
 			out.println( "<script>parent.alert(\"" + e.getMessage() + "\");</script>" );
 		} catch (Exception e) {
 			e.printStackTrace();
-			out.println( "<script>parent.alert(\"Ocorreu um erro inesperado ao cadastrar o administrador\");</script>" );
+			out.println( "<script>parent.alert(\"" + e.getMessage() + "\");</script>" );
 		}
 	}
 

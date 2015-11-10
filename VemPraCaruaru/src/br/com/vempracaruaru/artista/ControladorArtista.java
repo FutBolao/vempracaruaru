@@ -49,7 +49,10 @@ public class ControladorArtista {
 		System.out.println("Passando pela Controladora - concluido com sucesso -");
 		repositorio.deletar(id);
 	}
-	
+	public void ativar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception{
+		System.out.println("Passando pela Controladora - concluido com sucesso -");
+		repositorio.ativar(id);
+	}
 	
 	
 }

@@ -58,11 +58,11 @@ public class Fotos extends HttpServlet {
     					Fachada.getInstance().fotoDeletar(foto.getId());
     					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("ponto", ponto.getId()).get(0);
     					Fachada.getInstance().pontoTuristicoDefinirImagemPrincipal(ponto.getId(), fotoNova.getImagem());
-    					File arquivo = new File(foto.getImagem());
+    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
     					arquivo.delete();
     				} else {
     					Fachada.getInstance().fotoDeletar(foto.getId());
-    					File arquivo = new File(foto.getImagem());
+    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
     					arquivo.delete();
     				}
     			} else if (foto.getReferencia().equals("obra")) {
@@ -71,11 +71,11 @@ public class Fotos extends HttpServlet {
     					Fachada.getInstance().fotoDeletar(foto.getId());
     					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("obra", obra.getId()).get(0);
     					Fachada.getInstance().obraDefinirImagemPrincipal(obra.getId(), fotoNova.getImagem());
-    					File arquivo = new File(foto.getImagem());
+    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
     					arquivo.delete();
     				} else {
     					Fachada.getInstance().fotoDeletar(foto.getId());
-    					File arquivo = new File(foto.getImagem());
+    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
     					arquivo.delete();
     				}
     			} else if (foto.getReferencia().equals("artista")) {
@@ -84,11 +84,11 @@ public class Fotos extends HttpServlet {
     					Fachada.getInstance().fotoDeletar(foto.getId());
     					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("artista", artista.getId()).get(0);
     					Fachada.getInstance().artistaDefinirImagemPrincipal(artista.getId(), fotoNova.getImagem());
-    					File arquivo = new File(foto.getImagem());
+    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
     					arquivo.delete();
     				} else {
     					Fachada.getInstance().fotoDeletar(foto.getId());
-    					File arquivo = new File(foto.getImagem());
+    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
     					arquivo.delete();
     				}
     			}

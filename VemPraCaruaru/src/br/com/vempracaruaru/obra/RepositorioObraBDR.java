@@ -121,16 +121,14 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		if (existeId(obra) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				sql = "UPDATE " + NOME_TABELA + " SET id_administrador=?, id_artista=?, id_ponto_turistico=?, nome=?, imagem_principal=?, descricao=?, ativo=? WHERE id=?;";
+				sql = "UPDATE " + NOME_TABELA + " SET id_administrador=?, id_artista=?, id_ponto_turistico=?, nome=?, descricao=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setInt(1, obra.getIdAdministrador());
 				ps.setInt(2, obra.getIdArtista());
 				ps.setInt(3, obra.getIdPontoTuristico());
 				ps.setString(4, obra.getNome());
-				ps.setString(5, obra.getFoto());
-				ps.setString(6, obra.getDescricao());
-				ps.setString(7, String.valueOf(obra.getAtivo()));
-				ps.setInt(8, obra.getId());
+				ps.setString(5, obra.getDescricao());
+				ps.setInt(6, obra.getId());
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarObraException();
 				ps.close();
@@ -159,14 +157,27 @@ public class RepositorioObraBDR implements IRepositorioObra{
 		String sql = "";
 		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
 		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, String.valueOf("N"));
+		ps.setInt(2, id);
+		Integer resultado = ps.executeUpdate();
+		if (resultado == 0) throw new NaoFoiPossivelAlterarObraException();
+		ps.close();
+	
+	}
+	
+	@Override
+	public void ativar(int id) throws SQLException, ObraNaoCadastradaException, Exception {			
+		PreparedStatement ps = null;
+		String sql = "";
+		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+		ps = this.connection.prepareStatement(sql);
 		ps.setString(1, String.valueOf("S"));
 		ps.setInt(2, id);
 		Integer resultado = ps.executeUpdate();
 		if (resultado == 0) throw new NaoFoiPossivelAlterarObraException();
 		ps.close();
-
 	
-}
+	}
 
 	@Override
 	public boolean existeId(Obra obra) throws SQLException, ObraJaCadastradaException, Exception {		

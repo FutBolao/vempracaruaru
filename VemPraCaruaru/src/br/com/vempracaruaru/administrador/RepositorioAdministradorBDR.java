@@ -163,15 +163,24 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 			if(existeCpf(administrador) == false){
 				PreparedStatement ps = null;
 				String sql = "";
-				sql = "UPDATE " + NOME_TABELA + " SET nome=?, cpf=?, telefone=?, usuario=? , senha=?, ativo=? WHERE id=?;";
-				ps = this.connection.prepareStatement(sql);
-				ps.setString(1, administrador.getNome());
-				ps.setString(2, administrador.getCpf());
-				ps.setString(3, administrador.getTelefone());
-				ps.setString(4, administrador.getUsuario());
-				ps.setString(5, administrador.getSenha());
-				ps.setString(6, String.valueOf(administrador.getAtivo()));
-				ps.setInt(7, administrador.getId());
+				if (administrador.getSenha().equals("")) {
+					sql = "UPDATE " + NOME_TABELA + " SET nome=?, cpf=?, telefone=?, usuario=? WHERE id=?;";
+					ps = this.connection.prepareStatement(sql);
+					ps.setString(1, administrador.getNome());
+					ps.setString(2, administrador.getCpf());
+					ps.setString(3, administrador.getTelefone());
+					ps.setString(4, administrador.getUsuario());
+					ps.setInt(5, administrador.getId());
+				} else {
+					sql = "UPDATE " + NOME_TABELA + " SET nome=?, cpf=?, telefone=?, usuario=? , senha=password(?) WHERE id=?;";
+					ps = this.connection.prepareStatement(sql);
+					ps.setString(1, administrador.getNome());
+					ps.setString(2, administrador.getCpf());
+					ps.setString(3, administrador.getTelefone());
+					ps.setString(4, administrador.getUsuario());
+					ps.setString(5, administrador.getSenha());
+					ps.setInt(6, administrador.getId());
+				}
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarAdministradorException();
 				ps.close();
@@ -197,6 +206,29 @@ public class RepositorioAdministradorBDR implements IRepositorioAdministrador{
 			ps = this.connection.prepareStatement(sql);
 			ps.setString(1, String.valueOf(administrador.getAtivo()));
 			ps.setInt(2, administrador.getId());
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaoFoiPossivelAlterarAdministradorException();
+			ps.close();
+			System.out.println("- consulta completada com sucesso -");
+		}else{
+			throw new AdministradorNaoCadastradoException();
+		}
+		
+	}
+	
+	@Override
+	public void ativar(int id) throws SQLException,
+			AdministradorNaoCadastradoException, Exception {
+		System.out.println("Chegando ao repositorio");
+		Administrador administrador = new Administrador(id, "", "", "", "", "", 'S');
+		if (existeId(administrador) == false){
+			PreparedStatement ps = null;
+			String sql = "";
+			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, String.valueOf(administrador.getAtivo()));
+			ps.setInt(2, administrador.getId());
+			System.out.println(ps);
 			Integer resultado = ps.executeUpdate();
 			if (resultado == 0) throw new NaoFoiPossivelAlterarAdministradorException();
 			ps.close();

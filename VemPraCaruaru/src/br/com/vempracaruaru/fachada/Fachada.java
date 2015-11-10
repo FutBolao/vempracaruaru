@@ -128,6 +128,11 @@ public class Fachada {
 		controladorAdministrador.deletar(id);
 	}
 	
+	public void administradorAtivar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorAdministrador.ativar(id);
+	}
+	
 	public Administrador administradorLogin(String usuario, String senha) throws SQLException, BusinessException, Exception{
 		return controladorAdministrador.login(usuario, senha);
 	}
@@ -171,6 +176,11 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorArtista.deletar(id);
 	}
+	
+	public void artistaAtivar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorArtista.ativar(id);
+	}
 
 	// MÉTODOS DO USARIO
 
@@ -210,6 +220,11 @@ public class Fachada {
 	public void usuarioDeletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorUsuario.deletar(id);
+	}
+	
+	public void usuarioAtivar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorUsuario.ativar(id);
 	}
 
 	// MÉTODOS DO PONTO_TURISTICOS
@@ -253,6 +268,11 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorPontoTuristico.deletar(id);
 	}
+	
+	public void pontoTuristicoAtivar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorPontoTuristico.ativar(id);
+	}
 
 	// METODOS DAS OBRAS
 
@@ -292,6 +312,11 @@ public class Fachada {
 	public void obraDeletar(int id) throws SQLException, ObraNaoCadastradaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorObra.deletar(id);
+	}
+	
+	public void obraAtivar(int id) throws SQLException, ObraNaoCadastradaException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorObra.ativar(id);
 	}
 
 	// METODOS DAS LISTA

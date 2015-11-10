@@ -16,6 +16,7 @@ public interface IRepositorioUsuario {
 	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception;
 	public void alterar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception;
 	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception;
+	public void ativar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception;
 	public boolean existeId(Usuario usuario) throws SQLException, UsuarioJaCadastradoException, Exception;
 	public Usuario loginSite(String email, String senha) throws SQLException, BusinessException, Exception;
 }

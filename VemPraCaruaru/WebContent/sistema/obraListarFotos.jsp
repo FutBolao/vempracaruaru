@@ -25,6 +25,7 @@ try {
 <link href="../css/button.css" type="text/css" media="screen" rel="stylesheet" />
 <link href="../css/bootstrap.min.css" type="text/css" media="screen" rel="stylesheet" />
 <link href="../css/jquery.fileupload.css" type="text/css" media="screen" rel="stylesheet" />
+<script src="../js/funcoes.js" type="text/javascript" charset="ISO-8859-1"></script>
 </head>
 
 <body>
@@ -54,7 +55,7 @@ try {
             	<%if (!obra.getFoto().equals(foto.getImagem())) { %>
             	<button class="button blue" style="margin-top:2px;" onClick="window.open('../Fotos?acao=capa&id=<%=foto.getId()%>', 'recebeForm')">Definir como capa</button>
             	<%} %>
-           		<button class="button red" style="margin-top:2px;" onClick="window.open('../Fotos?acao=deletar&id=<%=foto.getId()%>', 'recebeForm')">Deletar</button>
+           		<button class="button red" style="margin-top:2px;" onClick="return (doConfirm(this.id) && window.open('../Fotos?acao=deletar&id=<%=foto.getId()%>', 'recebeForm'));">Deletar</button>
             </div>
 		</div>
 		<%}%>

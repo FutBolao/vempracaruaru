@@ -41,5 +41,8 @@ public class ControladorPontoTuristico{
 	public void deletar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
 		repositorio.deletar(id);
 	}
+	public void ativar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception{
+		repositorio.ativar(id);
+	}
 
 }

@@ -51,7 +51,7 @@
                 <span>Digite a senha</span>
               </div>
               <div class="coluna">
-                <label for="campoSenhaR">Senha</label>
+                <label for="campoSenhaR">Repita a senha</label>
                 <input type="password" id="campoSenhaR" name="campoSenhaR" style="width:280px;" class="required password" minlength="4" value="" />
                 <span>Repita a senha</span>
               </div>

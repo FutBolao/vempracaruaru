@@ -12,11 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import br.com.vempracaruaru.administrador.Administrador;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.destaque.Destaque;
 import br.com.vempracaruaru.exception.BusinessException;
@@ -46,6 +48,12 @@ public class DestaqueCadastrar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		Administrador sessionAdministrador = null;
+		if (session.getAttribute("loginAdministrador") != null){
+			sessionAdministrador = (Administrador) session.getAttribute("loginAdministrador");
+		}
+		
 		response.setContentType( "text/html" );
 	    PrintWriter out = response.getWriter();
 		String titulo = "";
@@ -56,7 +64,7 @@ public class DestaqueCadastrar extends HttpServlet {
 			Conexao.connection.setAutoCommit(false);
 			// cadastro o destaque com dados temporários para garantir o id.
 			// após upar e armazenar a imagem com o id do destaque atualizo os dados.
-			Destaque destaque = Fachada.getInstance().destaqueCadastrar(new Destaque(0, 1, titulo, arquivo, link));
+			Destaque destaque = Fachada.getInstance().destaqueCadastrar(new Destaque(0, sessionAdministrador.getId(), titulo, arquivo, link));
 			
 			// verifica se o pedido realmente contém arquivo de upload
 			if (!ServletFileUpload.isMultipartContent(request)) {

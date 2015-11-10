@@ -17,6 +17,7 @@ public interface IRepositorioAdministrador {
 	public Administrador listarPorCpf(String cpf) throws SQLException, AdministradorNaoCadastradoException, Exception;
 	public void alterar(Administrador administrador) throws SQLException, NaoFoiPossivelCadastrarAdministradorException, AdministradorNaoCadastradoException, Exception;
 	public void deletar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception;
+	public void ativar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception;
 	public boolean existeId(Administrador administrador) throws SQLException, AdministradorJaCadastradoException, Exception;
 	public boolean existeCpf(Administrador administrador) throws SQLException, AdministradorJaCadastradoException, Exception;
 	public Administrador login(String usuario, String senha) throws SQLException, BusinessException, Exception;

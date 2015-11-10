@@ -59,13 +59,14 @@ String cssClasse = "";
 		  			}
 		  			String imagemAtivarInativar = administrador.getAtivo() == 'S' ? "inativar.png" : "ativar.png";
 		  			String nomeAtivarInativar = administrador.getAtivo() == 'S' ? "Inativar" : "Ativar";
+					String paginaAtivoInativo = administrador.getAtivo() == 'S' ? "../AdministradorInativar?id=" + administrador.getId() : "../AdministradorAtivar?id=" + administrador.getId();
 	                %>
 	                <tr id="<%=cssClasse%>">
 	                  <td><%=administrador.getId()%></td>
 	                  <td><%=administrador.getNome()%></td>
 	                  <td><%=administrador.getUsuario()%></td>
 	                  <td style="text-align:center;"><%=administrador.getAtivo()%></td>
-	                 <td style="text-align:center;"><a href="administradorListarDetalhes.jsp?id=<%=administrador.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" title="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" width="44" height="24"></a>&nbsp;<a href="#"><img src="../img/<%=imagemAtivarInativar %>" alt="<%=nomeAtivarInativar %> o administrador de ID <%=administrador.getId()%>" title="<%=nomeAtivarInativar %> o administrador de ID <%=administrador.getId()%>" width="28" height="24"></a>&nbsp;<a href="#"><img src="../img/alterar.png" alt="Alterar o administrador de ID <%=administrador.getId()%>" title="Alterar o administrador de ID <%=administrador.getId()%>" width="24" height="24"></a></td>
+	                 <td style="text-align:center;"><a href="administradorListarDetalhes.jsp?id=<%=administrador.getId()%>" onclick="return hs.htmlExpand(this, { objectType: 'iframe', preserveContent: false, width: '600', height: '220'} )"><img src="../img/verDetalhes.png" alt="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" title="Visualizar detalhes do administrador de ID <%=administrador.getId()%>" width="44" height="24"></a>&nbsp;<a href="<%=paginaAtivoInativo%>" target="recebeForm"><img src="../img/<%=imagemAtivarInativar %>" alt="<%=nomeAtivarInativar %> o administrador de ID <%=administrador.getId()%>" title="<%=nomeAtivarInativar %> o administrador de ID <%=administrador.getId()%>" width="24" height="24"></a>&nbsp;<a href="administradorAlterar.jsp?id=<%=administrador.getId()%>"><img src="../img/alterar.png" alt="Alterar o administrador de ID <%=administrador.getId()%>" title="Alterar o administrador de ID <%=administrador.getId()%>" width="24" height="24"></a></td>
 	                </tr>
 	                <%        
             	  }

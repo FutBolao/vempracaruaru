@@ -16,6 +16,7 @@ public interface IRepositorioObra {
 	public ArrayList<Obra> listarPorNome(String nome) throws SQLException, ObraNaoCadastradaException, Exception;
 	public void alterar(Obra obra) throws SQLException, NaoFoiPossivelCadastrarObraException, ObraNaoCadastradaException, Exception;
 	public void deletar(int id) throws SQLException, ObraNaoCadastradaException, Exception;
+	public void ativar(int id) throws SQLException, ObraNaoCadastradaException, Exception;
 	public boolean existeId(Obra obra) throws SQLException, ObraJaCadastradaException, Exception;
 	public void definirImagemPrincipal(int id, String imagem) throws SQLException, ObraNaoCadastradaException, NaoFoiPossivelCadastrarObraException, Exception;
 }

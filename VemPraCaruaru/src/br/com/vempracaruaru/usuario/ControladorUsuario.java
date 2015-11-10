@@ -43,7 +43,10 @@ public class ControladorUsuario {
 	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
 		repositorio.deletar(id);
-		
+	}
+	public void ativar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
+		System.out.println("Passando pela controladora");
+		repositorio.ativar(id);
 	}
 
 }

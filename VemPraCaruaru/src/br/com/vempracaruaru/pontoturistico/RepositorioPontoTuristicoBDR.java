@@ -130,7 +130,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 				PreparedStatement ps = null;
 				String sql = "";
 				sql = "UPDATE " + NOME_TABELA + " SET id_administrador=?, nome=?, endereco=?, latitude=?, longitude=?, telefone=?, email=?, tempo_visitacao=?, "
-						+ "horario_funcionamento=?, historico_descricao=?, imagem_principal=?, ativo=? WHERE id=?;";
+						+ "horario_funcionamento=?, historico_descricao=? WHERE id=?;";
 				ps = this.connection.prepareStatement(sql);
 				ps.setInt(1, pontoTuristico.getIdAdministrador());
 				ps.setString(2, pontoTuristico.getNome());
@@ -142,9 +142,7 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 				ps.setString(8, pontoTuristico.getTempoVisitacao());
 				ps.setString(9, pontoTuristico.getHorarioFuncionamento());
 				ps.setString(10, pontoTuristico.getHistoricoDescricao());
-				ps.setString(11, pontoTuristico.getFoto());
-				ps.setString(12, String.valueOf(pontoTuristico.getAtivo()));		
-				ps.setInt(13, pontoTuristico.getId());
+				ps.setInt(11, pontoTuristico.getId());
 
 				Integer resultado = ps.executeUpdate();
 				if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
@@ -182,6 +180,22 @@ public class RepositorioPontoTuristicoBDR implements IRepositorioPontoTuristico{
 
 	
 	}
+	
+	@Override
+	public void ativar(int id) throws SQLException, PontoTuristicoNaoCadastradoException, Exception {			
+		PreparedStatement ps = null;
+		String sql = "";
+		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+		ps = this.connection.prepareStatement(sql);
+		ps.setString(1, String.valueOf("S"));
+		ps.setInt(2, id);
+		Integer resultado = ps.executeUpdate();
+		if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
+		ps.close();
+
+	
+	}
+	
 	@Override
 	public boolean existeId(PontoTuristico pontoTuristico)
 			throws SQLException, PontoTuristicoJaCadastradoException, Exception {		

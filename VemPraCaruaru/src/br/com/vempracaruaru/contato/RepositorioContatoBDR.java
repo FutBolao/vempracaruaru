@@ -11,9 +11,9 @@ import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.ContatoJaCadastradoException;
 import br.com.vempracaruaru.exception.ContatoNaoCadastradoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarContatoException;
-import br.com.vempracaruaru.exception.NaoFoiPossivelDeletarContatoException;
 import br.com.vempracaruaru.exception.NaofoiPossivelAlterarContatoException;
 
 public class RepositorioContatoBDR implements IRepositorioContado{
@@ -131,21 +131,17 @@ public class RepositorioContatoBDR implements IRepositorioContado{
 	@Override
 	public void deletar(int id) throws SQLException, ContatoNaoCadastradoException, Exception {		
 		System.out.println("chegando ao repositorio");
-		PreparedStatement stmt = null;
+		PreparedStatement ps = null;
 		String sql = "";
 		
-		try {
-			if(existeId(new Contato(id, "", "", "", "","",'s'))== false){
-			sql = "delete from "+ NOME_TABELA +" where id= ?";
-			stmt = this.connection.prepareStatement(sql);
-			stmt.setInt(1, id);			
-			stmt.execute();
-			System.out.println("foi removido");
-			}else{
-				throw new NaoFoiPossivelDeletarContatoException();
-			}
-		} finally {
-
+		if(existeId(new Contato(id, "", "", "", "","",'S'))== false){
+			sql = "UPDATE " + NOME_TABELA + " SET visualizado=? WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, "S");
+			ps.setInt(2, id);
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
+			ps.close();
 		}
 
 	}

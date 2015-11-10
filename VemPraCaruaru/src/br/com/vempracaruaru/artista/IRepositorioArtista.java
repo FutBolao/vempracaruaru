@@ -17,5 +17,6 @@ public interface IRepositorioArtista {
 	public void alterar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaNaoCadastradoException, Exception;
 	public void definirImagemPrincipal(int id, String imagem) throws SQLException, ArtistaNaoCadastradoException, NaoFoiPossivelAlterarArtistaException, Exception;
 	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception;
+	public void ativar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception;
 	public boolean existeId(Artista artista) throws SQLException, ArtistaJaCadastradoException, Exception;
 }

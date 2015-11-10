@@ -64,6 +64,11 @@ private IRepositorioAdministrador repositorio;
 		repositorio.deletar(id);
 	}
 	
+	public void ativar(int id) throws SQLException, AdministradorNaoCadastradoException, Exception{
+		System.out.println("passando pela controladora - concluido com sucesso -");
+		repositorio.ativar(id);
+	}
+	
 	public Administrador login(String usuario, String senha) throws SQLException, BusinessException, Exception{
 		return repositorio.login(usuario, senha);
 	}

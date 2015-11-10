@@ -3,7 +3,15 @@ var map;
 var marker;
 
 function initialize() {
-	var latlng = new google.maps.LatLng(-8.284556174274263, -35.971536532387745);
+	var campoLat = -8.284556174274263;
+	var campoLon = -35.971536532387745;
+	if ($("#campoLatitude").val() != "") {
+		campoLat = $("#campoLatitude").val();
+	}
+	if ($("#campoLongitude").val() != "") {
+		campoLon = $("#campoLongitude").val();
+	}
+	var latlng = new google.maps.LatLng(campoLat, campoLon);
 	var options = {
 		zoom: 18,
 		center: latlng,
@@ -52,6 +60,11 @@ $(document).ready(function () {
 	})
 	
 	$("#campoEndereco").blur(function() {
+		if($(this).val() != "")
+			carregarNoMapa($(this).val());
+	})
+	
+	$("#campoEndereco").load(function() {
 		if($(this).val() != "")
 			carregarNoMapa($(this).val());
 	})

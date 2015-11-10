@@ -60,6 +60,7 @@ String cssClasse = "";
 		  			}
 		  			String imagemAtivarInativar = usuario.getAtivo() == 'S' ? "inativar.png" : "ativar.png";
 		  			String nomeAtivarInativar = usuario.getAtivo() == 'S' ? "Inativar" : "Ativar";
+					String paginaAtivoInativo = usuario.getAtivo() == 'S' ? "../UsuarioInativar?id=" + usuario.getId() : "../UsuarioAtivar?id=" + usuario.getId();
 	                %>
 	                <tr id="<%=cssClasse%>">
 	                  <td><%=usuario.getId()%></td>
@@ -67,7 +68,7 @@ String cssClasse = "";
 	                  <td><%=usuario.getEmail()%></td>
 	                  <td><%=usuario.getPontos()%></td>
 	                  <td style="text-align:center;"><%=usuario.getAtivo()%></td>
-	                 <td style="text-align:center;"><a href="#"><img src="../img/<%=imagemAtivarInativar %>" alt="<%=nomeAtivarInativar %> o usuário de ID <%=usuario.getId()%>" title="<%=nomeAtivarInativar %> o usuário de ID <%=usuario.getId()%>" width="28" height="24"></a></td>
+	                 <td style="text-align:center;"><a href="<%=paginaAtivoInativo%>" target="recebeForm"><img src="../img/<%=imagemAtivarInativar %>" alt="<%=nomeAtivarInativar %> o usuário de ID <%=usuario.getId()%>" title="<%=nomeAtivarInativar %> o usuário de ID <%=usuario.getId()%>" width="24" height="24"></a></td>
 	                </tr>
 	                <%        
             	  }

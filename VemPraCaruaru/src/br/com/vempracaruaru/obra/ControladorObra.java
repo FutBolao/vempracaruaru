@@ -42,5 +42,8 @@ public class ControladorObra {
 	public void deletar(int id) throws SQLException, ObraNaoCadastradaException, Exception{
 		repositorio.deletar(id);
 	}
-
+	public void ativar(int id) throws SQLException, ObraNaoCadastradaException, Exception{
+		repositorio.ativar(id);
+	}
+	
 }

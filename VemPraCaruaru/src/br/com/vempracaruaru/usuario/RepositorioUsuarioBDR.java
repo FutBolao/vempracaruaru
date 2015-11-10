@@ -171,7 +171,28 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 	@Override
 	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		
-		Usuario usuario = new Usuario(0, "", "", "", "", "", "", 0,'N');
+		Usuario usuario = new Usuario(id, "", "", "", "", "", "", 0,'N');
+		if (existeId(usuario) == false){
+			PreparedStatement ps = null;
+			String sql = "";
+			// instrução de update do usuario
+			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, String.valueOf(usuario.getAtivo()));
+			ps.setInt(2, usuario.getId());
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaoFoiPossivelAlterarUsuarioException();
+			ps.close();
+		}else{
+			throw new UsuarioNaoCadastradoException();
+		}
+		
+	}
+	
+	@Override
+	public void ativar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
+		
+		Usuario usuario = new Usuario(id, "", "", "", "", "", "", 0,'S');
 		if (existeId(usuario) == false){
 			PreparedStatement ps = null;
 			String sql = "";

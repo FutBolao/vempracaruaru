@@ -132,21 +132,17 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		if (existeId(artista) == false){
 			PreparedStatement ps = null;
 			String sql = "";
-			sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, imagem_principal=?,"
-					+ " telefone=?, email=?, twitter=?, instagram=?, facebook=?, ativo=?"
-					+ " WHERE id=?;";
+			sql = "UPDATE " + NOME_TABELA + " SET nome=?, historico=?, tipo=?, telefone=?, email=?, twitter=?, instagram=?, facebook=? WHERE id=?;";
 			ps = this.connection.prepareStatement(sql);
 			ps.setString(1, artista.getNome());
 			ps.setString(2, artista.getHistorico());
 			ps.setString(3, artista.getTipo());
-			ps.setString(4, artista.getFoto());
-			ps.setString(5, artista.getTelefone());
-			ps.setString(6, artista.getEmail());
-			ps.setString(7, artista.getTwitter());
-			ps.setString(8, artista.getInstagram());
-			ps.setString(9, artista.getFacebook());
-			ps.setString(10, String.valueOf(artista.getAtivo()));
-			ps.setInt(11, artista.getId());
+			ps.setString(4, artista.getTelefone());
+			ps.setString(5, artista.getEmail());
+			ps.setString(6, artista.getTwitter());
+			ps.setString(7, artista.getInstagram());
+			ps.setString(8, artista.getFacebook());
+			ps.setInt(9, artista.getId());
 			Integer resultado = ps.executeUpdate();
 			if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
 			ps.close();
@@ -171,6 +167,21 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 
 	@Override
 	public void deletar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {		
+			Artista artista = new Artista(id, "", 0, "", "", "", "", "", "", "", "", "", 'N');
+		
+			PreparedStatement ps = null;
+			String sql = "";
+			sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, String.valueOf(artista.getAtivo()));
+			ps.setInt(2, artista.getId());
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaoFoiPossivelAlterarArtistaException();
+			ps.close();
+	}
+	
+	@Override
+	public void ativar(int id) throws SQLException, ArtistaNaoCadastradoException, Exception {		
 			Artista artista = new Artista(id, "", 0, "", "", "", "", "", "", "", "", "", 'S');
 		
 			PreparedStatement ps = null;

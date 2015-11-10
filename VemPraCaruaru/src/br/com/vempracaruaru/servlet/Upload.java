@@ -12,11 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import br.com.vempracaruaru.administrador.Administrador;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.exception.BusinessException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
@@ -48,6 +50,12 @@ public class Upload extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		Administrador sessionAdministrador = null;
+		if (session.getAttribute("loginAdministrador") != null){
+			sessionAdministrador = (Administrador) session.getAttribute("loginAdministrador");
+		}
+		
 		response.setContentType("text/html;");
 	    PrintWriter out = response.getWriter();
 	    if (request.getParameter("referencia").equalsIgnoreCase("ponto")) {
@@ -98,7 +106,7 @@ public class Upload extends HttpServlet {
 				if (!item.isFormField()) {
 					// faço o cadastro da imagem no bd com dados temporários pra garantir o id e salvar ela no disco com esse id
 					// após upar e armazenar a imagem atualizo os dados
-					Foto fotoTemp = Fachada.getInstance().fotoCadastrar(new Foto(0, 1, id, referencia, "", "", 'S'));
+					Foto fotoTemp = Fachada.getInstance().fotoCadastrar(new Foto(0, sessionAdministrador.getId(), id, referencia, "", "", 'S'));
 					// se for campo de arquivo processa aqui
 					String fileName = new File(item.getName()).getName();
 					String extencao = fileName.substring(fileName.lastIndexOf('.') + 1);
