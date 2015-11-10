@@ -1,3 +1,5 @@
+<%@page import="br.com.vempracaruaru.lista.Lista"%>
+<%@page import="br.com.vempracaruaru.usuario.Usuario"%>
 <%@page import="br.com.vempracaruaru.foto.Foto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.com.vempracaruaru.fachada.Fachada"%>
@@ -35,9 +37,17 @@ ArrayList<Foto> fotos = new ArrayList<Foto>();
         	</div>
         	<div class="coluna" style="float:right;">
         		<div class="coluna" style="background-color:#FECC47; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px;" onClick="window.open('obras.jsp?idPonto=<%=ponto.getId() %>', '_self')">ver obras</div>
-        		<%if (session.getAttribute("loginUsuario") != null){ %>
-        		<div class="coluna" style="background-color:#F3660A; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px; margin-left:30px;" onClick="window.open('ListaCadastrar?idPonto=<%=ponto.getId() %>', 'recebeForm'); $(this).hide();">+ adicionar à lista</div>
-        		<%} %>
+        		<%if (session.getAttribute("loginUsuario") != null){
+        			Usuario sessionUsuario = (Usuario) session.getAttribute("loginUsuario");
+        			try {
+        			Lista lista = Fachada.getInstance().listarPorUsuarioPonto(sessionUsuario.getId(), ponto.getId(), 'N');
+        			if (lista.getIdPontoTuristico() != ponto.getId()){%>
+        			<div class="coluna" style="background-color:#F3660A; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px; margin-left:30px;" onClick="window.open('ListaCadastrar?idPonto=<%=ponto.getId() %>', 'recebeForm'); $(this).hide();">+ adicionar à lista</div>
+        		<%	}
+        			}catch (Exception e){%>
+        				<div class="coluna" style="background-color:#F3660A; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px; margin-left:30px;" onClick="window.open('ListaCadastrar?idPonto=<%=ponto.getId() %>', 'recebeForm'); $(this).hide();">+ adicionar à lista</div>
+        		  <%}
+        		  } %>
         	</div>
         	<br/><br/><br/><br/>
         	<div class="clear">

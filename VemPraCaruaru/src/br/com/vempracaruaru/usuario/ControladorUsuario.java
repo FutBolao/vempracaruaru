@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.com.vempracaruaru.exception.BusinessException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarUsuarioException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
 import br.com.vempracaruaru.exception.UsuarioJaCadastradoException;
 import br.com.vempracaruaru.exception.UsuarioNaoCadastradoException;
@@ -36,9 +37,13 @@ public class ControladorUsuario {
 	public Usuario loginSite(String email, String senha) throws SQLException, BusinessException, Exception{
 		return repositorio.loginSite(email, senha);
 	}
-	public void alterar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception{
+	public void alterar(Usuario usuario) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
 	repositorio.alterar(usuario);
+	}
+	public void alterarSenha(Usuario usuario) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception{
+		System.out.println("Passando pela controladora");
+	repositorio.alterarSenha(usuario);
 	}
 	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");

@@ -26,6 +26,7 @@ import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarPontoTuristicoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarUsuarioException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarAdministradorException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarContatoException;
@@ -212,9 +213,15 @@ public class Fachada {
 	}
 
 	public void usuarioAlterar(Usuario usuario)
-			throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioNaoCadastradoException, Exception {
+			throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorUsuario.alterar(usuario);
+	}
+	
+	public void usuarioAlterarSenha(Usuario usuario)
+			throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorUsuario.alterarSenha(usuario);
 	}
 
 	public void usuarioDeletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
@@ -322,7 +329,7 @@ public class Fachada {
 	// METODOS DAS LISTA
 
 	public void listaCadastrar(Lista lista)
-			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception {
+			throws SQLException, ListaJaCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorLista.cadastrar(lista);
 	}
@@ -333,9 +340,14 @@ public class Fachada {
 		return controladorLista.listarTodos(complemento);
 	}
 
-	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception {
+	public ArrayList<Lista> listarPorUsuario(int idUsuario, char visitado) throws SQLException, ListaNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		return controladorLista.listarPorId(id);
+		return controladorLista.listarPorUsuario(idUsuario, visitado);
+	}
+	
+	public Lista listarPorUsuarioPonto(int idUsuario, int idPonto, char visitado) throws SQLException, ListaNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorLista.listarPorUsuarioPonto(idUsuario, idPonto, visitado);
 	}
 
 	public void ListaAlterar(Lista lista)

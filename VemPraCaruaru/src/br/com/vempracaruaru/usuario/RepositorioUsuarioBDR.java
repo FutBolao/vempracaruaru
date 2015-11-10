@@ -167,6 +167,25 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 			}
 		
 	}
+	
+	@Override
+	public void alterarSenha(Usuario usuario)
+			throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception {
+		
+		if (existeId(usuario) == false){
+			PreparedStatement ps = null;
+			String sql = "";
+			sql = "UPDATE " + NOME_TABELA + " SET senha=password(?) WHERE id=?;";
+			ps = this.connection.prepareStatement(sql);
+			ps.setString(1, usuario.getSenha());
+			ps.setInt(2, usuario.getId());
+			Integer resultado = ps.executeUpdate();
+			if (resultado == 0) throw new NaoFoiPossivelAlterarUsuarioException();
+			ps.close();
+		}else{
+			throw new NaoFoiPossivelAlterarUsuarioException();
+		}
+	}
 
 	@Override
 	public void deletar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
@@ -219,7 +238,7 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		ps = connection.prepareStatement(sql);
 		ps.setInt(1, usuario.getId());
 		rs = ps.executeQuery();
-		if(rs != null){
+		if(rs.next()){
 			resposta = false;
 		}
 		ps.close();

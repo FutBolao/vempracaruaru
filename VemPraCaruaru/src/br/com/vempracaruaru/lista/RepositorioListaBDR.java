@@ -4,20 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.conexao.DataBase;
-import br.com.vempracaruaru.exception.AdministradorNaoCadastradoException;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
-import br.com.vempracaruaru.exception.NaoFoiPossivelAlterarListaException;
-import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
 import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
-import br.com.vempracaruaru.exception.PontoTuristicoNaoCadastradoException;
-import br.com.vempracaruaru.pontoturistico.PontoTuristico;
 
 public class RepositorioListaBDR implements IRepositorioLista{
 	/*
@@ -27,6 +21,7 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	
 	private static RepositorioListaBDR instance;
 	public static final String NOME_TABELA = "lista_ponto";
+	public static final String VIEW_TABELA = "vw_lista_ponto";
 	private Connection connection;
 	private int dataBase = DataBase.MYSQL;
 	
@@ -39,39 +34,30 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	}
 	
 	public RepositorioListaBDR() throws Exception {
-		// TODO Auto-generated constructor stub
 		this.connection = Conexao.getConexao(dataBase);
 	}
 	
 	
 	@Override
 	public void cadastrar(Lista lista)
-			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception {
-		System.out.println("Chegando ao repositorio");
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "";
-	
+			throws SQLException, ListaJaCadastradoException, Exception {
+		System.out.println("Chegando ao repositorio LIST");
+		System.out.println(existeId(lista));
+		if (existeId(lista) == false) {
+			PreparedStatement ps = null;
+			String sql = "";
 			sql = "INSERT INTO " + NOME_TABELA + " (id_usuario, id_ponto_turistico) VALUES (?,?);";
-			ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps = this.connection.prepareStatement(sql);
 			ps.setInt(1, lista.getIdUsuario());
 			ps.setInt(2, lista.getIdPontoTuristico());
-			ps.execute();
-			rs = ps.getGeneratedKeys();
-//			int id = 0;
-//			if (rs != null) {
-//				while (rs.next()) {
-//					id = rs.getInt(1);
-//				}
-//				lista.setId(id);
-//				cardastrarLista(lista);
-//			} else {
-//				throw new NaoFoiPossivelCadastrarArtistaException();
-//			}
-			System.out.println("Cadastro concluido com sucesso");
-		
-		ps.close();
-		rs.close();
+			System.out.println(ps);
+			int execucao = ps.executeUpdate();
+			if (execucao == 0) throw new ListaJaCadastradoException();
+			ps.close();
+		} else {
+			throw new ListaJaCadastradoException();
+		}
+		System.out.println("Cadastro concluido com sucesso");
 	}
 
 	@Override
@@ -82,36 +68,41 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
-		sql = "SELECT * FROM " + NOME_TABELA + " ";
+		sql = "SELECT * FROM " + VIEW_TABELA + " ";
 		sql += "WHERE ";
 		sql += complemento;
+		sql += " ORDER by data_hora DESC";
 		ps = this.connection.prepareStatement(sql);
+		System.out.println(ps);
 		rs = ps.executeQuery();
-		if (rs != null) {
-			while (rs.next()) {
-				Lista lista = new Lista(rs.getInt("id_usuario"), rs.getInt("id_ponto_turistico"), rs.getString("data_hora"), rs.getString("visitado").charAt(0));
-				listas.add(lista);
-			}
-		}else{
-			throw new ObraNaoCadastradaException();
+		int contador = 0;
+		while (rs.next()) {
+			contador++;
+			Lista lista = new Lista(rs.getInt("id_usuario"), rs.getString("nome_usuario"), rs.getInt("id_ponto_turistico"), rs.getString("nome_ponto"), rs.getString("data_hora"), rs.getString("visitado").charAt(0));
+			listas.add(lista);
 		}
+//		if (contador == 0) throw new ObraNaoCadastradaException();
+		
 		System.out.println("- Consulta completada com sucesso -");
 		ps.close();
 		rs.close();
 		return listas;
 	
 	}
-
+	
 	@Override
-	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception {
-		return listarTodos("id=" + id).get(0);
-		}
+	public ArrayList<Lista> listarPorUsuario(int idUsuario, char visitado) throws SQLException, ListaNaoCadastradoException, Exception {
+		return listarTodos("id_usuario=" + idUsuario + " AND visitado='"+ visitado +"'");
+	}
+	
+	@Override
+	public Lista listarPorUsuarioPonto(int idUsuario, int idPonto, char visitado) throws SQLException, ListaNaoCadastradoException, Exception {
+		return listarTodos("id_usuario=" + idUsuario + " AND id_ponto_turistico= " + idPonto + " AND visitado='"+ visitado +"'").get(0);
+	}
 
 	@Override
 	public void alterar(Lista lista)
 			throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception {
-		
-		
 		
 	}
 
@@ -138,85 +129,18 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	public boolean existeId(Lista lista) throws SQLException, ListaJaCadastradoException, Exception {		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id=?";
+		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE id_usuario=? AND id_ponto_turistico=? AND visitado='N'";
 		boolean resposta = false;		
-//		ps = connection.prepareStatement(sql);
-//		ps.setInt(1, lista.getId());
-//		rs = ps.executeQuery();
-//		if(rs != null){
-//			resposta = true;
-//		}
-//		ps.close();
-//		rs.close();
-		return resposta;		
-	}
-	
-	private void cardastrarLista(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
-		System.out.println("Chegando ao repositorio");
-		PreparedStatement ps = null;
-		String sql = "";
-	
-			sql = "INSERT INTO lista_ponto (id_lista, id_ponto_turistico) VALUES (?,?);";
-			if (this.dataBase == DataBase.ORACLE) {
-				ps = this.connection.prepareStatement(sql, new String[] { "id" });
-			} else {
-				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			}
-			
-//			for (PontoTuristico ponto : lista.getListaPontoTuristico()) {
-//				ps.setInt(1, lista.getId());
-//				ps.setInt(2,ponto.getId());
-//				ps.execute();
-//				
-//			}		
-		ps.close();
-	
-	}
-	
-	private ArrayList<PontoTuristico> listarPonto(int id)throws SQLException, PontoTuristicoNaoCadastradoException, Exception {
-		ArrayList<PontoTuristico> pontosTuristicos = new ArrayList<PontoTuristico>();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "";
-		sql = "SELECT * FROM  lista_ponto ";
-		sql += "WHERE ";
-		sql += "id_lista = " + id;
-		ps = this.connection.prepareStatement(sql);
+		ps = connection.prepareStatement(sql);
+		ps.setInt(1, lista.getIdUsuario());
+		ps.setInt(2, lista.getIdPontoTuristico());
 		rs = ps.executeQuery();
-		if (rs != null) {
-			while (rs.next()) {
-								
-				PontoTuristico pontoTuristico = repcuperarPonto(rs.getInt("id_ponto_turistico"));
-				pontosTuristicos.add(pontoTuristico);
-			}
-		}else{
-			throw new AdministradorNaoCadastradoException();
+		if(rs.next()){
+			resposta = true;
 		}
 		ps.close();
 		rs.close();
-		return pontosTuristicos;
-		
+		return resposta;		
 	}
 	
-	private PontoTuristico repcuperarPonto(int id) throws SQLException{
-		PontoTuristico ponto = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM  vw_ponto_turistico where id_ponto_turistico = " +id;
-		
-		ps = this.connection.prepareStatement(sql);
-		rs = ps.executeQuery();
-		
-		if(rs != null){
-			while(rs.next()){
-				ponto = new PontoTuristico(rs.getInt("id"), rs.getInt("id_administrador"),
-						rs.getString("nome_administrador"),rs.getString("nome_ponto_turistico"), rs.getString("endereco"), rs.getString("latitude"), rs.getString("longitude"),
-						rs.getString("telefone"), rs.getString("email"), rs.getString("tempo_visitacao"), rs.getString("horario_funcionamento"),
-						rs.getString("historico_descricao"), rs.getString("imagem_principal"), rs.getString("ativo").charAt(0), rs.getInt("quantidade_fotos"));
-				}
-			}
-		ps.close();
-		rs.close();
-		return ponto;
-	}
 }

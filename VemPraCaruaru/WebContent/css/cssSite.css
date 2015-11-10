@@ -77,6 +77,22 @@ h3{
 	text-decoration:none;
 	color:#666;
 }
+#menuMinhaConta {
+	background-color:#666;
+	color:#FFF;
+	width:150px;
+	height:30px;
+	padding-left:8px;
+	padding-right:8px;
+	cursor:pointer;
+	line-height:28px;
+}
+#menuMinhaConta:hover{
+	background-color:#FECC47;
+}
+.paginaAtual#menuMinhaConta{
+	background-color:#F47928;
+}
 #pontoTuristicoTitulo{
 	width:247px;;
 	min-height:40px;

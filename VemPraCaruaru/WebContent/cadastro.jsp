@@ -49,7 +49,7 @@
                 		<span>Digite a senha</span>
               		</div>
 					<div class="coluna" style="text-align:left;">
-                		<label for="campoSenhaR">Senha</label>
+                		<label for="campoSenhaR">Repita a senha</label>
                 		<input type="password" id="campoSenhaR" name="campoSenhaR" style="width:200px; margin-right:20px;" class="required password" value="" />
                 		<span>Confirme a senha digitada</span>
               		</div>

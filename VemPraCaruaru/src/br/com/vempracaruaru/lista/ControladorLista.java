@@ -15,7 +15,7 @@ private IRepositorioLista repositorio;
 		this.repositorio = new RepositorioListaBDR();
 	}
 	
-	public void cadastrar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaJaCadastradoException, Exception{
+	public void cadastrar(Lista lista) throws SQLException, ListaJaCadastradoException, Exception{
 		System.out.println("passando pela controladora - concluido com sucesso -");
 		if (lista != null) {
 			repositorio.cadastrar(lista);
@@ -25,10 +25,12 @@ private IRepositorioLista repositorio;
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return repositorio.listarTodos(complemento);
 	}
-	public Lista listarPorId(int id) throws SQLException, ListaNaoCadastradoException, Exception{
-		return repositorio.listarPorId(id);
+	public ArrayList<Lista> listarPorUsuario(int idUsuario, char visitado) throws SQLException, ListaNaoCadastradoException, Exception{
+		return repositorio.listarPorUsuario(idUsuario, visitado);
 	}
-
+	public Lista listarPorUsuarioPonto(int idUsuario, int idPonto, char visitado) throws SQLException, ListaNaoCadastradoException, Exception{
+		return repositorio.listarPorUsuarioPonto(idUsuario, idPonto, visitado);
+	}
 	public void alterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
 		repositorio.alterar(lista);	
 	}
