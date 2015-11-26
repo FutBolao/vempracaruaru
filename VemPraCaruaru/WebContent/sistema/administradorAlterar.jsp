@@ -3,7 +3,7 @@
 <jsp:include page="verificaLogin.jsp" />
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <%
-Administrador administrador = null;
+	Administrador administrador = null;
 try {
 	administrador = Fachada.getInstance().administradorListarPorId(Integer.parseInt(request.getParameter("id")));
 } catch (Exception e) {

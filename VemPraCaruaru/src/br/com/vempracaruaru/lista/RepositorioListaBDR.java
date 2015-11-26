@@ -11,7 +11,6 @@ import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
-import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
 
 public class RepositorioListaBDR implements IRepositorioLista{
 	/*
@@ -75,9 +74,9 @@ public class RepositorioListaBDR implements IRepositorioLista{
 		ps = this.connection.prepareStatement(sql);
 		System.out.println(ps);
 		rs = ps.executeQuery();
-		int contador = 0;
+//		int contador = 0;
 		while (rs.next()) {
-			contador++;
+//			contador++;
 			Lista lista = new Lista(rs.getInt("id_usuario"), rs.getString("nome_usuario"), rs.getInt("id_ponto_turistico"), rs.getString("nome_ponto"), rs.getString("data_hora"), rs.getString("visitado").charAt(0));
 			listas.add(lista);
 		}

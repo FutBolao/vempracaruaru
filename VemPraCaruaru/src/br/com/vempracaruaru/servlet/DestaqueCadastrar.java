@@ -121,6 +121,7 @@ public class DestaqueCadastrar extends HttpServlet {
 			destaque.setLink(link);
 			Fachada.getInstance().destaqueAlterar(destaque);
 			Conexao.connection.setAutoCommit(true);
+//			out.println( "<script>parent.alert(\"Imagem Salva em: " + super.getServletContext().getResourcePaths("/WEB-INF") + "/" + UPLOAD_DIRECTORY + "\");</script>" );
 			out.println( "<script>parent.alert(\"Cadastro efetuado com sucesso!!!\");</script>" );
 			out.println( "<script>parent.limparFormulario();</script>" );
 		} catch (SQLException e) {
@@ -162,6 +163,9 @@ public class DestaqueCadastrar extends HttpServlet {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
+			String patch = getServletContext().getRealPath("");
+			if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+			out.println( "<script>parent.alert(\"" + patch + "\");</script>" );
 			out.println( "<script>parent.alert(\"Ocorreu um erro inesperado ao cadastrar o destaque\");</script>" );
 		}
 	}

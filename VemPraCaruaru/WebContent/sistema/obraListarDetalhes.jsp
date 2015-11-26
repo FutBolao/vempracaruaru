@@ -41,7 +41,9 @@ try {
                 Artista: <%=obra.getNomeArtista() %><br/>
            <%} %>
         Ativo: <%=obra.getAtivo() %><br>
-        Descri&ccedil;&atilde;o: <%=obra.getDescricao().replaceAll("\n", "<br/>").replaceAll("\r", "") %><br/>
+        Descri&ccedil;&atilde;o: <%=obra.getDescricao().replaceAll("\n", "<br/>").replaceAll("\r", "") %><br/><br/>
+        <strong>QR CODE</strong><br/>
+        <img alt="QR Code da obra de id <%=obra.getId() %>" title="QR Code da obra de id <%=obra.getId() %>" src="http://chart.apis.google.com/chart?cht=qr&chl=http://www.vempracaruaru.com.br/obrasDetalhes.jsp?id=<%=obra.getId() %>&chs=300x300">
       </p>
     </div>
 </body>

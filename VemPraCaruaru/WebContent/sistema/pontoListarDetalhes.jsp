@@ -42,7 +42,9 @@ try {
         Hor&aacute;rio de Funcionamento: <%=ponto.getHorarioFuncionamento() %><br>
         Quantidade de Obras: <%=ponto.getQuantidadeObras() %><br/>
         Ativo: <%=ponto.getAtivo() %><br>
-        Descri&ccedil;&atilde;o: <%=ponto.getHistoricoDescricao() %><br/>
+        Descri&ccedil;&atilde;o: <%=ponto.getHistoricoDescricao() %><br/><br/>
+      	  <strong>QR CODE</strong><br/>
+      	  <img alt="QR Code do ponto de id <%=ponto.getId() %>" title="QR Code do ponto de id <%=ponto.getId() %>" src="http://chart.apis.google.com/chart?cht=qr&chl=http://www.vempracaruaru.com.br/pontosTuristicosDetalhes.jsp?id=<%=ponto.getId() %>&chs=300x300">
       </p>
     </div>
 </body>

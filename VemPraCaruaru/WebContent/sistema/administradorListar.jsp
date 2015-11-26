@@ -4,7 +4,7 @@
 <%@page import="br.com.vempracaruaru.fachada.Fachada"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java" import="java.sql.*" errorPage="" %>
 <%
-ArrayList<Administrador> administradores = new ArrayList<Administrador>();
+	ArrayList<Administrador> administradores = new ArrayList<Administrador>();
 int ponteiro = 0;
 String cssClasse = "";
 %>
@@ -46,21 +46,21 @@ String cssClasse = "";
                 <th width="188">A&Ccedil;&Otilde;ES</th>
               </tr>
               <%
-              try {
-            	  administradores = Fachada.getInstance().administradorListarTodos("");
-            	  for (Administrador administrador : administradores) {
-            		ponteiro = ponteiro+1;
-            		if (administrador.getAtivo() == 'N') {
- 		  				cssClasse = "vermelho";
- 		  			} else if (ponteiro%2==0){
-		  				cssClasse = "par";
-		  			} else {
-		  				cssClasse = "impar";
-		  			}
-		  			String imagemAtivarInativar = administrador.getAtivo() == 'S' ? "inativar.png" : "ativar.png";
-		  			String nomeAtivarInativar = administrador.getAtivo() == 'S' ? "Inativar" : "Ativar";
-					String paginaAtivoInativo = administrador.getAtivo() == 'S' ? "../AdministradorInativar?id=" + administrador.getId() : "../AdministradorAtivar?id=" + administrador.getId();
-	                %>
+              	try {
+                                        	  administradores = Fachada.getInstance().administradorListarTodos("");
+                                        	  for (Administrador administrador : administradores) {
+                                        		ponteiro = ponteiro+1;
+                                        		if (administrador.getAtivo() == 'N') {
+                             		  				cssClasse = "vermelho";
+                             		  			} else if (ponteiro%2==0){
+                            		  				cssClasse = "par";
+                            		  			} else {
+                            		  				cssClasse = "impar";
+                            		  			}
+                            		  			String imagemAtivarInativar = administrador.getAtivo() == 'S' ? "inativar.png" : "ativar.png";
+                            		  			String nomeAtivarInativar = administrador.getAtivo() == 'S' ? "Inativar" : "Ativar";
+                            			String paginaAtivoInativo = administrador.getAtivo() == 'S' ? "../AdministradorInativar?id=" + administrador.getId() : "../AdministradorAtivar?id=" + administrador.getId();
+              %>
 	                <tr id="<%=cssClasse%>">
 	                  <td><%=administrador.getId()%></td>
 	                  <td><%=administrador.getNome()%></td>

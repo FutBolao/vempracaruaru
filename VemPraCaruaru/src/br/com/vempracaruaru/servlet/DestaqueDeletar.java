@@ -45,7 +45,7 @@ public class DestaqueDeletar extends HttpServlet {
 		    	System.out.println("É diretorio: " + arquivo.isDirectory());
 		    	System.out.println("É arquivo: " + arquivo.isFile());
 				arquivo.delete();
-		    	out.println( "<script>parent.alert(\"Destaque deletado com sucesso!\");</script>" );
+		    	out.println( "<script>parent.alert(\"Destaque deletado com sucesso!!!\");</script>" );
 		    	out.println( "<script>parent.location.href = \"sistema/destaqueListar.jsp\";</script>" );
 		    }
 		} catch (SQLException e) {

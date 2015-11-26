@@ -47,7 +47,9 @@ try {
            <a href="<%=artista.getFacebook() %>" target="_blank"><img src="../img/iconFacebook.png" alt="Link do Facebook" title="Link do Facebook" width="37" height="37"></a><br>
            <%} %>
            Ativo: <%=artista.getAtivo() %><br>
-           Histórico: <%=artista.getHistorico() %><br/>
+           Histórico: <%=artista.getHistorico() %><br/><br/>
+      	  <strong>QR CODE</strong><br/>
+      	  <img alt="QR Code do(a) artista de id <%=artista.getId() %>" title="QR Code do(a) artista de id <%=artista.getId() %>" src="http://chart.apis.google.com/chart?cht=qr&chl=http://www.vempracaruaru.com.br/artistasDetalhes.jsp?id=<%=artista.getId() %>&chs=300x300">
       </p>
     </div>
 </body>
