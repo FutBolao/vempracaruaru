@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelDeletarListaException;
 
 public class ControladorLista {
 
@@ -34,7 +35,7 @@ private IRepositorioLista repositorio;
 	public void alterar(Lista lista) throws SQLException, NaoFoiPossivelCadastrarListaException, ListaNaoCadastradoException, Exception{
 		repositorio.alterar(lista);	
 	}
-	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception{
-		repositorio.deletar(id);
+	public void deletar(int idUsuario, int idPontoTuristico) throws SQLException, NaoFoiPossivelDeletarListaException, Exception{
+		repositorio.deletar(idUsuario, idPontoTuristico);
 	}
 }

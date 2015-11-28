@@ -135,7 +135,12 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 	@Override
 	public Usuario listarPorId(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		return listarTodos("AND id=" + id).get(0);
-		}
+	}
+	
+	@Override
+	public Usuario listarPorIdFacebook(String idFacebook, String email) throws SQLException, UsuarioNaoCadastradoException, Exception {
+		return listarTodos("AND email=" + email + " AND user_facebook=" + idFacebook).get(0);
+	}
 
 	@Override
 	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception {
@@ -246,5 +251,4 @@ public class RepositorioUsuarioBDR implements IRepositorioUsuario{
 		return resposta;		
 	}
 
-	
 }

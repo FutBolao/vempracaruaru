@@ -30,6 +30,10 @@ public class ControladorUsuario {
 		System.out.println("Passando pela controladora");
 		return repositorio.listarPorId(id);
 	}
+	public Usuario listarPorIdFacebook(String idFacebook, String email) throws SQLException, UsuarioNaoCadastradoException, Exception{
+		System.out.println("Passando pela controladora");
+		return repositorio.listarPorIdFacebook(idFacebook, email);
+	}
 	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
 		return repositorio.listarPorNome(nome);

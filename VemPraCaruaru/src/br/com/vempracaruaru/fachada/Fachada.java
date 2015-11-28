@@ -36,6 +36,7 @@ import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarObraException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarPontoTuristicoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelDeletarListaException;
 import br.com.vempracaruaru.exception.ObraJaCadastradaException;
 import br.com.vempracaruaru.exception.ObraNaoCadastradaException;
 import br.com.vempracaruaru.exception.PontoTuristicoJaCadastradoException;
@@ -201,6 +202,11 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorUsuario.listarPorId(id);
 	}
+	
+	public Usuario usuarioListarPorIdFacebook(String idFacebook, String email) throws SQLException, UsuarioNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorUsuario.listarPorIdFacebook(idFacebook, email);
+	}
 
 	public ArrayList<Usuario> usuarioListarPorNome(String nome)
 			throws SQLException, UsuarioNaoCadastradoException, Exception {
@@ -356,9 +362,9 @@ public class Fachada {
 		controladorLista.alterar(lista);
 	}
 
-	public void listaDeletar(int id) throws SQLException, ListaNaoCadastradoException, Exception {
+	public void listaDeletar(int idUsuario, int idPontoTuristico) throws SQLException, NaoFoiPossivelDeletarListaException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
-		controladorLista.deletar(id);
+		controladorLista.deletar(idUsuario, idPontoTuristico);
 	}
 
 	// METODOS DAS FOTO

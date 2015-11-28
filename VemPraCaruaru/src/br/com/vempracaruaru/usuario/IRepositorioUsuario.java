@@ -14,6 +14,7 @@ public interface IRepositorioUsuario {
 	public void cadastrar(Usuario usuario) throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioJaCadastradoException, Exception;
 	public ArrayList<Usuario> listarTodos(String complemento) throws SQLException, UsuarioNaoCadastradoException, Exception;
 	public Usuario listarPorId(int id) throws SQLException, UsuarioNaoCadastradoException, Exception;
+	public Usuario listarPorIdFacebook(String idFacebook, String email) throws SQLException, UsuarioNaoCadastradoException, Exception;
 	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception;
 	public void alterar(Usuario usuario) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception;
 	public void alterarSenha(Usuario usuario) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception;

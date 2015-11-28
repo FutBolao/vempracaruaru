@@ -53,9 +53,10 @@
 				ArrayList<Lista> listasInativa = Fachada.getInstance().listarPorUsuario(sessionUsuario.getId(), 'S');
 				%>
 					<span style="color:#009; font-size:16px; font-weight:bold;">Lista de Pontos Turisticos à visitar</span><br/><br/>
-					<% for (Lista lista : listasAtiva) {
-						out.println(lista.getNomePontoTuristico());
-					} %>
+					<% for (Lista lista : listasAtiva) { %>
+						<a href="ListaDeletar?idPonto=<%=lista.getIdPontoTuristico()%>" target="recebeForm" onClick="return doConfirm(this.id)"><img src="img/deletar.png" alt="Deletar o ponto turístico de ID <%=lista.getIdPontoTuristico()%> da lista." title="Deletar o ponto turístico de ID <%=lista.getIdPontoTuristico()%> da lista." width="24" height="24" align="bottom"></a>
+						<%=lista.getNomePontoTuristico()%><br/><hr><br/>
+					<%} %>
 					<br/><br/><br/><span style="color:#F00; font-size:16px; font-weight:bold;">Lista de Pontos Turisticos à Visitados</span><br/><br/>
 					<% for (Lista lista : listasInativa) {
 						out.println(lista.getNomePontoTuristico() +" - (visitado em "+lista.getDataHora()+")");

@@ -138,21 +138,15 @@ public class RepositorioDestaqueBDR implements IRepositorioDestaque {
 		System.out.println("chegando ao repositorio");
 		PreparedStatement stmt = null;
 		String sql = "";
-		
-		try {
-			if(existeId(new Destaque(id, 0, "", "", ""))== false){
-			sql = "delete from "+ NOME_TABELA +" where id= ?";
-			stmt = this.connection.prepareStatement(sql);
-			stmt.setInt(1, id);			
-			stmt.execute();
-			System.out.println("foi removido");
-			}else{
-				throw new NaofoiPossivelDeletarDestaqueException();
-			}
-		} finally {
-
+		if(existeId(new Destaque(id, 0, "", "", ""))== false){
+		sql = "delete from "+ NOME_TABELA +" where id= ?";
+		stmt = this.connection.prepareStatement(sql);
+		stmt.setInt(1, id);			
+		stmt.execute();
+		System.out.println("foi removido");
+		}else{
+			throw new NaofoiPossivelDeletarDestaqueException();
 		}
-
 	}
 
 	@Override

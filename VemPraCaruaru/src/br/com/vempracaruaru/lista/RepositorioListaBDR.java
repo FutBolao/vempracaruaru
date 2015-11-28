@@ -11,6 +11,7 @@ import br.com.vempracaruaru.conexao.DataBase;
 import br.com.vempracaruaru.exception.ListaJaCadastradoException;
 import br.com.vempracaruaru.exception.ListaNaoCadastradoException;
 import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarListaException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelDeletarListaException;
 
 public class RepositorioListaBDR implements IRepositorioLista{
 	/*
@@ -106,22 +107,20 @@ public class RepositorioListaBDR implements IRepositorioLista{
 	}
 
 	@Override
-	public void deletar(int id) throws SQLException, ListaNaoCadastradoException, Exception {
-//		Lista lista = new Lista(id, null, 0, "", 'N');
-//		if(existeId(lista) == false){
-//		PreparedStatement ps = null;
-//		String sql = "";
-//		sql = "UPDATE " + NOME_TABELA + " SET ativo=? WHERE id=?;";
-//		ps = this.connection.prepareStatement(sql);
-//		ps.setString(1, String.valueOf(lista.getAtivo()));
-//		ps.setInt(2, lista.getId());
-//		Integer resultado = ps.executeUpdate();
-//		if (resultado == 0) throw new NaoFoiPossivelAlterarListaException();
-//		ps.close();
-//		System.out.println("- consulta completada com sucesso -");
-//	}else{
-//		throw new ListaNaoCadastradoException();
-//		}
+	public void deletar(int idUsuario, int idPontoTuristico) throws SQLException, NaoFoiPossivelDeletarListaException, Exception {
+		System.out.println("chegando ao repositorio");
+		PreparedStatement stmt = null;
+		String sql = "";
+		if(existeId(new Lista(idUsuario, idPontoTuristico, "", 'N'))){
+			sql = "delete from "+ NOME_TABELA +" where id_usuario=? AND id_ponto_turistico=? AND visitado='N'";
+			stmt = this.connection.prepareStatement(sql);
+			stmt.setInt(1, idUsuario);
+			stmt.setInt(2, idPontoTuristico);
+			stmt.execute();
+			System.out.println("foi removido");
+		}else{
+			throw new NaoFoiPossivelDeletarListaException();
+		}
 	}
 
 	@Override

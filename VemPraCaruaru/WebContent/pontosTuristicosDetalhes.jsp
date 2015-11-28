@@ -26,6 +26,13 @@ ArrayList<Foto> fotos = new ArrayList<Foto>();
 </head>
 
 <body>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.4&appId=1043761065664755";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="corpo">
 		<div id="topo">
           <jsp:include page="topo.jsp"></jsp:include>
@@ -36,6 +43,9 @@ ArrayList<Foto> fotos = new ArrayList<Foto>();
         		<h3><%=ponto.getNome() %></h3>
         	</div>
         	<div class="coluna" style="float:right;">
+        		<div class="coluna" style="height:30px; padding-left:8px; padding-right:8px; line-height:28px;">
+          			<div class="fb-like" data-href="http://www.vempracaruaru.com.br/pontosTuristicosDetalhes.php?id=<%=ponto.getId() %>" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+        		</div>
         		<div class="coluna" style="background-color:#FECC47; color:#FFF; height:30px; padding-left:8px; padding-right:8px; cursor:pointer; line-height:28px;" onClick="window.open('obras.jsp?idPonto=<%=ponto.getId() %>', '_self')">ver obras</div>
         		<%if (session.getAttribute("loginUsuario") != null){
         			Usuario sessionUsuario = (Usuario) session.getAttribute("loginUsuario");
