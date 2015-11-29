@@ -55,7 +55,7 @@ try {
               </div>
             <div class="coluna">
                 <button class="button blue submit" type="submit" style="margin-top:14px; margin-right:10px;">Alterar</button>
-                <button  class="button gray reset" type="reset" style="margin-top:14px;">Redefinir</button>
+                <button  class="button gray" type="reset" style="margin-top:14px;">Redefinir</button>
               </div>
               <div class="clear"></div>
           </form>

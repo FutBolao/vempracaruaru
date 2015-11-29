@@ -23,7 +23,7 @@ import br.com.vempracaruaru.artista.Artista;
 import br.com.vempracaruaru.conexao.Conexao;
 import br.com.vempracaruaru.exception.ArtistaJaCadastradoException;
 import br.com.vempracaruaru.exception.BusinessException;
-import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarDestaqueException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarArtistaException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.foto.Foto;
 
@@ -91,7 +91,9 @@ public class ArtistaCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY 
+			String patch = getServletContext().getRealPath("");
+			if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+			String uploadPath = patch + "/" + UPLOAD_DIRECTORY
 					+ "/" + artista.getId() + "/";
 			
 			// cria o diretório caso não exista
@@ -162,6 +164,7 @@ public class ArtistaCadastrar extends HttpServlet {
 			}
 			System.out.println(artista.toString());
 			Fachada.getInstance().artistaAlterar(artista);
+			Fachada.getInstance().artistaDefinirImagemPrincipal(artista.getId(), artista.getFoto());
 			Conexao.connection.setAutoCommit(true);
 			out.println( "<script>parent.alert(\"Cadastro efetuado com sucesso!!!\");</script>" );
 			out.println( "<script>parent.limparFormulario();</script>" );
@@ -173,7 +176,7 @@ public class ArtistaCadastrar extends HttpServlet {
 			}
 			e.printStackTrace();
 			out.println( "<script>parent.alert(\"" + e.getMessage() + "\");</script>" );
-		} catch (NaoFoiPossivelCadastrarDestaqueException e) {
+		} catch (NaoFoiPossivelCadastrarArtistaException e) {
 			try {
 				Conexao.connection.rollback();
 			} catch (SQLException e1) {

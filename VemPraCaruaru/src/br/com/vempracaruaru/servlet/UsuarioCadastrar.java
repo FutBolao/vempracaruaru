@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.vempracaruaru.exception.ContatoJaCadastradoException;
-import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarContatoException;
+import br.com.vempracaruaru.exception.NaoFoiPossivelCadastrarUsuarioException;
 import br.com.vempracaruaru.fachada.Fachada;
 import br.com.vempracaruaru.usuario.Usuario;
 
@@ -44,7 +44,7 @@ public class UsuarioCadastrar extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			out.println( "<script>parent.alert(\"" + e.getMessage() + "\");</script>" );
-		} catch (NaoFoiPossivelCadastrarContatoException e) {
+		} catch (NaoFoiPossivelCadastrarUsuarioException e) {
 			e.printStackTrace();
 			out.println( "<script>parent.alert(\"" + e.getMessage() + "\");</script>" );
 		} catch (ContatoJaCadastradoException e) {

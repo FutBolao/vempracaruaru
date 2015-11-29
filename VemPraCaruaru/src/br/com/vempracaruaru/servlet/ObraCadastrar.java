@@ -87,7 +87,9 @@ public class ObraCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY 
+			String patch = getServletContext().getRealPath("");
+			if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+			String uploadPath = patch + "/" + UPLOAD_DIRECTORY
 					+ "/" + obra.getId() + "/";
 			
 			// cria o diretório caso não exista
@@ -144,8 +146,8 @@ public class ObraCadastrar extends HttpServlet {
 					obra.setDescricao(descricao);
 				}
 			}
-			System.out.println(obra.toString());
 			Fachada.getInstance().obraAlterar(obra);
+			Fachada.getInstance().obraDefinirImagemPrincipal(obra.getId(), obra.getFoto());
 			Conexao.connection.setAutoCommit(true);
 			out.println( "<script>parent.alert(\"Cadastro efetuado com sucesso!!!\");</script>" );
 			out.println( "<script>parent.limparFormulario();</script>" );

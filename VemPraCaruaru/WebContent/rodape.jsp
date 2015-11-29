@@ -6,9 +6,9 @@
           </div>
           <div class="coluna" style="margin-top:20px; margin-left:30px; color:#FFFFFF;">
                 <div>&copy; Copyright 2015 Vem Pra Caruaru — Todos os direitos reservados</div>
-                <div class="coluna" style="margin-top:10px; margin-right:10px;"> <a href="#"><img src="img/iconFacebook.png" width="37" height="37" alt="Link para página do facebook Vem Pra Caruaru" title="Link para página do facebook Vem Pra Caruaru"></a>
-                  <a href="#"><img src="img/iconTwitter.png" width="37" height="37" alt="Link para página do twitter Vem Pra Caruaru" title="Link para página do twitter Vem Pra Caruaru"></a>
-                  <a href="#"><img src="img/iconInstagram.png" width="38" height="37" alt="Link para página do instagram Vem Pra Caruaru" title="Link para página do instagram Vem Pra Caruaru"></a>
+                <div class="coluna" style="margin-top:10px; margin-right:10px;"> <a href="https://www.facebook.com/VEMPRACARUARU1/"><img src="img/iconFacebook.png" width="37" height="37" alt="Link para página do facebook Vem Pra Caruaru" title="Link para página do facebook Vem Pra Caruaru"></a>
+                  <a href="https://twitter.com/@vempracaruaru"><img src="img/iconTwitter.png" width="37" height="37" alt="Link para página do twitter Vem Pra Caruaru" title="Link para página do twitter Vem Pra Caruaru"></a>
+                  <a href="https://www.instagram.com/vempracaruaru/"><img src="img/iconInstagram.png" width="38" height="37" alt="Link para página do instagram Vem Pra Caruaru" title="Link para página do instagram Vem Pra Caruaru"></a>
                 </div>
                 <div style="margin-top:28px;">Siga-nos nas redes sociais.</div>
           </div>

@@ -184,7 +184,7 @@ public class Fachada {
 		controladorArtista.ativar(id);
 	}
 
-	// MÉTODOS DO USARIO
+	// MÉTODOS DO USUÁRIO
 
 	public void usuarioCadastrar(Usuario usuario)
 			throws SQLException, NaoFoiPossivelCadastrarUsuarioException, UsuarioJaCadastradoException, Exception {
@@ -207,6 +207,11 @@ public class Fachada {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		return controladorUsuario.listarPorIdFacebook(idFacebook, email);
 	}
+	
+	public Usuario usuarioListarPorEmail(String email) throws SQLException, UsuarioNaoCadastradoException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorUsuario.listarPorEmail(email);
+	}
 
 	public ArrayList<Usuario> usuarioListarPorNome(String nome)
 			throws SQLException, UsuarioNaoCadastradoException, Exception {
@@ -224,6 +229,11 @@ public class Fachada {
 		controladorUsuario.alterar(usuario);
 	}
 	
+	public void usuarioAlterarIdFacebook(String idFacebook, String email) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception{
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		controladorUsuario.alterarIdFacebook(idFacebook, email);
+	}
+	
 	public void usuarioAlterarSenha(Usuario usuario)
 			throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
@@ -238,6 +248,11 @@ public class Fachada {
 	public void usuarioAtivar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception {
 		System.out.println("Passando pela fachada - concluido com sucesso -");
 		controladorUsuario.ativar(id);
+	}
+	
+	public boolean usuarioExisteEmail(String email) throws SQLException, Exception {
+		System.out.println("Passando pela fachada - concluido com sucesso -");
+		return controladorUsuario.existeEmail(email);
 	}
 
 	// MÉTODOS DO PONTO_TURISTICOS

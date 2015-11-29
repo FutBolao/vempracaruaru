@@ -34,6 +34,10 @@ public class ControladorUsuario {
 		System.out.println("Passando pela controladora");
 		return repositorio.listarPorIdFacebook(idFacebook, email);
 	}
+	public Usuario listarPorEmail(String email) throws SQLException, UsuarioNaoCadastradoException, Exception{
+		System.out.println("Passando pela controladora");
+		return repositorio.listarPorEmail(email);
+	}
 	public ArrayList<Usuario> listarPorNome(String nome) throws SQLException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
 		return repositorio.listarPorNome(nome);
@@ -44,6 +48,10 @@ public class ControladorUsuario {
 	public void alterar(Usuario usuario) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
 	repositorio.alterar(usuario);
+	}
+	public void alterarIdFacebook(String idFacebook, String email) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception{
+		System.out.println("Passando pela controladora");
+		repositorio.alterarIdFacebook(idFacebook, email);
 	}
 	public void alterarSenha(Usuario usuario) throws SQLException, NaoFoiPossivelAlterarUsuarioException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
@@ -56,6 +64,10 @@ public class ControladorUsuario {
 	public void ativar(int id) throws SQLException, UsuarioNaoCadastradoException, Exception{
 		System.out.println("Passando pela controladora");
 		repositorio.ativar(id);
+	}
+	public boolean existeEmail(String email) throws SQLException, Exception {
+		System.out.println("Passando pela controladora");
+		return repositorio.existeEmail(email);
 	}
 
 }

@@ -34,47 +34,51 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 	}
 	
 	@Override
-	public Artista cadastrar(Artista artista)
-			throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception {
+	public Artista cadastrar(Artista artista) throws SQLException, NaoFoiPossivelCadastrarArtistaException, ArtistaJaCadastradoException, Exception {
 		System.out.println("Chegando ao repositorio");
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "";
-	
-			sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, historico,imagem_principal,"
-					+ " telefone, email, twitter, instagram, facebook, tipo, ativo"
-					+ ") VALUES (?,?,?,?,?,?,?,?,?,?,?);";
-			if (this.dataBase == DataBase.ORACLE) {
-				ps = this.connection.prepareStatement(sql, new String[] { "id" });
-			} else {
-				ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			}
-			ps.setInt(1, artista.getIdAdministrador());
-			ps.setString(2, artista.getNome());
-			ps.setString(3, artista.getHistorico());	
-			ps.setString(4, artista.getFoto());
-			ps.setString(5, artista.getTelefone());
-			ps.setString(6, artista.getEmail());
-			ps.setString(7, artista.getTwitter());
-			ps.setString(8, artista.getInstagram());
-			ps.setString(9, artista.getFacebook());			
-			ps.setString(10, artista.getTipo());
-			ps.setString(11, String.valueOf(artista.getAtivo()));
-			ps.execute();
-			rs = ps.getGeneratedKeys();
-			int id = 0;
-			if (rs != null) {
-				while (rs.next()) {
-					id = rs.getInt(1);
-				}
-				artista.setId(id);
-			} else {
-				throw new NaoFoiPossivelCadastrarArtistaException();
-			}
-			System.out.println("Cadastro concluido com sucesso");
 		
-		ps.close();
-		rs.close();
+		if (existeNome(artista.getNome())){
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "";
+		
+				sql = "INSERT INTO " + NOME_TABELA + " (id_administrador, nome, historico,imagem_principal,"
+						+ " telefone, email, twitter, instagram, facebook, tipo, ativo"
+						+ ") VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+				if (this.dataBase == DataBase.ORACLE) {
+					ps = this.connection.prepareStatement(sql, new String[] { "id" });
+				} else {
+					ps = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				}
+				ps.setInt(1, artista.getIdAdministrador());
+				ps.setString(2, artista.getNome());
+				ps.setString(3, artista.getHistorico());	
+				ps.setString(4, artista.getFoto());
+				ps.setString(5, artista.getTelefone());
+				ps.setString(6, artista.getEmail());
+				ps.setString(7, artista.getTwitter());
+				ps.setString(8, artista.getInstagram());
+				ps.setString(9, artista.getFacebook());			
+				ps.setString(10, artista.getTipo());
+				ps.setString(11, String.valueOf(artista.getAtivo()));
+				ps.execute();
+				rs = ps.getGeneratedKeys();
+				int id = 0;
+				if (rs != null) {
+					while (rs.next()) {
+						id = rs.getInt(1);
+					}
+					artista.setId(id);
+				} else {
+					throw new NaoFoiPossivelCadastrarArtistaException();
+				}
+				System.out.println("Cadastro concluido com sucesso");
+			
+			ps.close();
+			rs.close();
+		} else {
+			throw new NaoFoiPossivelCadastrarArtistaException("Não foi possível efetuar o cadastro, pois o Artista já está cadastrado no sistema.");
+		}
 		
 		return artista;
 		
@@ -204,6 +208,25 @@ public class RepositorioArtistaBDR  implements IRepositorioArtista{
 		boolean resposta = true;		
 		ps = connection.prepareStatement(sql);
 		ps.setInt(1, artista.getId());
+		rs = ps.executeQuery();
+		if(rs != null){
+			resposta = false;
+		}
+		ps.close();
+		rs.close();
+		return resposta;
+		
+	}
+	
+
+	private boolean existeNome(String nome) throws SQLException, ArtistaJaCadastradoException, Exception {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM " + NOME_TABELA + " WHERE nome=?";
+		boolean resposta = true;		
+		ps = connection.prepareStatement(sql);
+		ps.setString(1, nome);
 		rs = ps.executeQuery();
 		if(rs != null){
 			resposta = false;

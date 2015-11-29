@@ -38,7 +38,7 @@
           %>
 		<div id="conteudo">
 			<h3>Minha Conta</h3><br/>
-			<h4>Olá <%=sessionUsuario.getNome()%></h4><br/><br/>
+			<h4>Olá <%=sessionUsuario.getNome()%></h4><small>sua pontuação atual é <%=sessionUsuario.getPontos()%></small><br/><br/>
 			<iframe style="display:none;" name="recebeForm"></iframe>
         	<div class="clear">
 				<div class="coluna<%if (request.getParameter("acao") != null && request.getParameter("acao").equals("listas")) out.print(" paginaAtual"); %>" id="menuMinhaConta" onClick="window.open('minhaConta.jsp?acao=listas', '_self')">Listar Roteiros</div>
@@ -52,12 +52,12 @@
 				ArrayList<Lista> listasAtiva = Fachada.getInstance().listarPorUsuario(sessionUsuario.getId(), 'N');
 				ArrayList<Lista> listasInativa = Fachada.getInstance().listarPorUsuario(sessionUsuario.getId(), 'S');
 				%>
-					<span style="color:#009; font-size:16px; font-weight:bold;">Lista de Pontos Turisticos à visitar</span><br/><br/>
+					<span style="color:#009; font-size:16px; font-weight:bold;">Lista de Pontos Turísticos à visitar</span><br/><br/>
 					<% for (Lista lista : listasAtiva) { %>
 						<a href="ListaDeletar?idPonto=<%=lista.getIdPontoTuristico()%>" target="recebeForm" onClick="return doConfirm(this.id)"><img src="img/deletar.png" alt="Deletar o ponto turístico de ID <%=lista.getIdPontoTuristico()%> da lista." title="Deletar o ponto turístico de ID <%=lista.getIdPontoTuristico()%> da lista." width="24" height="24" align="bottom"></a>
 						<%=lista.getNomePontoTuristico()%><br/><hr><br/>
 					<%} %>
-					<br/><br/><br/><span style="color:#F00; font-size:16px; font-weight:bold;">Lista de Pontos Turisticos à Visitados</span><br/><br/>
+					<br/><br/><br/><span style="color:#F00; font-size:16px; font-weight:bold;">Lista de Pontos Turísticos visitados</span><br/><br/>
 					<% for (Lista lista : listasInativa) {
 						out.println(lista.getNomePontoTuristico() +" - (visitado em "+lista.getDataHora()+")");
 					} %>

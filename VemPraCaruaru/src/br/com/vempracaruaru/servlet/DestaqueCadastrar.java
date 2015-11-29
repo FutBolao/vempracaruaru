@@ -82,7 +82,9 @@ public class DestaqueCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY;
+			String patch = getServletContext().getRealPath("");
+			if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+			String uploadPath = patch + "/" + UPLOAD_DIRECTORY;
 			
 			// cria o diretório caso não exista
 			File uploadDir = new File(uploadPath);
@@ -163,9 +165,6 @@ public class DestaqueCadastrar extends HttpServlet {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-			String patch = getServletContext().getRealPath("");
-			if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
-			out.println( "<script>parent.alert(\"" + patch + "\");</script>" );
 			out.println( "<script>parent.alert(\"Ocorreu um erro inesperado ao cadastrar o destaque\");</script>" );
 		}
 	}

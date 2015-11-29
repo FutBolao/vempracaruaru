@@ -93,7 +93,9 @@ public class PontoCadastrar extends HttpServlet {
 			upload.setSizeMax(REQUEST_SIZE);
 			
 			// constrói o caminho do diretório para o arquivo de upload
-			String uploadPath = getServletContext().getRealPath("") + "/" + UPLOAD_DIRECTORY 
+			String patch = getServletContext().getRealPath("");
+			if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+			String uploadPath = patch + "/" + UPLOAD_DIRECTORY
 					+ "/" + ponto.getId() + "/";
 			
 			// cria o diretório caso não exista
@@ -165,8 +167,8 @@ public class PontoCadastrar extends HttpServlet {
 					ponto.setHistoricoDescricao(historicoDescricao);
 				}
 			}
-			System.out.println(ponto.toString());
 			Fachada.getInstance().pontoTuristicoAlterar(ponto);
+			Fachada.getInstance().pontoTuristicoDefinirImagemPrincipal(ponto.getId(), ponto.getFoto());
 			Conexao.connection.setAutoCommit(true);
 			out.println( "<script>parent.alert(\"Cadastro efetuado com sucesso!!!\");</script>" );
 			out.println( "<script>parent.limparFormulario();</script>" );

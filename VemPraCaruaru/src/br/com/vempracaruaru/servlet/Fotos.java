@@ -58,11 +58,16 @@ public class Fotos extends HttpServlet {
     					Fachada.getInstance().fotoDeletar(foto.getId());
     					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("ponto", ponto.getId()).get(0);
     					Fachada.getInstance().pontoTuristicoDefinirImagemPrincipal(ponto.getId(), fotoNova.getImagem());
-    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+    					String patch = getServletContext().getRealPath(foto.getImagem());
+    					if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+    					File arquivo = new File(patch);
     					arquivo.delete();
     				} else {
     					Fachada.getInstance().fotoDeletar(foto.getId());
-    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+//    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+    					String patch = getServletContext().getRealPath(foto.getImagem());
+    					if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+    					File arquivo = new File(patch);
     					arquivo.delete();
     				}
     			} else if (foto.getReferencia().equals("obra")) {
@@ -71,11 +76,17 @@ public class Fotos extends HttpServlet {
     					Fachada.getInstance().fotoDeletar(foto.getId());
     					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("obra", obra.getId()).get(0);
     					Fachada.getInstance().obraDefinirImagemPrincipal(obra.getId(), fotoNova.getImagem());
-    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+//    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+    					String patch = getServletContext().getRealPath(foto.getImagem());
+    					if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+    					File arquivo = new File(patch);
     					arquivo.delete();
     				} else {
     					Fachada.getInstance().fotoDeletar(foto.getId());
-    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+//    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+    					String patch = getServletContext().getRealPath(foto.getImagem());
+    					if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+    					File arquivo = new File(patch);
     					arquivo.delete();
     				}
     			} else if (foto.getReferencia().equals("artista")) {
@@ -84,11 +95,17 @@ public class Fotos extends HttpServlet {
     					Fachada.getInstance().fotoDeletar(foto.getId());
     					Foto fotoNova = Fachada.getInstance().fotoListarPorReferencia("artista", artista.getId()).get(0);
     					Fachada.getInstance().artistaDefinirImagemPrincipal(artista.getId(), fotoNova.getImagem());
-    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+//    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+    					String patch = getServletContext().getRealPath(foto.getImagem());
+    					if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+    					File arquivo = new File(patch);
     					arquivo.delete();
     				} else {
     					Fachada.getInstance().fotoDeletar(foto.getId());
-    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+//    					File arquivo = new File(getServletContext().getRealPath(foto.getImagem()));
+    					String patch = getServletContext().getRealPath(foto.getImagem());
+    					if (patch.endsWith("/SIS")) patch = patch.replaceAll("/SIS", "");
+    					File arquivo = new File(patch);
     					arquivo.delete();
     				}
     			}

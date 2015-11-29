@@ -32,7 +32,7 @@ public class Sair extends HttpServlet {
 		if (session != null) {
 			session.invalidate();
 		}
-		String url = response.encodeURL("entrar.jsp");     
+		String url = response.encodeURL("index.jsp");     
 		RequestDispatcher rd = request.getRequestDispatcher(url);  
 		rd.forward(request, response);
 		System.out.println("pediu pra sair");
