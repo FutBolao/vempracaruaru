@@ -35,10 +35,11 @@
 	        } else {
 	        	sessionUsuario = (Usuario) session.getAttribute("loginUsuario");
 	        }
+	        Usuario usuario = Fachada.getInstance().usuarioListarPorId(sessionUsuario.getId());
           %>
 		<div id="conteudo">
 			<h3>Minha Conta</h3><br/>
-			<h4>Olá <%=sessionUsuario.getNome()%></h4><small>sua pontuação atual é <%=sessionUsuario.getPontos()%></small><br/><br/>
+			<h4>Olá <%=sessionUsuario.getNome()%></h4><small>sua pontuação atual é <%=usuario.getPontos()%></small><br/><br/>
 			<iframe style="display:none;" name="recebeForm"></iframe>
         	<div class="clear">
 				<div class="coluna<%if (request.getParameter("acao") != null && request.getParameter("acao").equals("listas")) out.print(" paginaAtual"); %>" id="menuMinhaConta" onClick="window.open('minhaConta.jsp?acao=listas', '_self')">Listar Roteiros</div>
